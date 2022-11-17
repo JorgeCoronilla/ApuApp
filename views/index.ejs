@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./templates/head', {title:'Home'} ); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('./templates/nav'); %>
+    </header>
+    <main>
+        <section class="splide" aria-labelledby="carousel-heading">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <li class="splide__slide"><img src="./../public/img/img_mountains_wide.jpg" alt="imagen1" srcset="">
+                    </li>
+                    <li class="splide__slide"><img src="./../public/img/img_lights_wide.jpg" alt="imagen1" srcset="">
+                    </li>
+                    <li class="splide__slide"><img src="./../public/img/img_nature_wide.jpg" alt="imagen1" srcset="">
+                    </li>
+                    <li class="splide__slide"><img src="./../public/img/img_snow_wide.jpg" alt="imagen1" srcset=""></li>
+                </ul>
+            </div>
+        </section>
+        <div class="jumbotron">
+            <h1>Esto es un h1</h1>
+            <p>Gracias, vuelvan pronto!</p>
+        </div>
+    </main>
+
+    <footer>
+        <%- include('./templates/footer'); %>
+    </footer>
+
+</body>
+
+</html>

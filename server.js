@@ -10,36 +10,36 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 
-//MongoDB connection
+// //MongoDB connection
 
-mongoose.connect(process.env.DB_URI_MONGO, {useNewUrlPArser: true, useUnifiedTopology: true})
-const db = mongoose.connection;
-db.on('error', (error) => console.log("error"));
-db.once('open', ()=> console.log("Connected to db"));
+// mongoose.connect(process.env.DB_URI_MONGO, {useNewUrlPArser: true, useUnifiedTopology: true})
+// const db = mongoose.connection;
+// db.on('error', (error) => console.log("error"));
+// db.once('open', ()=> console.log("Connected to db"));
 
-//MYSQL conection
+// //MYSQL conection
 
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
-    database: 'baseprueba'
-});
+// const connection = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     password: 'root',
+//     database: 'baseprueba'
+// });
 
-connection.connect((err)=> {
-    if(!err){
-        console.log('Connection Established Successfully');
-        //connection.end();
-    }else{
-        console.log('Connection Failed!'+ JSON.stringify(err,undefined,2));
-    }
-});
+// connection.connect((err)=> {
+//     if(!err){
+//         console.log('Connection Established Successfully');
+//         //connection.end();
+//     }else{
+//         console.log('Connection Failed!'+ JSON.stringify(err,undefined,2));
+//     }
+// });
 
 //middlewares
 
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
-
+app.use(express.static("."));
 
 //Set XXXXX folder as static
 //app.use(express.static('XXXXXX'));
@@ -47,7 +47,10 @@ app.use(express.json());
 
 //set temaplate engine
 app.set('view engine', 'ejs');
-
+// index page
+app.get('/', function(req, res) {
+    res.render('../views/index');
+});
 
 
 app.listen(PORT, () => {
