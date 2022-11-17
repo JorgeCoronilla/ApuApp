@@ -1,4 +1,14 @@
-//module.exports = router;
+const ejemploRouter = require('express').Router();
+const controller = require("../controllers/ejemplo.controllers");
+
+//rutas
+ejemploRouter.get('/session/:user', controller.sessionUser);
+ejemploRouter.get('/login', controller.ejemploRender);
+ejemploRouter.post('/login', controller.ejemploPost);
+ejemploRouter.patch('/session/:user', controller.ejemploPatch);
+ejemploRouter.delete('/session/:user', controller.ejemploDelete);
+
+module.exports = ejemploRouter;
 
 /*
 /
