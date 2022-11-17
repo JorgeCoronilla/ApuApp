@@ -3,6 +3,11 @@ require('dotenv').config();
 const express = require('express');
 const ejemploRouter = require("./routes/routes");
 
+//MongoDB connection
+require("./ddbb/mongo");
+//MYSQL conection
+require("./ddbb/mysql");
+
 //const session = require('express-session');
 const app = express();
 const PORT = process.env.PORT || 3000;
