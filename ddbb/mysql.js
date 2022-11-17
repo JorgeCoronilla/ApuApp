@@ -15,3 +15,5 @@ connection.connect((err)=> {
         console.log('Connection Failed!'+ JSON.stringify(err,undefined,2));
     }
 });
+
+module.exports = connection;

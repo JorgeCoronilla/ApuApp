@@ -3,8 +3,17 @@ const mongoose = require("mongoose");
 const modelo = require("../models/ejemplo.model");
 
 const middleEjemplo = {
-    ejemploRender: async (req, res) => {
-        res.render("../views/login.ejs");
+    datosAdmin: async (req, res) => {
+        const {user} = req.params;
+        const mysql = require('mysql');
+        const connection = require('../ddbb/mysql')
+        let query = 'select * from app_admins where id_admin = 1;';
+        connection.query(query, (err, req) => {
+            if(err) throw err;
+            console.log(req);
+            //connection.end();
+        });
+        res.send("Aquí está" + user );
     },
     ejemploPost: async (req, res) => {
         const { email, password } = req.body;
