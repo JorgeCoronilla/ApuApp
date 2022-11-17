@@ -1,0 +1,82 @@
+[
+    {
+        "_id": {
+            "$oid": "63760217e610ecbbe1ab1527"
+        },
+        "labName": "Lab01",
+        "address": "Calle de Orense, 67",
+        "city": "Madrid"
+    },
+    {
+        "_id": {
+            "$oid": "63760217e610ecbbe1ab1528"
+        },
+        "labName": "Lab02",
+        "address": "Calle de Enrique Larreta, 21",
+        "city": "Madrid"
+    },
+    {
+        "_id": {
+            "$oid": "63760217e610ecbbe1ab1529"
+        },
+        "labName": "Lab03",
+        "address": "Calle de Salomó ben Adret, 84",
+        "city": "Barcelona"
+    },
+    {
+        "_id": {
+            "$oid": "63760217e610ecbbe1ab1530"
+        },
+        "labName": "Lab04",
+        "address": "Plaça Joan Cornudella, 29",
+        "city": "Barcelona"
+    },
+    {
+        "_id": {
+            "$oid": "63760217e610ecbbe1ab1531"
+        },
+        "labName": "Lab05",
+        "address": "Calle Luis de Morales, 5",
+        "city": "Sevilla"
+    },
+    {
+        "_id": {
+            "$oid": "63760217e610ecbbe1ab1532"
+        },
+        "labName": "Lab06",
+        "address": "Calle Casas Ibáñez, 32",
+        "city": "Bilbao"
+    },
+    {
+        "_id": {
+            "$oid": "63760217e610ecbbe1ab1533"
+        },
+        "labName": "Lab07",
+        "address": "Calle Sta. Isabel, 17",
+        "city": "Zaragoza"
+    },
+    {
+        "_id": {
+            "$oid": "63760217e610ecbbe1ab1534"
+        },
+        "labName": "Lab08",
+        "address": "Calle Sta. Isabel, 17",
+        "city": "Zaragoza"
+    },
+    {
+        "_id": {
+            "$oid": "63760217e610ecbbe1ab1535"
+        },
+        "labName": "Lab09",
+        "address": "Calle Navegante Juan Fernández, 78",
+        "city": "Murcia"
+    },
+    {
+        "_id": {
+            "$oid": "63760217e610ecbbe1ab1536"
+        },
+        "labName": "Lab10",
+        "address": "Calle del General Vives, 102",
+        "city": "Las Palmas de Gran Canaria"
+    }
+]

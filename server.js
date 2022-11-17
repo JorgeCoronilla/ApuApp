@@ -7,26 +7,27 @@ const ejemploRouter = require("./routes/routes");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-
-//MongoDB connection
-require("./ddbb/mongo");
-
-//MYSQL conection
-require("./ddbb/mysql");
-
 //middlewares
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
+app.use(express.static("."));
 app.use(express.text());
 
 //Rutas
 app.use("/", ejemploRouter);
+
 
 //Set XXXXX folder as static
 //app.use(express.static('XXXXXX'));
 
 //set temaplate engine
 app.set('view engine', 'ejs');
+
+// index page
+app.get('/', function(req, res) {
+    res.render('../views/index');
+});
+
 
 //Start listening
 app.listen(PORT, () => {
