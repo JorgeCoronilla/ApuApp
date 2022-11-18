@@ -1,6 +1,7 @@
 //imports
 require('dotenv').config();
 const express = require('express');
+
 const register = require ("./routes/register.js")
 const adminRouter = require("./routes/admin");
 const userDash = require ('./routes/userDash')
@@ -21,16 +22,18 @@ app.use(express.json());
 app.use(express.static("."));
 //app.use(express.text());
 
-
 //Rutas
 app.use("/admin", adminRouter);
 app.use("/login", loginRouter);
-app.use("/userDash", userDash)
+app.use("/userDash", userDash);
 app.use("/register", register);
+
+//Set XXXXX folder as static
+//app.use(express.static('XXXXXX'));
+
 
 //set temaplate engine
 app.set('view engine', 'ejs');
-
 
 
 //Start listening
