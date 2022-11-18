@@ -1,4 +1,5 @@
-const mysql = require('mysql');
+//const { connect } = require('mongoose');
+const mysql = require('promise-mysql');
 
 const connection = mysql.createConnection({
     host: process.env.HOST,
@@ -7,11 +8,22 @@ const connection = mysql.createConnection({
     database: process.env.DATABASE
 });
 
-connection.connect((err)=> {
-    if(!err){
-        console.log('Connection Established Successfully');
-        //connection.end();
-    }else{
-        console.log('Connection Failed!'+ JSON.stringify(err,undefined,2));
-    }
-});
+const getConnection = () =>{return connection}
+module.exports = getConnection;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
