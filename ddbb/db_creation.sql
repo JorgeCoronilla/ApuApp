@@ -150,4 +150,4 @@ VALUES (null, "2022-11-17", 100, 1, 1),
 #select * from sales;
 #select * from services;
 #select * from repair_sales;
-     
+
