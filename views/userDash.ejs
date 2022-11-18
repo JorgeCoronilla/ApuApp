@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./templates/head', {title:'Home'} ); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('./templates/nav'); %>
+    </header>
+    <main>
+       <form action="">
+        <label for="name">Nombre</label>
+        <input type="text" name="name" placeholder="escribe tu nombre">
+
+        <label for="surname">Apellidos</label>
+        <input type="text" name="surname" placeholder="escribe tus apellidos">
+
+        <label for="email">email</label>
+        <input type="text" name="email" placeholder="escribe tu email">
+
+        <label for="address">Direccion</label>
+        <input type="text" name="address" placeholder="escribe tu direccion">
+
+        <label for="password">Password</label>
+        <input type="text" name="password" placeholder="escribe tu password">
+       </form>
+    </main>
+
+    <footer>
+        <%- include('./templates/footer'); %>
+    </footer>
+
+</body>
+
+</html>

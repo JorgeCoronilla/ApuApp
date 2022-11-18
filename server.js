@@ -1,5 +1,6 @@
 //imports
 require('dotenv').config();
+const morgan = require ('morgan')
 const express = require('express');
 const ejemploRouter = require("./routes/routes");
 
@@ -13,13 +14,26 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 //middlewares
+app.use(morgan('dev'))
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(express.static("."));
+
+app.use('/userDash', express.static(__dirname + '/public'));
 app.use(express.text());
 
 //Rutas
-app.use("/", ejemploRouter);
+// const loginRouter = require('./routes/login');
+// app.use('/login', loginRouter);
+
+// const register = require ("./routes/register.js")
+// app.use('/register', routes)
+
+// const adminRouter = require("./routes/admin");
+// app.use("/admin", adminRouter);
+
+const userDash = require ('./routes/userDash')
+app.use("/userDash", userDash)
 
 
 //Set XXXXX folder as static
@@ -31,6 +45,11 @@ app.set('view engine', 'ejs');
 // index page
 app.get('/', function(req, res) {
     res.render('../views/index');
+});
+
+// index userDash
+app.get('/userDash', function(req, res) {
+    res.render('../views/userDash');
 });
 
 
