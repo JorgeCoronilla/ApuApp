@@ -1,5 +1,6 @@
 //imports
 require('dotenv').config();
+const morgan = require ('morgan')
 const express = require('express');
 
 const register = require ("./routes/register.js")
@@ -18,15 +19,21 @@ require("./ddbb/mysql");
 
 
 //middlewares
+
+app.use(morgan('dev'))
+app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(express.static("."));
-//app.use(express.text());
+
+app.use('/userDash', express.static(__dirname + '/public'));
+app.use(express.text());
 
 //Rutas
 app.use("/admin", adminRouter);
 app.use("/login", loginRouter);
 app.use("/userDash", userDash);
 app.use("/register", register);
+
 
 //Set XXXXX folder as static
 //app.use(express.static('XXXXXX'));
@@ -35,6 +42,11 @@ app.use("/register", register);
 //set temaplate engine
 app.set('view engine', 'ejs');
 
+
+// index page
+app.get('/', function(req, res) {
+    res.render('../views/index');
+});
 
 //Start listening
 app.listen(PORT, () => {
