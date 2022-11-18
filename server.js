@@ -7,6 +7,7 @@ const register = require ("./routes/register.js")
 const adminRouter = require("./routes/admin");
 const userDash = require ('./routes/userDash')
 const loginRouter = require("./routes/login");
+
 //const session = require('express-session');
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -29,6 +30,7 @@ app.use('/userDash', express.static(__dirname + '/public'));
 app.use(express.text());
 
 //Rutas
+
 app.use("/admin", adminRouter);
 app.use("/login", loginRouter);
 app.use("/userDash", userDash);
@@ -42,7 +44,6 @@ app.use("/register", register);
 //set temaplate engine
 app.set('view engine', 'ejs');
 
-
 // index page
 app.get('/', function(req, res) {
     res.render('../views/index');
@@ -52,3 +53,4 @@ app.get('/', function(req, res) {
 app.listen(PORT, () => {
     console.log(`Server started at http://127.0.0.1:${PORT}`);
 });
+

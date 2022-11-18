@@ -1,0 +1,40 @@
+
+
+<div class="table-responsible">
+    <% if (users != '') { %>
+        <table class="table table-striped text-center">
+            <thead>
+                <tr class="table-dark">
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido 1</th>
+                    <th>Apellido 2</th>
+                    <th>Dirección</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% users.forEach((row, index) => { %>
+                <tr class="align-middle">
+                    <td><%= index  %> </td>
+                    <td><%= row.user_name  %> </td>
+                    <td><%= row.surname_1  %></td>
+                    <td><%= row.surname_2  %></td>
+                    <td><%= row.address  %></td>
+                    <td><%= row.email  %></td>
+                    <td><%= row.user_pass  %></td>
+                    <td>
+                        <a href="/admin/<%= admin_id %>/users/<%= row.id_user %> " class="text-success">Editar</a>
+                        <a href="/admin/<%= admin_id %>/users/<%= row.id_user %>/delete " class="text-success">Borrar</a>
+                        <a href="/admin/<%= admin_id %>/check/<%= row.id_user %> " class="text-success">Detalles</a>
+                    </td>
+                </tr>
+            <% }) %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <h1 class="text-center text-secondary mt-5">No users found in thr DB!!</h1>
+        <% } %> 
+
+</div>
