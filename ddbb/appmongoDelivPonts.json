@@ -1,0 +1,82 @@
+    [
+        {
+            "_id": {
+                "$oid": "63760976fc457bb75e475a27"
+            },
+            "deliveryPoint": "EL CORTE INGLÉS TRES DE MAYO",
+            "address": "Avenida Tres de Mayo, 7",
+            "city": "Madrid"
+        },
+        {
+            "_id": {
+                "$oid": "63760976fc457bb75e475a28"
+            },
+            "deliveryPoint": "EL CORTE INGLÉS PAMPLONA",
+            "address": "Calle Estella 9",
+            "city": "Pamplona"
+        },
+        {
+            "_id": {
+                "$oid": "63760976fc457bb75e475a29"
+            },
+            "deliveryPoint": "EL CORTE INGLÉS PLAÇA DE CATALUNYA",
+            "address": "Plaça de Cataluña, 14",
+            "city": "Barcelona"
+        },
+        {
+            "_id": {
+                "$oid": "63760976fc457bb75e475a30"
+            },
+            "deliveryPoint": "EL CORTE INGLÉS ARABIAL",
+            "address": "Arabial, 97",
+            "city": "Granada"
+        },
+        {
+            "_id": {
+                "$oid": "63760976fc457bb75e475a31"
+            },
+            "deliveryPoint": "Carrefour GRAN VIA",
+            "address": "Calle José García Sellés, 2",
+            "city": "Alicante"
+        },
+        {
+            "_id": {
+                "$oid": "63760976fc457bb75e475a32"
+            },
+            "deliveryPoint": "EL CORTE INGLÉS COSTA LUZ",
+            "address": "Avenida Alcalde Federico Molina, 1",
+            "city": "Huelva"
+        },
+        {
+            "_id": {
+                "$oid": "63760976fc457bb75e475a33"
+            },
+            "deliveryPoint": "EL CORTE INGLÉS MARBELLA",
+            "address": "C/ Ramón Areces, s/n",
+            "city": "Marbella"
+        },
+        {
+            "_id": {
+                "$oid": "63760976fc457bb75e475a34"
+            },
+            "deliveryPoint": "Carrefour BADALONA",
+            "address": "Polg.Ind Montigalá Batlloria",
+            "city": "Badalona"
+        },
+        {
+            "_id": {
+                "$oid": "63760976fc457bb75e475a35"
+            },
+            "deliveryPoint": "Carrefour JAEN",
+            "address": "Carretera Bailén - Motril, Km. 37,5",
+            "city": "Jaen"
+        },
+        {
+            "_id": {
+                "$oid": "63760976fc457bb75e475a36"
+            },
+            "deliveryPoint": "Carrefour VIGO",
+            "address": "Travesía de Vigo, 202",
+            "city": "Vigo"
+        }
+    ]

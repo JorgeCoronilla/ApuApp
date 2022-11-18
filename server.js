@@ -16,12 +16,15 @@ require("./ddbb/mongo");
 //MYSQL conection
 require("./ddbb/mysql");
 
-//middlewares
-app.use(express.urlencoded({extended: false}));
-app.use(express.json());
-app.use(express.text());
 
-//Routers
+//middlewares
+app.use(express.json());
+app.use(express.static("."));
+//app.use(express.text());
+
+
+//Rutas
+
 app.use("/admin", adminRouter);
 app.use("/login", loginRouter);
 app.use("/userDash", userDash)
