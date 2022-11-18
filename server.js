@@ -2,7 +2,12 @@
 require('dotenv').config();
 const morgan = require ('morgan')
 const express = require('express');
-const ejemploRouter = require("./routes/routes");
+
+//Require de Rutas
+const loginRouter = require('./routes/login');
+const register = require ("./routes/register.js")
+const adminRouter = require("./routes/admin");
+const userDash = require ('./routes/userDash')
 
 //MongoDB connection
 require("./ddbb/mongo");
@@ -23,17 +28,10 @@ app.use('/userDash', express.static(__dirname + '/public'));
 app.use(express.text());
 
 //Rutas
-// const loginRouter = require('./routes/login');
-// app.use('/login', loginRouter);
-
-// const register = require ("./routes/register.js")
-// app.use('/register', routes)
-
-// const adminRouter = require("./routes/admin");
-// app.use("/admin", adminRouter);
-
-const userDash = require ('./routes/userDash')
-app.use("/userDash", userDash)
+app.use('/login', loginRouter);
+app.use('/register', register);
+app.use("/admin", adminRouter);
+app.use("/userDash", userDash);
 
 
 //Set XXXXX folder as static
