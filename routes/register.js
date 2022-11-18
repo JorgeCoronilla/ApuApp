@@ -2,7 +2,7 @@ const register = require("express").Router()
 const Register = require("../controllers/register.controller")
 
 
-router.get('/register', (req, res) => {
+register.get('/register', (req, res) => {
     res.send("funciona!");
 });
 
@@ -16,4 +16,4 @@ register.get('/findall',Register.findAll)
 
 
 
-module.exports = router
+module.exports = register

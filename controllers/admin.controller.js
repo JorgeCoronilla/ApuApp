@@ -1,4 +1,3 @@
-
 const getConnection = require('../ddbb/mysql')
 const adminController = {
     dashAdmin: async (req, res) => {

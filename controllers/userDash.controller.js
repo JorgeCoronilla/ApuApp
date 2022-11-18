@@ -16,14 +16,11 @@ const getUsers = async (req, res) => {
 
 const getUser = async (req, res) => {
     try {
-        console.log(req.params)
         const { id_user } = req.params
         const connection = await getConnection()
-        const result = await connection.query("SELECT * FROM users WHERE id_user=?", id_user)
-        console.log(result)
-        console.log(result[0].id_user)
-        console.log(result[0].user_name)
-        res.json(result)
+        const user = await connection.query("SELECT * FROM users WHERE id_user=?", id_user)
+        console.log(user[0].surname_2)
+        res.render('userDash', {user})
     } catch (error) {
         res.status(500)
         res.send(error.message)

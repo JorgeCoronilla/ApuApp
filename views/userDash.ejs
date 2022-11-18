@@ -11,21 +11,28 @@
         <%- include('./templates/nav'); %>
     </header>
     <main>
+        <h1> <%= user[0].user_name %></h1>
        <form action="">
-        <label for="name">Nombre</label>
-        <input type="text" name="name" placeholder="escribe tu nombre">
+        <label class="form-label" for="name">Nombre</label>
+        <input class="form-control" type="text" name="name" readonly value=<%= user[0].user_name %>>
 
-        <label for="surname">Apellidos</label>
-        <input type="text" name="surname" placeholder="escribe tus apellidos">
+        <label class="form-label" for="surname">Primer Apellido</label>
+        <input class="form-control" type="text" name="surname" readonly value=<%= user[0].surname_1 %>>
 
-        <label for="email">email</label>
-        <input type="text" name="email" placeholder="escribe tu email">
+        <label class="form-label" for="surname">Segundo Apellido</label>
+        <input class="form-control" type="text" name="surname" readonly value=<%= user[0].surname_2 %>>
 
-        <label for="address">Direccion</label>
-        <input type="text" name="address" placeholder="escribe tu direccion">
+        <label class="form-label" for="email">email</label>
+        <input class="form-control" type="text" name="email" readonly value=<%= user[0].email %>>
 
-        <label for="password">Password</label>
-        <input type="text" name="password" placeholder="escribe tu password">
+        <label class="form-label" for="address">Direccion</label>
+        <input class="form-control" type="text" name="address" readonly value=<%= user[0].address %>>
+
+        <label class="form-label" for="password">Password</label>
+        <input class="form-control" type="text" name="password" readonly value=<%= user[0].user_pass %>>
+
+        <input id="uD_edit_data" class="btn btn-primary" type="button" value="Editar">
+        <input class="btn btn-primary" type="submit" value="Guardar">
        </form>
     </main>
 
@@ -33,6 +40,7 @@
         <%- include('./templates/footer'); %>
     </footer>
 
+    <script src="./../public/js/userDashEJS.js"></script>
 </body>
 
 </html>

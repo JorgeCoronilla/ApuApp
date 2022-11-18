@@ -18,7 +18,6 @@
 const adminRouter = require('express').Router();
 const controller = require("../controllers/admin.controller");
 const mongoose = require("mongoose");
-const modelo = require("../models/ejemplo.model");
 
 adminRouter.get('/:admin_id', controller.dashAdmin)
 adminRouter.post('/:admin_id', controller.updateAdmin);
