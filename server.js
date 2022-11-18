@@ -1,8 +1,10 @@
 //imports
 require('dotenv').config();
 const express = require('express');
-const ejemploRouter = require("./routes/routes");
+const register = require ("./routes/register.js")
 const adminRouter = require("./routes/admin");
+const userDash = require ('./routes/userDash')
+const loginRouter = require("./routes/login");
 
 //const session = require('express-session');
 const app = express();
@@ -15,20 +17,18 @@ require("./ddbb/mongo");
 require("./ddbb/mysql");
 
 //middlewares
-//app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(express.text());
 
-//Rutas
-
-
-//Añadido jorge
+//Routers
 app.use("/admin", adminRouter);
-
+app.use("/login", loginRouter);
+app.use("/userDash", userDash)
+app.use("/register", register);
 
 //set temaplate engine
 app.set('view engine', 'ejs');
-
 
 
 //Start listening

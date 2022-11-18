@@ -19,28 +19,15 @@ const controller = require("../controllers/admin.controller");
 const mongoose = require("mongoose");
 const modelo = require("../models/ejemplo.model");
 
-adminRouter.get('/:user', controller.datosAdmin)
-//adminRouter.post('/:user', controller.updateAdmin)
-adminRouter.post('/:user', (req, res) => {
-    //const {name_New, surname1_New, surname2_New, email_New} = req.body;   ----¿????????????
-    const name_New = req.body.name_New, surname1_New = req.body.surname1_New, surname2_New = req.body.surname2_New, email_New = req.body.email_New
-    console.log(name_New, surname1_New, surname2_New, email_New);
-    
-    const {user} = req.params;
-    console.log(user)
-    //console.log(req.params)
-
-   
-let insert ="UPDATE app_admins SET ";
-    if (name_New && surname1_New && surname2_New && email_New) { 
-    console.log(name_New, surname1_New, surname2_New, email_New);
-        let insert = `UPDATE app_admins SET admin_name = "${name_New}", surname_1 = "${surname1_New}", surname_2 = "${surname2_New}", email = "${email_New}"  WHERE id_admin = ${user};`}
-        const connection = require('../ddbb/mysql')
-        console.log(insert)
-    connection.query(insert, (err, res) => {
-      
-    });
-    res.send();
-});
-adminRouter.get('/:user', controller.datosAdmin)
+adminRouter.get('/:admin_id', controller.dashAdmin)
+adminRouter.post('/:admin_id', controller.updateAdmin);
+adminRouter.get('/:admin_id/create_admin', controller.createAdmin)
+adminRouter.post('/:admin_id/create_admin', controller.insertAdmin);
+adminRouter.get('/:admin_id/users', controller.allUsers);
+adminRouter.get('/:admin_id/check/:user', controller.checkUser);
+adminRouter.get('/:admin_id/users/:user', controller.editUser);
+adminRouter.get('/:admin_id/users/:user/delete', controller.deleteUser);
+adminRouter.post('/:admin_id/users/:user/delete', controller.confirmDeleteUser);
+adminRouter.post('/:admin_id/users/:user', controller.updateUser);
+adminRouter.get('/:admin_id/print/:id_bill', controller.printBill);
 module.exports = adminRouter;

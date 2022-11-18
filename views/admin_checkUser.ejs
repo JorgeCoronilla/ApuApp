@@ -1,0 +1,42 @@
+<%= user_name %>
+<%= surname1 %>
+<%= surname2 %>
+<%= address %>
+<%= email %>
+
+Facturas
+
+<div class="table-responsible">
+    <% if (users != '') { %>
+        <table class="table table-striped text-center">
+            <thead>
+                <tr class="table-dark">
+                    <th>ID</th>
+                    <th>Total</th>
+                    <th>Nif</th>
+                    <th>Fecha</th>
+                    <th>Dirección</th>
+                    <th>ID cliente</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% bills.forEach((row, index) => { %>
+                <tr class="align-middle">
+                    <td><%= index  %> </td>
+                    <td><%= row.id_bill  %> </td>
+                    <td><%= row.total  %></td>
+                    <td><%= row.nif  %></td>
+                    <td><%= row.bill_date  %></td>
+                    <td><%= row.fk_id_user  %></td>
+                    <td>
+                        <a href="/admin/<%=admin_id %>/print/<%= row.id_bill %> " class="text-success"><i class="fas fa-edit fa-lg mx-1"></i></a>
+                    </td>
+                </tr>
+            <% }) %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <h1 class="text-center text-secondary mt-5">Este usuario no tienen ninguna factura</h1>
+        <% } %> 
+
+</div>
