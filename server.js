@@ -1,7 +1,10 @@
 //imports
 require('dotenv').config();
 const express = require('express');
-const ejemploRouter = require("./routes/routes");
+const register = require ("./routes/register")
+const adminRouter = require("./routes/admin");
+const userDash = require ('./routes/userDash')
+const loginRouter = require("./routes/login");
 
 //MongoDB connection
 require("./ddbb/mongo");
@@ -19,8 +22,10 @@ app.use(express.static("."));
 app.use(express.text());
 
 //Rutas
-app.use("/", ejemploRouter);
-
+app.use("/admin", adminRouter);
+app.use("/login", loginRouter);
+app.use("/userDash", userDash)
+app.use("/register", routes);
 
 //Set XXXXX folder as static
 //app.use(express.static('XXXXXX'));
@@ -32,7 +37,6 @@ app.set('view engine', 'ejs');
 app.get('/', function(req, res) {
     res.render('../views/index');
 });
-
 
 //Start listening
 app.listen(PORT, () => {
