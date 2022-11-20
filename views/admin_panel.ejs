@@ -1,14 +1,8 @@
-<%= admin_name %>
-<%= surname1 %>
-<%= surname2 %>
-<%= email %>
-Cambiar datos
-
-menu a editar user:
-/:admin_id/users
-
-menu a crear admin 
-/:admin_id/create_admin
-
-menu a usuario
-
+<h1>Panel del administrador</h1>
+<a href="/admin/<%= admin_id %>/update">actualizar datos</a>
+<a href="/admin/<%= admin_id %>/create_admin">añadir administrador</a>
+<a href="/admin/<%= admin_id %>/users">usuarios registrados</a>
+<a href="/admin/<%= admin_id %>/bills">facturas</a>
+<a href="/admin/<%= admin_id %>/labs">laboratorios</a>
+<a href="/admin/<%= admin_id %>/stores">tiendas</a>
+<a href="/admin/<%= admin_id %>/deliveryPoints">puntos de recogida</a>

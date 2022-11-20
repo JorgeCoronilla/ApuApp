@@ -7,4 +7,5 @@ loginRouter.post('/', loginController.getUser);
 loginRouter.post('/recuperar', loginController.getUser);
 loginRouter.get('/confirmacion/:token', loginController.verifyToken);
 loginRouter.get('/confirmacion/', loginController.verifyToken);
+
 module.exports = loginRouter;
