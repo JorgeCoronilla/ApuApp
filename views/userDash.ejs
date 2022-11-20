@@ -11,28 +11,62 @@
         <%- include('./templates/nav'); %>
     </header>
     <main>
-       <form action="">
-        <label for="name">Nombre</label>
-        <input type="text" name="name" placeholder="escribe tu nombre">
+        <h1>
+            <%= user[0].user_name %>
+        </h1>
+        <form method="post" action="/userDash/<%=id_user%>/update">
+            <label class="form-label" for="user_name">Nombre</label>
+            <input class="form-control user_data" type="text" name="user_name" readonly value=<%=user[0].user_name %>>
 
-        <label for="surname">Apellidos</label>
-        <input type="text" name="surname" placeholder="escribe tus apellidos">
+            <label class="form-label" for="surname_1">Primer Apellido</label>
+            <input class="form-control user_data" type="text" name="surname_1" readonly value=<%=user[0].surname_1 %>>
 
-        <label for="email">email</label>
-        <input type="text" name="email" placeholder="escribe tu email">
+            <label class="form-label" for="surname_2">Segundo Apellido</label>
+            <input class="form-control user_data" type="text" name="surname_2" readonly value=<%=user[0].surname_2 %>>
 
-        <label for="address">Direccion</label>
-        <input type="text" name="address" placeholder="escribe tu direccion">
+            <label class="form-label" for="address">Direccion</label>
+            <input class="form-control user_data" type="text" name="address" readonly value=<%=user[0].address %>>
 
-        <label for="password">Password</label>
-        <input type="text" name="password" placeholder="escribe tu password">
-       </form>
+            <label class="form-label" for="email">Email</label>
+            <input class="form-control user_data" type="email" name="email" readonly value=<%=user[0].email %>>
+
+            <div id="uD_data_buttons" style="display: flex;">
+                <input id="uD_edit_data" class="btn btn-primary" type="button" value="Editar">
+                <input id="uD_save_data" class="btn btn-primary" type="submit" value="Guardar" style="display: none;">
+            </div>
+        </form>
+
+        <form method="post" action="/userDash/<%=id_user%>/updatePass">
+            <div id="password" style="display:flex; flex-direction:column;">
+                <label class="form-label" for="password">Password</label>
+                <input class="form-control" type="password" name="password" disabled value=<%=user[0].user_pass %>>
+            </div>
+
+            <label class="form-label" for="password">Old Password</label>
+            <input class="form-control" type="password" name="old_password" placeholder="Escribe tu antigua contraseña"
+                required style="display: none;">
+            <label class="form-label" for="user_pass">New Password</label>
+            <input class="form-control" type="text" name="user_pass" placeholder="Escribe tu nueva contraseña" required
+                style="display: none;">
+
+            <div id="uD_password_buttons" style="display: flex;">
+                <input id="uD_edit_password" class="btn btn-primary" type="button" value="Cambiar">
+                <input id="uD_save_password" class="btn btn-primary" type="submit" value="Guardar"
+                    style="display: none;">
+            </div>
+        </form>
+
+        <form method="get" action="/userDash/<%=id_user%>/unsubscribe">
+            <input id="uD_unsubscribe" class="btn btn-secondary" type="submit" value="Unsubscribe">
+        </form>
+
     </main>
 
     <footer>
         <%- include('./templates/footer'); %>
     </footer>
 
+    <script type="module" src="./../js/userDashScript.js"></script>
 </body>
 
 </html>

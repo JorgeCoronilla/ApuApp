@@ -26,6 +26,7 @@ const Register = {
                 filas.forEach(fila => {
                     console.log(fila)
                 });
+                res.json()
             }
         })
 

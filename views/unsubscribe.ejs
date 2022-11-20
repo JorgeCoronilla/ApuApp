@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%- include('./templates/head', {title:'Home'} ); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('./templates/nav'); %>
+    </header>
+    <main>
+        <h1>Unsubscribe</h1>
+        <div class="mb-3">
+            <label class="form-label" for="comments">Cuentanos como ha sido tu experiencia con nosotros</label>
+            <textarea class="form-control" name="comments" placeholder="escribe aquí tus comentarios"></textarea>
+
+            <label class="form-label" for="options">¿Por qué te vas?</label>
+            <select class="form-control form-select" name="options">
+                <option selected>Elige Opcion</option>
+                <option value="all_ok">Nada en particular, me volveré a suscribir más adelante</option>
+                <option value="better_price">He encontrado tiendas con mejores precios</option>
+                <option value="no_interest">Ya no quiero comprar Smartphones</option>
+                <option value="other">Otros motivos</option>
+            </select>
+
+            <div id="select_unsubscribe">
+                <form method="get" action="/userDash/<%=id_user%>">
+                    <input id="cancel1" class="btn btn-warning" type="submit" value="Cancelar">
+                </form>
+                <input id="unsubscribe" class="btn btn-danger" type="button" value="Unsubscribe">
+            </div>
+
+            <div id="sure_to_unsubscribe" style="display:none;">
+                <label class="form-label" id="sure">¿Seguro?</label>
+                <form method="get" action="/userDash/<%=id_user%>">
+                    <input id="cancel2" class="btn btn-secondary" type="submit" value="No, Cancelar">
+                </form>
+
+                <form method="post" action="/userDash/<%=id_user%>/deleteUser">
+                    <input id="confirm_unsubscribe" class="btn btn-secondary" type="submit" value="Sí, Eliminar Cuenta">
+                </form>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <%- include('./templates/footer'); %>
+    </footer>
+
+    <script type="module" src="./../js/unsubscribeScript.js"></script>
+</body>
+
+</html>
