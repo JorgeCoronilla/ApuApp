@@ -24,9 +24,11 @@ require("./ddbb/mysql");
 app.use(morgan('dev'))
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
-app.use(express.static("."));
 
-// app.use('/userDash', express.static(__dirname + '/public'));
+
+//Static
+app.use('/', express.static("public"));
+app.use('/userDash', express.static(__dirname + '/public'));
 app.use(express.text());
 
 //Rutas

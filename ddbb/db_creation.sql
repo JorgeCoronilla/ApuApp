@@ -18,8 +18,8 @@ CREATE TABLE users (
     surname_1 VARCHAR(100) NOT NULL,
     surname_2 VARCHAR(100) NOT NULL,
     address VARCHAR(100) NOT NULL,
-    email VARCHAR(100)NOT NULL,
-    user_pass VARCHAR(10) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    user_pass VARCHAR(200) NOT NULL,
     PRIMARY KEY (id_user)
 );
 
@@ -29,8 +29,8 @@ CREATE TABLE users_all (
     surname_1 VARCHAR(100) NOT NULL,
     surname_2 VARCHAR(100) NOT NULL,
     address VARCHAR(100) NOT NULL,
-    email VARCHAR(100)NOT NULL,
-    user_pass VARCHAR(10) NOT NULL,
+    email VARCHAR(100)NOT NULL UNIQUE,
+    user_pass VARCHAR(200) NOT NULL,
     PRIMARY KEY (id_user)
 );
 
@@ -40,12 +40,13 @@ CREATE TABLE app_admins (
     surname_1 VARCHAR(100) NOT NULL,
     surname_2 VARCHAR(100) NOT NULL,
     email VARCHAR(100)NOT NULL,
-    admin_pass VARCHAR(10) NOT NULL,
+    admin_pass VARCHAR(200) NOT NULL,
     PRIMARY KEY (id_admin)
 );
 
 CREATE TABLE bills (
     id_bill INT AUTO_INCREMENT,
+    items VARCHAR(300),
     total INT NOT NULL,
     nif VARCHAR(9) NOT NULL,
     user_name VARCHAR(100) NOT NULL,
@@ -121,11 +122,16 @@ VALUES (null, "screen", 100,"lab1","1 hora"),
 		(null, "connector", 150,"lab3","3 horas");
         
 INSERT INTO bills
-VALUES (null, 5000, "11111111G", "Antonio", "Ruiz","Del Monte","Calle Manzana 12","2022-11-17",1),
+VALUES (null, "Iphone 8 - 1000€ - Unidades: 3 - 3000€ # cargador Iphone uni - 500€ - unidades: 4 - 2000€", 5000, "11111111G", "Antonio", "Ruiz","Del Monte","Calle Manzana 12","2022-11-17",1),
+		(null, "Samsung 9 - 800€ - Unidades: 2 - 1600€ # cargador Samsung - 100€ - unidades: 3 - 300€",2000, "11111111G", "Antonio", "Ruiz","Del Monte","Calle Manzana 12","2022-11-17",1),
+		(null, "Protector pantalla - 50€ - Unidades: 5 - 250€ # cable USB_ tipo C - 20€ - unidades: 3 - 60€ # funda universal - 15€ - unidades: 4 - 60€", 330, "11111111G", "Antonio", "Ruiz","Del Monte","Calle Manzana 12","2022-11-17",1),
+		(null, "Iphone 8 - 1000€ - Unidades: 3 - 3000€ # cargador Iphone uni - 500€ - unidades: 4 - 2000€", 5000, "22222222H", "Gonzalo", "Pérez","Del Camino","Calle Pera 53", "2022-11-18",2),
+		(null, "Samsung 9 - 800€ - Unidades: 2 - 1600€ # cargador Samsung - 100€ - unidades: 3 - 300€",2000, "22222222H", "Gonzalo", "Pérez","Del Camino","Calle Pera 53", "2022-11-18",2),
+		(null, "Protector pantalla - 50€ - Unidades: 5 - 250€ # cable USB_ tipo C - 20€ - unidades: 3 - 60€ # funda universal - 15€ - unidades: 4 - 60€", 330, "22222222H", "Gonzalo", "Pérez","Del Camino","Calle Pera 53", "2022-11-18",2),
+		(null, "Iphone 8 - 1000€ - Unidades: 3 - 3000€ # cargador Iphone uni - 500€ - unidades: 4 - 2000€", 5000, "33333333K", "Jorge", "González","Cansado","Calle Limón 68", "2022-11-19",3),
+		(null, "Samsung 9 - 800€ - Unidades: 2 - 1600€ # cargador Samsung - 100€ - unidades: 3 - 300€",2000, "33333333K", "Jorge", "González","Cansado","Calle Limón 68", "2022-11-19",3),
+		(null, "Protector pantalla - 50€ - Unidades: 5 - 250€ # cable USB_ tipo C - 20€ - unidades: 3 - 60€ # funda universal - 15€ - unidades: 4 - 60€", 330, "33333333K", "Jorge", "González","Cansado","Calle Limón 68", "2022-11-19",3);
 
-		(null, 2000, "22222222H", "Gonzalo", "Pérez","Del Camino","Calle Pera 53", "2022-11-18",2),
-
-		(null, 1000, "33333333K", "Jorge", "González","Cansado","Calle Limón 68", "2022-11-19",3);
 
 INSERT INTO sales
 VALUES (null, 1, 5000,"2022-11-17",1),

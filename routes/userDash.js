@@ -2,8 +2,18 @@ const router = require('express').Router();
 const userDashController = require('./../controllers/userDash.controller')
 
 router.get("/all", userDashController.getUsers)
+
+//Load User Dash
 router.get("/:id_user", userDashController.getUser)
-router.put("/:id_user", userDashController.updateUser)
-router.delete("/:id_user", userDashController.deleteUser)
+//Update User Data
+router.post("/:id_user/update", userDashController.updateUser)
+//Update User Pass
+router.post("/:id_user/updatePass", userDashController.updatePass)
+
+
+// Unsubscribe
+router.get("/:id_user/unsubscribe", userDashController.unsubscribeForm)
+
+router.post("/:id_user/deleteUser", userDashController.deleteUser)
 
 module.exports = router
