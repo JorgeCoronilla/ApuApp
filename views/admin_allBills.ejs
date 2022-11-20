@@ -1,0 +1,38 @@
+
+
+<div class="table-responsible">
+    <% if (bills != '') { %>
+        <table class="table table-striped text-center">
+            <thead>
+                <tr class="table-dark">
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido 1</th>
+                    <th>Apellido 2</th>
+                    <th>fecha</th>
+                    <th>pedido</th>
+                    <th>total</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% bills.forEach((row, index) => { %>
+                <tr class="align-middle">
+                    <td><%= row.id_bill  %> </td>
+                    <td><%= row.user_name  %></td>
+                    <td><%= row.surname_1  %></td>
+                    <td><%= row.surname_2  %></td>
+                    <td><%= row.bill_date  %></td>
+                    <td><%= row.items  %></td>
+                    <td><%= row.total  %></td>
+                    <td>
+                        <a href="/admin/<%= admin_id %>/print/<%= row.id_bill %> " class="text-success">Imprimir</a>
+                    </td>
+                </tr>
+            <% }) %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <h1 class="text-center text-secondary mt-5">No bills found in the DB!!</h1>
+        <% } %> 
+
+</div>

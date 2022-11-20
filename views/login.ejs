@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <%- include('./templates/head', {title:'Log in'} ); %>
+    <%- include('./templates/head', {title:'Acceso'} ); %>
 </head>
 
 <body class="container">
@@ -11,13 +11,13 @@
         <%- include('./templates/nav'); %>
     </header>
     <div class="text-center mt-3">
-        <h1 class="font-weight-bold">Haz tu login aquí</h1>
+        <h1 class="font-weight-bold">Accede desde aquí</h1>
     </div>
     <form action='' method="POST">
     <!-- Email input -->
     <div class="form-outline">
       <input type="email" id="email" class="form-control" name="email" />
-      <label class="form-label" for="form2Example1">Email address</label>
+      <label class="form-label" for="form2Example1">Dirección de email</label>
     </div>
   
     <!-- Password input -->
@@ -30,15 +30,15 @@
     <div class="row mb-4">
       <div class="col">
         <!-- Simple link -->
-        <a href="#!">Forgot password?</a>
+        <a href="http://127.0.0.1:3000/login/recuperar">¿Olvidaste el password?</a>
       </div>
     </div>
   
     <!-- Submit button -->
-    <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+    <button type="submit" class="btn btn-primary btn-block mb-4">Acceder</button>
   
     <!-- Register buttons -->
     <div class="text-center">
-      <p>Not a member? <a href="#!">Register</a></p>
+      <p>¿No estás registrado? <a href="http://127.0.0.1:3000/register">Regístrate</a></p>
     </div>
   </form>

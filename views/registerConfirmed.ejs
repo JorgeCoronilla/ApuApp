@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./templates/head', {title:'Home'} ); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('./templates/nav'); %>
+    </header>
+    <h1>Registro de usuario hecho correctamente!</h1>
+    <main>
+      <form action="/login" method="get">
+      <div class="card">
+        <h5 class="card-header">Apumovil</h5>
+        <div class="card-body">
+          <h5 class="card-title">Enhorabuena <%= user_name %>! Te has registado correctamente</h5>
+          <p class="card-text">Accede a nuestra pantalla de LOGIN para iniciar sesión</p>
+          <button type="submit" class="btn btn-primary">Inicio</button>
+        </div>
+      </div>
+      </form>
+    </main>
+
+    <footer>
+        <%- include('./templates/footer'); %>
+    </footer>
+
+</body>
+
+</html>

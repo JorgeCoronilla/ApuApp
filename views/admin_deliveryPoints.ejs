@@ -1,0 +1,30 @@
+
+<div class="table-responsible">
+    <% if (result != '') { %>
+        <table class="table table-striped text-center">
+            <thead>
+                <tr class="table-dark">
+                    <th>Nombre</th>
+                    <th>Dirección</th>
+                    <th>Ciudad</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% result.forEach((row, index) => { %>
+                <tr class="align-middle">
+                    <td><%= row.deliveryPoint  %></td>
+                    <td><%= row.address  %></td>
+                    <td><%= row.city  %></td>
+                    <td>
+                        <a href="/admin/<%= admin_id %>/labs/<%= index %> " class="text-success">Editar</a>
+                        <a href="/admin/<%= admin_id %>/labs/<%= index %>/delete " class="text-success">Borrar</a>
+                    </td>
+                </tr>
+            <% }) %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <h1 class="text-center text-secondary mt-5">No hay resultados</h1>
+        <% } %> 
+
+</div>

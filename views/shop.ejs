@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./templates/head', {title:'Home'} ); %>
+    <link rel="stylesheet" href="./../css/style.css">
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('./templates/nav'); %>
+    </header>
+    <main>
+        <div>
+            Filtro
+        </div>
+
+        <section id="allProducts">
+            <% result.forEach(element => { %>
+                <div>
+                    <img src='<%=element.img%>' alt="foto Smartphone">
+                    <h3><%=element.brand%></h3>
+                </div>
+                <% }) %>
+        </section>
+        
+    </main>
+
+    <footer>
+        <%- include('./templates/footer'); %>
+    </footer>
+
+    <script type="module" src="./../js/shopScript.js"></script>
+
+</body>
+
+</html>
