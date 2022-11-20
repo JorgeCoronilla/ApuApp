@@ -1,4 +1,3 @@
-
 /*
  name
  surname1
@@ -31,4 +30,3 @@ adminRouter.post('/:admin_id/users/:user/delete', controller.confirmDeleteUser);
 adminRouter.post('/:admin_id/users/:user', controller.updateUser);
 adminRouter.get('/:admin_id/print/:id_bill', controller.printBill);
 module.exports = adminRouter;
-
