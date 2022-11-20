@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('./templates/head', {title:'Acceso'} ); %>
+</head>
+
+<body class="container">
+
+  <header>
+    <%- include('./templates/nav'); %>
+  </header>
+  <div class="jumbotron mb-4">
+    <h1>¡Acceso garantizado!</h1>
+    <p>Enhorabuena, haz click para acceder a tu panel</p>
+    <!-- Submit button -->
+    <div><button type="button" onclick="document.location=''"
+        class="btn btn-primary btn-sm mb-4">Acceder</button>
+    </div>
+  </div>
+</body>
+
+<footer>
+  <%- include('./templates/footer'); %>
+</footer>
+
+</body>
+
+</html>

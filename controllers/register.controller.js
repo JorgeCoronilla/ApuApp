@@ -82,4 +82,3 @@ const addUser = async (user_name, surname_1, surname_2, address, email, user_pas
 
 
 module.exports = Register
-
