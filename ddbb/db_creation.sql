@@ -18,7 +18,7 @@ CREATE TABLE users (
     surname_1 VARCHAR(100) NOT NULL,
     surname_2 VARCHAR(100) NOT NULL,
     address VARCHAR(100) NOT NULL,
-    email VARCHAR(100)NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
     user_pass VARCHAR(200) NOT NULL,
     PRIMARY KEY (id_user)
 );
@@ -131,6 +131,8 @@ VALUES (null, "Iphone 8 - 1000€ - Unidades: 3 - 3000€ # cargador Iphone uni 
 		(null, "Iphone 8 - 1000€ - Unidades: 3 - 3000€ # cargador Iphone uni - 500€ - unidades: 4 - 2000€", 5000, "33333333K", "Jorge", "González","Cansado","Calle Limón 68", "2022-11-19",3),
 		(null, "Samsung 9 - 800€ - Unidades: 2 - 1600€ # cargador Samsung - 100€ - unidades: 3 - 300€",2000, "33333333K", "Jorge", "González","Cansado","Calle Limón 68", "2022-11-19",3),
 		(null, "Protector pantalla - 50€ - Unidades: 5 - 250€ # cable USB_ tipo C - 20€ - unidades: 3 - 60€ # funda universal - 15€ - unidades: 4 - 60€", 330, "33333333K", "Jorge", "González","Cansado","Calle Limón 68", "2022-11-19",3);
+
+
 INSERT INTO sales
 VALUES (null, 1, 5000,"2022-11-17",1),
 
