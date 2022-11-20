@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./templates/head', {title:'Recuperar contraseña'} ); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('./templates/nav'); %>
+    </header>
+    <div class="text-center mt-3">
+        <h1 class="font-weight-bold">Recupera tu contraseña</h1>
+    </div>
+    <form action='' method="POST">
+    <!-- Email input -->
+    <div class="form-outline row mb-3">
+    <label class="form-label" for="form1">Ingresa el email con el que te registraste</label>
+      <input type="email" id="email" class="form-control" name="email" />
+    </div>
+    <!-- Submit button -->
+    <div class="row mb-4">
+    <button type="submit" class="btn btn-primary mb-4">Enviar correo</button>
+    </div>
+  </form>
