@@ -25,14 +25,12 @@ app.use(morgan('dev'))
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
-
 //Static
 app.use('/', express.static("public"));
 app.use('/userDash', express.static(__dirname + '/public'));
 app.use(express.text());
 
 //Rutas
-
 app.use("/admin", adminRouter);
 app.use("/login", loginRouter);
 app.use("/userDash", userDash);
@@ -55,4 +53,3 @@ app.get('/', function(req, res) {
 app.listen(PORT, () => {
     console.log(`Server started at http://127.0.0.1:${PORT}`);
 });
-

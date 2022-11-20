@@ -1,5 +1,42 @@
-<%= user_name %>
-<%= surname1 %>
-<%= surname2 %>
-<%= address %>
-<%= email %>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./templates/head', {title:'Home'} ); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('./templates/nav'); %>
+    </header>
+    <h1>Editar Usuarios</h1>
+    <main>
+      <form action="/admin" method="GET">
+            <div class="mb-3">
+              <label for="user_name" class="form-label">Introduce el nombre</label>
+              <input type="text" class="form-control" id="user_name" name="user_name" >
+            </div>
+            <div class="mb-3">
+              <label for=" surname1" class="form-label">Introduce el primer apellido</label>
+              <input type="text" class="form-control" id="surname1" name="surname1">
+            </div>
+            <div class="mb-3">
+              <label for="surname2" class="form-label">Intoduce el segundo apellido</label>
+              <input type="text" class="form-control" id="surname2" name="surname2">
+            </div>
+            <div class="mb-3">
+              <label for="address" class="form-label">Introduce el correo electrónico</label>
+              <input type="email" class="form-control" id="address" name="address">
+            </div>
+            <button type="submit" class="btn btn-primary">Modificar datos</button>
+          </form>
+    </main>
+
+    <footer>
+        <%- include('./templates/footer'); %>
+    </footer>
+
+</body>
+
+</html>
