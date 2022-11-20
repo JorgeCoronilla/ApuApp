@@ -8,17 +8,24 @@ const PDFDocument = require('pdfkit');
 const pdfService = require('../invoices/invoice');
 const blobStream = require('blob-stream');
 const { findByIdAndRemove } = require('../models/labs_model');
+const jwt = require('jsonwebtoken');
+
+function verify (admin_id, req){
+    const verified = jwt.verify(admin_id, process.env.TOKEN_SECRET)
+    req.user = verified;
+}
 
 const adminController = {
     dashAdmin: async (req, res) => {
 
         try {
             const { admin_id } = req.params;
-            //userInfo = JSON.parse(Buffer.from(admin_id.split('.')[1], 'base64').toString());
-            //if (userInfo.id_admin == undefined) {
-            //    res.status(400).json({ message: "Bad request. That user doens't exist." })
-           // }
-            //userInfo.id_admin
+            verify (admin_id, req)
+            userInfo = JSON.parse(Buffer.from(admin_id.split('.')[1], 'base64').toString());
+            if (userInfo.id_admin == undefined) {
+                res.status(400).json({ message: "Bad request. That user doens't exist." })
+            }
+            // userInfo.id_admin
             res.render("admin_panel", { admin_id })
         }
         catch (error) {
@@ -31,10 +38,10 @@ const adminController = {
 
         try {
             const { admin_id } = req.params;
-           /*userInfo = JSON.parse(Buffer.from(admin_id.split('.')[1], 'base64').toString());
-            if (userInfo.id_admin == undefined) {
-                res.status(400).json({ message: "Bad request. That user doens't exist." })
-            }*/
+            /*userInfo = JSON.parse(Buffer.from(admin_id.split('.')[1], 'base64').toString());
+             if (userInfo.id_admin == undefined) {
+                 res.status(400).json({ message: "Bad request. That user doens't exist." })
+             }*/
             const connection = await getConnection();
             let result = await connection.query('select * from app_admins where id_admin = ?;', userInfo.id_admin)
             const admin_name = result[0].admin_name, surname1 = result[0].surname_1, surname2 = result[0].surname_2, email = result[0].email;
@@ -169,7 +176,7 @@ const adminController = {
         }
     },
 
-    allBills:  async (req, res) => {
+    allBills: async (req, res) => {
 
         try {
             const { admin_id } = req.params;
@@ -313,7 +320,7 @@ const adminController = {
         console.log("entra3");
         db.once('open', async () => console.log("Conectado a la base de datos"));
         console.log("entra4");
-        labs.find().exec(async function(err, result) {
+        labs.find().exec(async function (err, result) {
             if (err) throw err;
             console.log(result);
             //mongoose.disconnect();
@@ -424,14 +431,14 @@ const adminController = {
         const db = mongoose.connection;
         db.on('error', (error) => console.log("error"));
         db.once('open', () => console.log("Conectado a la base de datos"));
-       
-        labs.findOneAndDelete({ 'labName': labname }, (err, res) =>{    
+
+        labs.findOneAndDelete({ 'labName': labname }, (err, res) => {
             if (err) throw err;
             console.log("Borrado correcto");
-            
+
         })
-        res.render("admin_labsDeletion", {admin_id})
-                  res.end();
+        res.render("admin_labsDeletion", { admin_id })
+        res.end();
     }
 }
 module.exports = adminController;
