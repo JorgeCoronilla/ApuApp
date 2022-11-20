@@ -2,18 +2,11 @@ const register = require("express").Router()
 const Register = require("../controllers/register.controller")
 
 
-router.get('/register', (req, res) => {
-    res.send("funciona!");
-});
+register.get('/', Register.start);
+register.post("/", Register.insertUser)
+register.get("/confirmed", Register.index)
+
+//register.get('/findall',Register.findAll)
 
 
-register.post("/register", Register.insertUser)
-
-
-
-
-register.get('/findall',Register.findAll)
-
-
-
-module.exports = router
+module.exports = register
