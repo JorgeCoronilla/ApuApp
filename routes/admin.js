@@ -1,4 +1,3 @@
-
 const adminRouter = require('express').Router();
 const controller = require("../controllers/admin.controller");
 
@@ -30,4 +29,3 @@ adminRouter.get('/:admin_id/stores/', controller.checkStores);
 adminRouter.get('/:admin_id/deliveryPoints/', controller.checkdeliveryPoints);
 
 module.exports = adminRouter;
-

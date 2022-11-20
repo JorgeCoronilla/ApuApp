@@ -1,4 +1,3 @@
-
 const getConnection = require('../ddbb/mysql')
 const mongoose = require('mongoose');
 const labs = require('../models/labs_model');

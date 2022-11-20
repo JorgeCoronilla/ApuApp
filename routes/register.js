@@ -16,4 +16,4 @@ register.get('/findall',Register.findAll)
 
 
 
-module.exports = register;
+module.exports = register

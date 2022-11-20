@@ -18,7 +18,7 @@ CREATE TABLE users (
     surname_1 VARCHAR(100) NOT NULL,
     surname_2 VARCHAR(100) NOT NULL,
     address VARCHAR(100) NOT NULL,
-    email VARCHAR(100)NOT UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
     user_pass VARCHAR(200) NOT NULL,
     PRIMARY KEY (id_user)
 );
@@ -121,7 +121,7 @@ VALUES (null, "screen", 100,"lab1","1 hora"),
 
 		(null, "connector", 150,"lab3","3 horas");
         
-IINSERT INTO bills
+INSERT INTO bills
 VALUES (null, "Iphone 8 - 1000€ - Unidades: 3 - 3000€ # cargador Iphone uni - 500€ - unidades: 4 - 2000€", 5000, "11111111G", "Antonio", "Ruiz","Del Monte","Calle Manzana 12","2022-11-17",1),
 		(null, "Samsung 9 - 800€ - Unidades: 2 - 1600€ # cargador Samsung - 100€ - unidades: 3 - 300€",2000, "11111111G", "Antonio", "Ruiz","Del Monte","Calle Manzana 12","2022-11-17",1),
 		(null, "Protector pantalla - 50€ - Unidades: 5 - 250€ # cable USB_ tipo C - 20€ - unidades: 3 - 60€ # funda universal - 15€ - unidades: 4 - 60€", 330, "11111111G", "Antonio", "Ruiz","Del Monte","Calle Manzana 12","2022-11-17",1),
