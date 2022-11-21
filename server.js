@@ -7,6 +7,8 @@ const register = require ("./routes/register.js")
 const adminRouter = require("./routes/admin");
 const userDash = require ('./routes/userDash')
 const loginRouter = require("./routes/login");
+const shopRouter = require("./routes/shop");
+const cartRouter = require("./routes/cart");
 
 //const session = require('express-session');
 const app = express();
@@ -36,7 +38,8 @@ app.use("/admin", adminRouter);
 app.use("/login", loginRouter);
 app.use("/userDash", userDash);
 app.use("/register", register);
-
+app.use("/shop", shopRouter);
+app.use("/cart", cartRouter);
 
 //Set XXXXX folder as static
 //app.use(express.static('XXXXXX'));

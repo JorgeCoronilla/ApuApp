@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./templates/head', {title:'Home'} ); %>
+        <link rel="stylesheet" href="./../css/style.css">
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('./templates/nav'); %>
+    </header>
+    <main>
+        <section id="allProductsSummary">
+            <% result.forEach(element=> { %>
+                <div class="productSummary">
+                    <figure class="imgContainer">
+                        <img class="productImg" src='<%=element.img%>' alt="foto Smartphone">
+                    </figure>
+                    <article class="productInfo">
+                        <h5>
+                            <%=element.brand%> <br>
+                            <%=element.model%>
+                        </h5>
+                </div>
+                <% }) %>
+        </section>
+
+        <h1>Smartphones</h1>
+        <section id="allProducts">
+            <% result.forEach(element=> { %>
+                <div id="<%=element.id_item%>" class="product">
+                    <figure class="imgContainer">
+                        <img class="productImg" src='<%=element.img%>' alt="foto Smartphone">
+                    </figure>
+                    <article class="productInfo">
+                        <h3 class="productBrand">
+                            <%=element.brand%> <%=element.model%>
+                        </h3>
+                        <p class="productDescription">
+                            <%=element.description%>
+                        </p>
+                        <details>
+                            <summary>Especificaciones</summary>
+                            <p class="productSpecs">
+                                <%=element.specs%>
+                            </p>
+                        </details>
+                        <p class="productPrice">Desde <%=element.price%>€ </p>
+                        <p class="productStock">No te quedes sin él, aun quedan <%=element.stock%> en stock </p>
+                        <button class="addToCart <%=element.id_item%>" data-id='<%=element.id_item%>'>Añadir al carrito</button>
+                    </article>
+                </div>
+                <% }) %>
+        </section>
+
+        <button id="goToCart">Carrito</button>
+    </main>
+
+    <footer>
+        <%- include('./templates/footer'); %>
+    </footer>
+
+    <script type="module" src="./../js/shopScript.js"></script>
+
+</body>
+
+</html>

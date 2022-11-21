@@ -14,7 +14,7 @@
         <h1>
             <%= user[0].user_name %>
         </h1>
-        <form method="post" action="/userDash/<%=id_user%>/update">
+        <form method="post" action="/userDash/<%=decoded_id_user%>/update">
             <label class="form-label" for="user_name">Nombre</label>
             <input class="form-control user_data" type="text" name="user_name" readonly value=<%=user[0].user_name %>>
 
@@ -36,7 +36,7 @@
             </div>
         </form>
 
-        <form method="post" action="/userDash/<%=id_user%>/updatePass">
+        <form method="post" action="/userDash/<%=decoded_id_user%>/updatePass">
             <div id="password" style="display:flex; flex-direction:column;">
                 <label class="form-label" for="password">Password</label>
                 <input class="form-control" type="password" name="password" disabled value=<%=user[0].user_pass %>>
