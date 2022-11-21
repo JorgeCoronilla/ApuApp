@@ -66,7 +66,13 @@
     </footer>
 
     <script type="module" src="./../js/userDashScript.js"></script>
-
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            if (localStorage.admin) {
+                localStorage.setItem("admin", false);
+            }
+        })
+    </script>
 </body>
 
 </html>

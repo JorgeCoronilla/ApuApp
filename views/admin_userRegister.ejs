@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./templates/head', {title:'Home'} ); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('./templates/nav_admin'); %>
+    </header>
+    <h1>Registro de usuario</h1>
+    <main>
+      <form action="/register" method="POST">
+            <div class="mb-3">
+              <label for="user_name" class="form-label">Introduce tu nombre</label>
+              <input type="text" class="form-control" id="user_name" name="user_name" >
+            </div>
+            <div class="mb-3">
+              <label for="surname_1" class="form-label">Introduce tu primer apellido</label>
+              <input type="text" class="form-control" id="surname_1" name="surname_1">
+            </div>
+            <div class="mb-3">
+              <label for="surname_2" class="form-label">Intoduce tu segundo apellido</label>
+              <input type="text" class="form-control" id="surname_2" name="surname_2">
+            </div>
+            <div class="mb-3">
+              <label for="address" class="form-label">Introduce tu dirección</label>
+              <input type="text" class="form-control" id="address" name="address">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Introduce tu correo electrónico</label>
+              <input type="email" class="form-control" id="email" name="email">
+            </div>
+            <div class="mb-3">
+              <label for="user_pass" class="form-label">Introduce una contraseña</label>
+              <input type="password" class="form-control" id="user_pass" name="user_pass">
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Acepto condiciones</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrarse</button>
+          </form>
+          <% if (message!=""){ %>
+            <br>
+            <h2><%= message %></h2>
+            <br>
+            <% } %>
+    </main>
+
+    <footer>
+        <%- include('./templates/footer'); %>
+    </footer>
+
+</body>
+</html>

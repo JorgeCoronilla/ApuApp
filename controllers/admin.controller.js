@@ -143,11 +143,14 @@ const adminController = {
     insertAdmin: async (req, res) => {
         try {
             const { admin_id } = req.params;
+            verify (admin_id, req)
             const { admin_name, surname_1, surname_2, email, admin_pass } = req.body;
             const newAdmin = { admin_name, surname_1, surname_2, email, admin_pass }
+            console.log(newAdmin)
             const connection = await getConnection();
-            let result = await connection.query('INSERT INTO app_admins (admin_name, surname_1, surname_2, email, admin_pass) VALUES (?) ', newAdmin)
-            res.render("admin_createAd", {admin_id, message: "Admministrador creado"})
+            //let result = await connection.query('INSERT INTO app_admins (admin_name, surname_1, surname_2, email, admin_pass) VALUES (?) ', newAdmin)
+            let result = await connection.query('INSERT INTO app_admins SET ?', newAdmin)
+            res.render("admin_createAd", {admin_id, message: "Administrador creado"})
         }
         catch (error) {
             res.status(500)
@@ -177,22 +180,21 @@ const adminController = {
             res.send(error.message)
         }
     },
-    
-    insertUser: async (req, res) => {
-        //await getConnection()
-        const { user_name, surname_1, surname_2, address, email, user_pass } = req.body
-        try{
-            const userId = await addUser(user_name, surname_1, surname_2, address, email, user_pass)
-            if(userId){
-                res.render("registerConfirmed",{ user_name });
-                //res.render("../views/userRegister.ejs");
-            }
-        }catch(error){
-            if(error == "ER_DUP_ENTRY"){ //ES EL MENSAJE QUE NOS DA LA CONSOLA CUANDO EL REGISTRO DEL CORREO ESTÁ DUPLICADO EN LA BASE DE DATOS.
-                res.render("userRegister",{message:"El correo introducido ya existe.Por favor introduzca uno válido"});
-                
-               // res.status(400).json({ message: "El correo electrónico introducido ya existe.Por favor introduzca uno válido" })
-            }
+    insertUser2:async (req, res) => {
+        try {
+            const { admin_id } = req.params;
+            verify (admin_id, req)
+            const { user_name, surname_1, surname_2, address, email, user_pass } = req.body
+            const datesUser = { user_name, surname_1, surname_2, address, email, user_pass }
+            const connection = await getConnection();
+            //let result = await connection.query('INSERT INTO app_admins (admin_name, surname_1, surname_2, email, admin_pass) VALUES (?) ', newAdmin)
+            let result = await connection.query("INSERT INTO users SET ?", datesUser)
+            res.redirect(`/admin/${admin_id}`);
+               
+        }
+        catch (error) {
+            res.status(500)
+            res.send(error.message)
         }
     },
 
@@ -649,4 +651,6 @@ const adminController = {
 
 
 }
+
+
 module.exports = adminController;

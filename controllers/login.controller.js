@@ -55,7 +55,6 @@ const User = {
 
             }, process.env.TOKEN_SECRET, { expiresIn: '600000' })
             res.location(`/admin/${token}`);
-
             res.sendStatus(302);
         }
     },
