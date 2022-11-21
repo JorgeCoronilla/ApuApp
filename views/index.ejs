@@ -5,7 +5,7 @@
     <%- include('./templates/head', {title:'Home'} ); %>
 </head>
 
-<body class="container">
+<body class="container-fluid">
 
     <header>
         <%- include('./templates/nav'); %>
@@ -14,19 +14,51 @@
         <section class="splide" aria-labelledby="carousel-heading">
             <div class="splide__track">
                 <ul class="splide__list">
-                    <li class="splide__slide"><img src="./../img/img_mountains_wide.jpg" alt="imagen1" srcset="">
-                    </li>
-                    <li class="splide__slide"><img src="./../img/img_lights_wide.jpg" alt="imagen1" srcset="">
-                    </li>
-                    <li class="splide__slide"><img src="./../img/img_nature_wide.jpg" alt="imagen1" srcset="">
-                    </li>
-                    <li class="splide__slide"><img src="./../img/img_snow_wide.jpg" alt="imagen1" srcset=""></li>
+                    <li class="splide__slide"><a href="/shop"><img src="./../img/slide-1.jpg" alt="imagen1" srcset="">
+                        </a></li>
+                    <li class="splide__slide"><a href="/reparaciones"><img src="./../img/slide-2.jpg" alt="imagen1"
+                                srcset="">
+                        </a></li>
+                    <li class="splide__slide"><a href="#"><img src="./../img/slide-3.jpg" alt="imagen1" srcset="">
+                    </li></a>
                 </ul>
             </div>
         </section>
-        <div class="jumbotron">
-            <h1>Esto es un h1</h1>
-            <p>Gracias, vuelvan pronto!</p>
+        <div class="row icon-boxes jumbo p-5">
+            <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in"
+                data-aos-delay="200">
+                <div class="icon-box border">
+                    <div class="icon fa-sm text-info"><i class="bi fa-2x bi-phone-vibrate"></i></div>
+                    <h4 class="title"><a class="text-info" href="">ApuShop</a></h4>
+                    <p class="description">En nuestra tienda encontrarás los mejores móviles al mejor precio.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in"
+                data-aos-delay="300">
+                <div class="icon-box border">
+                    <div class="icon text-info mb-2"><i class="bi bi-tools"></i></div>
+                    <h4 class="title"><a class="text-info" href="">Reparaciones</a></h4>
+                    <p class="description">Ofrecemos soporte técnico para las mejores marcas, las que ofrecemos.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in"
+                data-aos-delay="400">
+                <div class="icon-box border">
+                    <div class="icon mb-2 text-info"><i class="bi bi-search"></i></div>
+                    <h4 class="title"><a class="text-info" class="text-info" href="">Encuentra tu tienda</a></h4>
+                    <p class="description">Busca la tienda o el laboratorio de reparación más cercano</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in"
+                data-aos-delay="500">
+                <div class="icon-box border">
+                    <div class="icon mb-2 text-info"><i class="bi bi-envelope-paper-heart"></i></div>
+                    <h4 class="title"><a class="text-info" href="">Contáctanos</a></h4>
+                    <p class="description">Si tienes cualquier duda o sugerencia, estamos a tu disposición</p>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -35,13 +67,15 @@
     </footer>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-          var splide = new Splide('.splide', {
-            type: 'loop',
-            perPage: 1
-          });
-          splide.mount();
+            var splide = new Splide('.splide', {
+                type: 'loop',
+                autoplay: true,
+                perPage: 1
+            });
+            splide.mount();
+            splide.play();
         });
-      </script>
+    </script>
 </body>
 
 </html>
