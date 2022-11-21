@@ -23,7 +23,6 @@ const adminController = {
             if (userInfo.id_admin == undefined) {
                 res.status(400).json({ message: "Bad request. That user doens't exist." })
             }
-            // userInfo.id_admin
             res.render("admin_panel", { admin_id })
         }
         catch (error) {
@@ -145,7 +144,6 @@ const adminController = {
         try {
             const { admin_id } = req.params;
             const { admin_name, surname_1, surname_2, email, admin_pass } = req.body;
-            console.log(admin_name, surname_1, surname_2, email, admin_pass)
             const newAdmin = { admin_name, surname_1, surname_2, email, admin_pass }
             const connection = await getConnection();
             let result = await connection.query('INSERT INTO app_admins (admin_name, surname_1, surname_2, email, admin_pass) VALUES (?) ', newAdmin)
@@ -159,12 +157,9 @@ const adminController = {
 
     checkUser: async (req, res) => {
 
-     
         try {
-            console.log("ENTRA")
             const { user, admin_id } = req.params;
             verify (admin_id, req)
-            console.log("ENTRA2")
 
             if (user == undefined) {
                 res.status(400).json({ message: "Bad request. That user doens't exist." })
@@ -180,6 +175,24 @@ const adminController = {
         catch (error) {
             res.status(500)
             res.send(error.message)
+        }
+    },
+    
+    insertUser: async (req, res) => {
+        //await getConnection()
+        const { user_name, surname_1, surname_2, address, email, user_pass } = req.body
+        try{
+            const userId = await addUser(user_name, surname_1, surname_2, address, email, user_pass)
+            if(userId){
+                res.render("registerConfirmed",{ user_name });
+                //res.render("../views/userRegister.ejs");
+            }
+        }catch(error){
+            if(error == "ER_DUP_ENTRY"){ //ES EL MENSAJE QUE NOS DA LA CONSOLA CUANDO EL REGISTRO DEL CORREO ESTÁ DUPLICADO EN LA BASE DE DATOS.
+                res.render("userRegister",{message:"El correo introducido ya existe.Por favor introduzca uno válido"});
+                
+               // res.status(400).json({ message: "El correo electrónico introducido ya existe.Por favor introduzca uno válido" })
+            }
         }
     },
 
@@ -216,7 +229,6 @@ const adminController = {
             const bill = result[0];
             var item = bill.items.split('#');
             let fecha = bill.bill_date.toLocaleDateString()
-            console.log(fecha)
 
             const doc = new PDFDocument();
             var filename = `factura${Date.now()}.pdf`
@@ -302,7 +314,6 @@ const adminController = {
     confirmDeleteUser: async (req, res) => {
 
         try {
-            console.log("Entra")
             const { answer } = req.body;
             const { admin_id, user } = req.params;
             verify (admin_id, req)
@@ -310,7 +321,6 @@ const adminController = {
             let result = await connection.query("DELETE FROM users WHERE id_user=?", user)       
             console.log("Usuario eliminado") 
             res.redirect(`/admin/${admin_id}/`)
-           
         }
         catch (error) {
             res.status(500)
@@ -321,19 +331,12 @@ const adminController = {
         
         const { admin_id } = req.params;
         verify (admin_id, req)
-        console.log("entra1");
-
         mongoose.connect(process.env.DB_URI_MONGO, { useNewUrlPArser: true, useUnifiedTopology: true })
         const db = mongoose.connection;
-        console.log("entra2");
         db.on('error', (error) => console.log("error"));
-        console.log("entra3");
         db.once('open', async () => console.log("Conectado a la base de datos"));
-        console.log("entra4");
         labs.find().exec(async function (err, result) {
             if (err) throw err;
-            console.log(result);
-            //mongoose.disconnect();
             res.render('admin_labs', { result, admin_id })
         });
     },
@@ -348,8 +351,6 @@ const adminController = {
         db.once('open', () => console.log("Conectado a la base de datos"));
         stores.find().exec(function (err, result) {
             if (err) throw err;
-            console.log(result);
-            //mongoose.disconnect();
             res.render('admin_stores', { result, admin_id })
         });
     },
@@ -365,7 +366,6 @@ const adminController = {
         deliveryPoints.find().exec(function (err, result) {
             if (err) throw err;
             console.log(result);
-            //mongoose.disconnect();
             res.render('admin_deliveryPoints', { result, admin_id })
         });
     },
@@ -383,13 +383,10 @@ const adminController = {
             console.log(result[0].city);
             const lab = result[0]
             res.render('admin_labsEdit', { lab, admin_id })
-            //mongoose.disconnect();
-
         });
     },
 
     findStore: (req, res) => {
-        
         const { admin_id, storeName } = req.params;
         verify (admin_id, req)
         mongoose.connect(process.env.DB_URI_MONGO, { useNewUrlPArser: true, useUnifiedTopology: true })
@@ -401,7 +398,6 @@ const adminController = {
             console.log(result[0].city);
             const store = result[0]
             res.render('admin_storesEdit', { store, admin_id })
-            //mongoose.disconnect();
 
         });
     },
@@ -419,8 +415,6 @@ const adminController = {
             console.log(result[0].city);
             const deliveryPoint1 = result[0]
             res.render('admin_deliveryEdit', { deliveryPoint1, admin_id })
-            //mongoose.disconnect();
-
         });
     },
 
@@ -442,7 +436,6 @@ const adminController = {
                 if (err) throw err;
                 console.log("Actualización correcta");
                 res.render('admin_labs', { message: "Actualización correcta", admin_id })
-                //mongoose.disconnect();
             });
         });
     },
