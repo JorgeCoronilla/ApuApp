@@ -1,0 +1,31 @@
+[
+    {
+        "ciudad": "madrid",
+        "provincia": "madrid",
+        "latitud": "0.4045759378462648",
+        "longitud": "-0.036947193021955353",
+        "deliveryPoint":"Apu Nietazos"
+    },
+    {
+        "ciudad": "barcelona",
+        "provincia": "barcelona",
+        "latitud": "0.41434208381886066",
+        "longitud": "0.021486234843453436",
+        "deliveryPoint":"Apu Ntillado"
+    },
+    {
+        "ciudad":"valencia",
+        "provincia":"valencia",
+        "latitud":"0.3946658600140445",
+        "longitud":"-0.003756572",
+        "deliveryPoint":"Apu Rado"
+       },
+       {
+        "ciudad":"murcia",
+        "provincia":"murcia",
+        "latitud":"0.3799839497237545",
+        "longitud":"-0.011248019022",
+        "deliveryPoint":"Apu Tadas"
+       }
+]
+

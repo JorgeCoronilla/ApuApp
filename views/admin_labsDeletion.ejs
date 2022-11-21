@@ -1,2 +1,37 @@
-<p>Usuario borrado con éxito</p>
-<a href="/admin/<%= admin_id %>">Volver</a>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./templates/head', {title:'Home'} ); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('./templates/nav'); %>
+    </header>
+    <h1>Eliminar laboratorios</h1>
+    <main>
+        <form action="/admin/" method="post">
+            <div class="mb-3">
+              <label for="admin_id" class="form-label">Introduce el id del laboratorio</label>
+              <input type="text" class="form-control" id="admin_id" name="admin_id" >
+            </div>
+            <div class="mb-3">
+              <label for="labname" class="form-label">Introduce el nombre del laboratorio</label>
+              <input type="text" class="form-control" id="labname" name="labname">
+            </div>
+            <button type="submit" class="btn btn-primary">Eliminar</button>
+          </form>
+        <p>Laboratorio borrado con éxito</p>
+        <a href="/admin/<%= admin_id %>">Volver</a>
+
+    </main>
+
+    <footer>
+        <%- include('./templates/footer'); %>
+    </footer>
+
+</body>
+
+</html>

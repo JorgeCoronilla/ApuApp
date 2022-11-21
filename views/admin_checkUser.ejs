@@ -6,6 +6,19 @@
 
 Facturas
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./templates/head', {title:'Home'} ); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('./templates/nav'); %>
+    </header>
+
 <div class="table-responsible">
     <% if (bills != '') { %>
         <table class="table table-striped text-center">
@@ -39,3 +52,11 @@ Facturas
         <h1 class="text-center text-secondary mt-5">Este usuario no tienen ninguna factura</h1>
         <% } %> 
 </div>
+
+<footer>
+    <%- include('./templates/footer'); %>
+</footer>
+
+</body>
+
+</html>
