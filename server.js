@@ -53,6 +53,16 @@ app.get('/', function(req, res) {
     res.render('../views/index');
 });
 
+app.get('/adminpay/', async (req, res) => {
+    try {
+        res.render("admin_pay")
+    }
+    catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+});
+
 //Start listening
 app.listen(PORT, () => {
     console.log(`Server started at http://127.0.0.1:${PORT}`);

@@ -41,7 +41,9 @@ adminRouter.get('/:admin_id/services/', controller.allservices);
 adminRouter.get('/:admin_id/sales/', controller.allSales);
 
 //adminRouter.get('/:admin_id/compras/', controller.shopAdmin);
-//adminRouter.get('/:admin_id/shop/:user', controller.shopAdmin);
+adminRouter.get('/:admin_id/shop/:user', controller.shopAdmin);
+adminRouter.get('/adminpay/', controller.adminPay);
+adminRouter.get('/:admin_id/shop/:user/pay', controller.payment);
 //adminRouter.get('/:admin_id/cart/:user', controller.cartAdmin);
 
 

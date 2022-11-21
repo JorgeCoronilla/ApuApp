@@ -27,25 +27,17 @@
           <li class="list-group-item bg-light"><a href="/admin/<%= admin_id %>/deliveryPoints">puntos de recogida</a></li>
           <li class="list-group-item bg-light"><a href="/admin/<%= admin_id %>/services">reparaciones</a></li>
           <li class="list-group-item bg-light"><a href="/admin/<%= admin_id %>/sales">ventas</a></li>
-          <li class="list-group-item bg-light"><a href="/admin/<%= admin_id %>/shop">comprar para un usuario</a></li>
         </ul>
       </div>
       <br>
     <br>
-
+      <input id="admin_id" value="<%=admin_id%>">
     <footer>
         <%- include('./templates/footer'); %>
     </footer>
     <br>
     <br>
     <br>
-    <script>
-        window.addEventListener("DOMContentLoaded", () => {
-            if (!localStorage.admin) {
-                localStorage.setItem("admin", true);
-            }
-        })
-    </script>
 </body>
 
 </html>

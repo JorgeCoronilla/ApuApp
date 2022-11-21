@@ -51,11 +51,13 @@ const adminController = {
         }
     },
     updateAdmin: async (req, res) => {
+        /*
         try {
-            
-            const { admin_name, surname_1, surname_2, email, admin_pass } = req.body;
+                     
             const { admin_id } = req.params;
             verify (admin_id, req)
+            
+            const { admin_name, surname_1, surname_2, email, admin_pass } = req.body;
             userInfo = JSON.parse(Buffer.from(admin_id.split('.')[1], 'base64').toString());
             if (userInfo.id_admin == undefined) {
                 res.status(400).json({ message: "Bad request. That user doens't exist." })
@@ -71,7 +73,7 @@ const adminController = {
         catch (error) {
             res.status(500)
             res.send(error.message)
-        }
+        }*/
     },
 
     allUsers: async (req, res) => {
@@ -649,7 +651,38 @@ const adminController = {
         }
     },
 
+    shopAdmin: async (req, res) => {
+        try {
+            const { admin_id, user } = req.params;
+            verify (admin_id, req)
+            const admin_id2 = JSON.parse(Buffer.from(admin_id.split('.')[1], 'base64').toString());
+            res.render("admin_goShopping", { admin_id, user, admin_id2 })
+        }
+        catch (error) {
+            res.status(500)
+            res.send(error.message)
+        }
+    },
 
+    adminPay: async (req, res) => {
+        try {
+            res.render("admin_pay")
+        }
+        catch (error) {
+            res.status(500)
+            res.send(error.message)
+        }
+    },
+
+    payment: async (req, res) => {
+        try {
+            res.render("admin_paymentGate")
+        }
+        catch (error) {
+            res.status(500)
+            res.send(error.message)
+        }
+    },
 }
 
 
