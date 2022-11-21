@@ -1,0 +1,41 @@
+a.navbar-brand, h1 {
+    font-family: 'Homer Simpson Revised', sans-serif;
+    font-size: 40px;
+}
+h2, h3, h4 {
+    font-family: 'Homer Simpson Revised', sans-serif;
+}
+body {
+    font-family: 'Work Sans', sans-seri !important;
+}
+li.splide__slide img {
+    width: 100%;
+}
+.icon-box {
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 0 29px 0 rgb(18 66 101 / 8%);
+    transition: all 0.3s ease-in-out;
+    border-radius: 8px;
+    z-index: 1;
+}
+.icon-boxes {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
+.icon {
+    font-size: 2rem;
+}
+.jumbo {
+    background-color: #d6e4a2;
+    box-shadow: 0 5px 8px -6px #333 inset;
+}
+footer {
+   background-color: #33383c;
+   color: #fff;
+}
+li {
+    list-style: none;
+}

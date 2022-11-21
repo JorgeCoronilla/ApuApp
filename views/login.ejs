@@ -5,7 +5,7 @@
     <%- include('./templates/head', {title:'Acceso'} ); %>
 </head>
 
-<body class="container">
+<body class="container border">
 
     <header>
         <%- include('./templates/nav'); %>
@@ -30,7 +30,7 @@
     <div class="row mb-4">
       <div class="col">
         <!-- Simple link -->
-        <a href="http://127.0.0.1:3000/login/recuperar">¿Olvidaste el password?</a>
+        <a href="/login/recuperar">¿Olvidaste el password?</a>
       </div>
     </div>
   
@@ -39,6 +39,6 @@
   
     <!-- Register buttons -->
     <div class="text-center">
-      <p>¿No estás registrado? <a href="http://127.0.0.1:3000/register">Regístrate</a></p>
+      <p>¿No estás registrado? <a href="/register">Regístrate</a></p>
     </div>
   </form>
