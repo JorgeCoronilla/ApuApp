@@ -1,8 +1,31 @@
-<h1>Panel del administrador</h1>
-<a href="/admin/<%= admin_id %>/update">actualizar datos</a>
-<a href="/admin/<%= admin_id %>/create_admin">añadir administrador</a>
-<a href="/admin/<%= admin_id %>/users">usuarios registrados</a>
-<a href="/admin/<%= admin_id %>/bills">facturas</a>
-<a href="/admin/<%= admin_id %>/labs">laboratorios</a>
-<a href="/admin/<%= admin_id %>/stores">tiendas</a>
-<a href="/admin/<%= admin_id %>/deliveryPoints">puntos de recogida</a>
+<!DOCTYPE html>
+<html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./templates/head', {title:'Home'} ); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('./templates/nav'); %>
+    </header>
+    <h1>Panel del administrador</h1>
+    <a href="/admin/<%= admin_id %>/update">actualizar datos</a>
+    <a href="/admin/<%= admin_id %>/create_admin">añadir administrador</a>
+    <a href="/admin/<%= admin_id %>/users">usuarios registrados</a>
+    <a href="/admin/<%= admin_id %>/bills">facturas</a>
+    <a href="/admin/<%= admin_id %>/labs">laboratorios</a>
+    <a href="/admin/<%= admin_id %>/stores">tiendas</a>
+    <a href="/admin/<%= admin_id %>/deliveryPoints">puntos de recogida</a>
+
+
+    <footer>
+        <%- include('./templates/footer'); %>
+    </footer>
+
+</body>
+
+</html>

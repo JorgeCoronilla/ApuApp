@@ -1,0 +1,31 @@
+[
+    {
+        "ciudad": "jaen",
+        "provincia": "jaen",
+        "latitud": "0.3778140693205725",
+        "longitud": "-0.037652395000000003",
+        "deliveryPoint":"Carrefour JAEN"
+    },
+    {
+        "ciudad": "pamplona",
+        "provincia": "pamolona",
+        "latitud": "0.4281391815560146",
+        "longitud": "-0.0164535174606015",
+        "deliveryPoint":"EL CORTE INGLÉS PAMPLONA"
+
+    },
+    {
+        "ciudad": "barcelona",
+        "provincia": "barcelona",
+        "latitud": "0.4138787847554435",
+        "longitud": "0.021710703370877904",
+        "deliveryPoint":"EL CORTE INGLÉS PLAÇA DE CATALUNYA"
+    },
+    {
+        "ciudad": "alicante",
+        "provincia": "alicante",
+        "latitud": "0.3844930543912056",
+        "longitud": "-0.468843132730",
+        "deliveryPoint":"Carrefour GRAN VIA"
+    }
+]

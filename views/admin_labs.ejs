@@ -1,4 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <%- include('./templates/head', {title:'Home'} ); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('./templates/nav'); %>
+    </header>
 
 <div class="table-responsible">
     <% if (result != '') { %>
@@ -29,3 +40,11 @@
         <% } %> 
 
 </div>
+
+<footer>
+    <%- include('./templates/footer'); %>
+</footer>
+
+</body>
+
+</html>
