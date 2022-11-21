@@ -8,6 +8,7 @@
 <body class="container">
 
     <header>
+
         <%- include('./templates/nav_admin'); %>
     </header>
     <h1>Editar laboratorios</h1>
@@ -24,6 +25,7 @@
             <div class="mb-3">
               <label for="city" class="form-label">Introduce la ciudad</label>
               <input type="text" class="form-control" id="city" name="city" placeholder="Ciudad" value="<%= lab.city %>">
+
             </div>
             <button type="submit" class="btn btn-primary">Confirmar cambios</button>
           </form>

@@ -8,6 +8,7 @@
 <body class="container">
 
     <header>
+
         <%- include('./templates/nav_admin'); %>
     </header>
 <br>
@@ -16,6 +17,7 @@
 <h3>Usuarios registrados</h3>
 <br>
 <br>
+
 <div class="table-responsible">
     <% if (users != '') { %>
         <table class="table table-striped text-center">
@@ -55,6 +57,7 @@
         <h1 class="text-center text-secondary mt-5">No users found in the DB!!</h1>
         <% } %> 
 </div>
+
 <br>
 <br>
 <h3>Registro de nuevo usuario</h3>
@@ -93,6 +96,7 @@
 </main>
 <br>
 <br>
+
 
 <footer>
     <%- include('./templates/footer'); %>
