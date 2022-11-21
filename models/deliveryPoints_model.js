@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const deliverySchema = new Schema({
-    _id: {
+    user_id: {
         type: String,
         required: true
     },
@@ -20,4 +20,4 @@ const deliverySchema = new Schema({
     },
 })
 
-module.exports = mongoose.model('deliveryPoints', deliverySchema);
+module.exports = mongoose.model('deliverySchema', deliverySchema);

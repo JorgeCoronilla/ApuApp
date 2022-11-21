@@ -11,25 +11,10 @@
     <header>
         <%- include('./templates/nav'); %>
     </header>
-    <main>
-        <section id="allProductsSummary">
-            <% result.forEach(element=> { %>
-                <div class="productSummary">
-                    <figure class="imgContainer">
-                        <img class="productImg" src='<%=element.img%>' alt="foto Smartphone">
-                    </figure>
-                    <article class="productInfo">
-                        <h5>
-                            <%=element.brand%> <br>
-                            <%=element.model%>
-                        </h5>
-                </div>
-                <% }) %>
-        </section>
-
-        <h1>Smartphones</h1>
-        <section id="allProducts">
-            <% result.forEach(element=> { %>
+    <main id="cart">
+        <section id="cartProducts">
+            <h1>Carrito</h1>
+            <% cartProducts.forEach(element=> { %>
                 <div id="<%=element.id_item%>" class="product">
                     <figure class="imgContainer">
                         <img class="productImg" src='<%=element.img%>' alt="foto Smartphone">
@@ -47,22 +32,45 @@
                                 <%=element.specs%>
                             </p>
                         </details>
-                        <p class="productPrice">Desde <%=element.price%>€ </p>
-                        <p class="productStock">No te quedes sin él, aun quedan <%=element.stock%> en stock </p>
-                        <button class="addToCart <%=element.id_item%>" data-id='<%=element.id_item%>'>Añadir al carrito</button>
+                        <p class="productPrice">Precio: <%=element.price%>€ </p>
                     </article>
                 </div>
                 <% }) %>
         </section>
+        <section id="paySection">
+            <h3>Resumen</h3>
+            <div id="totalSumm">
+                <div>
+                    <p>Total (IVA incluído)</p>
+                    <p><strong>Subtotal</strong></p>
+                </div>
+                <div>
+                    <p style="font-size: 12px; color: gray;"> 
+                        <% let total = 0%>
+                        <% cartProducts.forEach(element=> { %>
+                        <% total+=element.price%>
+                        <% }) %>
 
-        <button id="goToCart">Carrito</button>
+                        <%= total %>€
+                    </p>
+                    <p><strong><%= total %>€</strong></p>
+                    <p style="font-size: 12px; color: gray;">
+                        <% let IVA = total - total/1.21 %>
+                        <%=IVA.toFixed(2) %>€ IVA incluido
+                    </p>
+
+                </div>
+                
+            </div>
+            <button id="buyButton">Comprar</button>
+        </section>
     </main>
 
     <footer>
         <%- include('./templates/footer'); %>
     </footer>
 
-    <script type="module" src="./../js/shopScript.js"></script>
+    <script type="module" src="./../js/cartScript.js"></script>
 
 </body>
 
