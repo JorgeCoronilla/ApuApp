@@ -6,8 +6,10 @@ CREATE TABLE products (
     id_item INT AUTO_INCREMENT,
     brand VARCHAR(100) NOT NULL,
     model VARCHAR(100) NOT NULL,
+    description text,
     price INT NOT NULL,
     specs VARCHAR(300) NOT NULL,
+    img VARCHAR(200),
     stock INT NOT NULL,
     PRIMARY KEY (id_item)
 );
@@ -108,11 +110,11 @@ INSERT INTO app_admins
 VALUES (null, "Apu", "Abdel","Martínez","apu@gmail.com","9999");
 
 INSERT INTO products
-VALUES (null, "Apple", "Iphone 14",979,"pantalla 6.1,memoria 128GB,IOS",20),
+VALUES (null, "Apple", "Iphone 14", "Este Iphone mejora en batería, cámara y diseño, conserva el mismo procesador, el Apple A15 Bionic, y la misma pantalla de 6,1 pulgadas. La pantalla ha mejorado el brillo. Mantiene la misma resolución que versiones anteriores.", 979,"pantalla 6.1, memoria 128GB, IOS", "./../img/iphone14.jpg", 20),
 
-		(null, "Realme", "C33",159,"pantalla 6.5,memoria 128GB,ANDROID",20),
+		(null, "Realme", "C33", "El Realme C33 es un móvil económico, con un buen rendimiento, una cámara  y una pantalla que cumplen, y una gran autonomía.", 159,"pantalla 6.5, memoria 128GB, ANDROID","./../img/realmeC33.jpg", 20),
 
-		(null, "Xiaomi", "12X",399,"pantalla 6.28,memoria 256GB,ANDROID",20);
+		(null, "Xiaomi", "12X", "El Xiaomi 12X ofrece potencia y diseño a un precio comedido. Se presenta con un procesador Snapdragon 870 y con 8 GB de memoria RAM, por lo que asegura un muy buen rendimiento. Además, cuenta con una pantalla AMOLED con 120 Hz de tasa de frecuencia que aseguran una gran fluidez. Y a todo ello hay que sumarle lo último en conectividad.", 399,"pantalla 6.28, memoria 256GB, ANDROID","./../img//xiaomi12X.png", 20);
         
 INSERT INTO services
 VALUES (null, "screen", 100,"lab1","1 hora"),
@@ -151,6 +153,7 @@ VALUES (null, "2022-11-17", 100, 1, 1),
 #select * from users;
 #select * from users_all;
 #select * from products;
+select * from products where id_item=1 or id_item=2;
 #select * from app_admins;
 #select * from bills;
 #select * from sales;
