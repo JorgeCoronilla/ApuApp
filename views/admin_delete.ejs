@@ -1,1 +1,27 @@
-Llega
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./templates/head', {title:'Home'} ); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('./templates/nav_admin'); %>
+    </header>
+<form action="/admin/<%=admin_id%>/users/<%= user %>/delete" method="POST">
+    <div class="mb-3">
+      <label for="admin_name" class="form-label">Va a borrar a este usuario. ¿Está seguro?</label>
+      <button type="submit" class="form-control" >ACEPTAR</button>
+    </div>
+    <a href="/admin/<%=admin_id %>">volver</a>
+  
+  </form>
+  <footer>
+    <%- include('./templates/footer'); %>
+</footer>
+
+</body>
+
+</html>

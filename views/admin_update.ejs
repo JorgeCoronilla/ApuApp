@@ -1,10 +1,47 @@
 
-<form method="post">
-    
-    <%= admin_name %>
-<%= surname1 %>
-<%= surname2 %>
-<%= email %>
-    Cambiar datos
-</form>
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <%- include('./templates/head', {title:'Home'} ); %>
+</head>
+
+<body class="container">
+
+    <header>
+
+        <%- include('./templates/nav_admin'); %>
+    </header>
+    <h1>Editar administrador</h1>
+    <main>
+      <form action="admin/<%= admin_id %>/update" method="post">
+
+            <div class="mb-3">
+              <label for="admin_name" class="form-label">Introduce el nombre</label>
+              <input type="text" class="form-control" id="admin_name" name="admin_name" placeholder="Nombre" value="<%= admin_name %>" >
+            </div>
+            <div class="mb-3">
+              <label for=" surname1" class="form-label">Introduce el primer apellido</label>
+              <input type="text" class="form-control" id="surname1" name="surname1" placeholder="Primer apellido" value="<%= surname1 %>">
+            </div>
+            <div class="mb-3">
+              <label for="surname2" class="form-label">Intoduce el segundo apellido</label>
+              <input type="text" class="form-control" id="surname2" name="surname2" placeholder="Segundo apellido" value="<%= surname2 %>">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Introduce el correo electrónico</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="Correo electrónico" value="<%= email %>">
+            </div>
+            <button type="submit" class="btn btn-primary">Modificar datos</button>
+          </form>
+    </main>
+
+    <footer>
+        <%- include('./templates/footer'); %>
+    </footer>
+
+</body>
+
+</html>
 

@@ -1,10 +1,24 @@
-<%= user_name %>
-<%= surname1 %>
-<%= surname2 %>
-<%= address %>
-<%= email %>
 
-Facturas
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./templates/head', {title:'Home'} ); %>
+</head>
+
+<body class="container">
+
+    <header>
+
+        <%- include('./templates/nav_admin'); %>
+    </header>
+
+<h2><%= user_name %></h2>
+<h2><%= surname1 %> <%= surname2 %></h2>
+<p><%= address %></p>   
+<p><%= email %></p>
 
 <div class="table-responsible">
     <% if (bills != '') { %>
@@ -39,3 +53,11 @@ Facturas
         <h1 class="text-center text-secondary mt-5">Este usuario no tienen ninguna factura</h1>
         <% } %> 
 </div>
+
+<footer>
+    <%- include('./templates/footer'); %>
+</footer>
+
+</body>
+
+</html>

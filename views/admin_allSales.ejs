@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./templates/head', {title:'Home'} ); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('./templates/nav_admin'); %>
+    </header>
+<div class="table-responsible">
+    <% if (sales != '') { %>
+        <table class="table table-striped text-center">
+            <thead>
+                <tr class="table-dark">
+                    <th>ID</th>
+                    <th>cantidad</th>
+                    <th>Total</th>
+                    <th>Id factura</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% sales.forEach((row, index) => { %>
+                <tr class="align-middle">
+                    <td><%= row.id_sale  %> </td>
+                    <td><%= row.q_sale  %></td>
+                    <td><%= row.total  %></td>
+                    <td><%= row.fk_id_bill  %></td>
+                </tr>
+            <% }) %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <h1 class="text-center text-secondary mt-5">No sales found in the DB!!</h1>
+        <% } %> 
+</div>
+
+<footer>
+    <%- include('./templates/footer'); %>
+</footer>
+
+</body>
+
+</html>
