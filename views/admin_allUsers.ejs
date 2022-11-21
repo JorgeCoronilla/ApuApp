@@ -8,8 +8,15 @@
 <body class="container">
 
     <header>
-        <%- include('./templates/nav'); %>
+
+        <%- include('./templates/nav_admin'); %>
     </header>
+<br>
+<br>
+<br>
+<h3>Usuarios registrados</h3>
+<br>
+<br>
 
 <div class="table-responsible">
     <% if (users != '') { %>
@@ -23,6 +30,7 @@
                     <th>Dirección</th>
                     <th>Email</th>
                     <th>Password</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,6 +47,7 @@
                         <a href="/admin/<%= admin_id %>/users/<%= row.id_user %> " class="text-success">Editar</a>
                         <a href="/admin/<%= admin_id %>/users/<%= row.id_user %>/delete " class="text-success">Borrar</a>
                         <a href="/admin/<%= admin_id %>/check/<%= row.id_user %> " class="text-success">Detalles</a>
+                        <a href="/admin/<%= admin_id %>/shop/<%= row.id_user %> " class="text-success">Comprar</a>
                     </td>
                 </tr>
             <% }) %>
@@ -48,6 +57,46 @@
         <h1 class="text-center text-secondary mt-5">No users found in the DB!!</h1>
         <% } %> 
 </div>
+
+<br>
+<br>
+<h3>Registro de nuevo usuario</h3>
+<main>
+  <form action="/admin/<%= admin_id %>/users" method="POST">
+        <div class="mb-3">
+          <label for="user_name" class="form-label">Introduce tu nombre</label>
+          <input type="text" class="form-control" id="user_name" name="user_name" >
+        </div>
+        <div class="mb-3">
+          <label for="surname_1" class="form-label">Introduce tu primer apellido</label>
+          <input type="text" class="form-control" id="surname_1" name="surname_1">
+        </div>
+        <div class="mb-3">
+          <label for="surname_2" class="form-label">Intoduce tu segundo apellido</label>
+          <input type="text" class="form-control" id="surname_2" name="surname_2">
+        </div>
+        <div class="mb-3">
+          <label for="address" class="form-label">Introduce tu dirección</label>
+          <input type="text" class="form-control" id="address" name="address">
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Introduce tu correo electrónico</label>
+          <input type="email" class="form-control" id="email" name="email">
+        </div>
+        <div class="mb-3">
+          <label for="user_pass" class="form-label">Introduce una contraseña</label>
+          <input type="password" class="form-control" id="user_pass" name="user_pass">
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Acepto condiciones</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Registrarse</button>
+      </form>
+</main>
+<br>
+<br>
+
 
 <footer>
     <%- include('./templates/footer'); %>

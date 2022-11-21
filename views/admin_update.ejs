@@ -1,19 +1,22 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+
     <%- include('./templates/head', {title:'Home'} ); %>
 </head>
 
 <body class="container">
 
     <header>
-        <%- include('./templates/nav'); %>
+
+        <%- include('./templates/nav_admin'); %>
     </header>
     <h1>Editar administrador</h1>
     <main>
-      <form action="/admin/" method="post">
+      <form action="admin/<%= admin_id %>/update" method="post">
+
             <div class="mb-3">
               <label for="admin_name" class="form-label">Introduce el nombre</label>
               <input type="text" class="form-control" id="admin_name" name="admin_name" placeholder="Nombre" value="<%= admin_name %>" >
@@ -41,3 +44,4 @@
 </body>
 
 </html>
+

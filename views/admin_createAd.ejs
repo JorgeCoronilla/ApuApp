@@ -8,18 +8,20 @@
 <body class="container">
 
     <header>
-        <%- include('./templates/nav'); %>
+        <%- include('./templates/nav_admin'); %>
     </header>
     <h1>Crear Administrador</h1>
     <main>
-      <form action="/admin" method="POST">
+      <form action="/admin/<%=admin_id%>/create_admin" method="POST">
             <div class="mb-3">
               <label for="admin_name" class="form-label">Introduce tu nombre</label>
               <input type="text" class="form-control" id="admin_name" name="admin_name" >
             </div>
             <div class="mb-3">
               <label for="surname_1" class="form-label">Introduce tu primer apellido</label>
-              <input type="text" class="form-control" id="surname_1" name=" surname_1">
+
+              <input type="text" class="form-control" id="surname_1" name="surname_1">
+
             </div>
             <div class="mb-3">
               <label for="surname_2" class="form-label">Intoduce tu segundo apellido</label>
@@ -36,6 +38,11 @@
             <button type="submit" class="btn btn-primary">Confirmar Administrador</button>
           </form>
     </main>
+    <% if (message!=""){ %>
+      <br>
+      <h2><%= message %></h2>
+      <br>
+      <% } %>
 
     <footer>
         <%- include('./templates/footer'); %>

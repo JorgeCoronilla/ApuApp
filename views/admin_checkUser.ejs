@@ -1,10 +1,5 @@
-<%= user_name %>
-<%= surname1 %>
-<%= surname2 %>
-<%= address %>
-<%= email %>
 
-Facturas
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,8 +11,14 @@ Facturas
 <body class="container">
 
     <header>
-        <%- include('./templates/nav'); %>
+
+        <%- include('./templates/nav_admin'); %>
     </header>
+
+<h2><%= user_name %></h2>
+<h2><%= surname1 %> <%= surname2 %></h2>
+<p><%= address %></p>   
+<p><%= email %></p>
 
 <div class="table-responsible">
     <% if (bills != '') { %>

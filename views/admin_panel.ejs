@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<!DOCTYPE html>
-<html lang="en">
 
 <head>
     <%- include('./templates/head', {title:'Home'} ); %>
@@ -10,17 +8,30 @@
 <body class="container">
 
     <header>
-        <%- include('./templates/nav'); %>
-    </header>
-    <h1>Panel del administrador</h1>
-    <a href="/admin/<%= admin_id %>/update">actualizar datos</a>
-    <a href="/admin/<%= admin_id %>/create_admin">añadir administrador</a>
-    <a href="/admin/<%= admin_id %>/users">usuarios registrados</a>
-    <a href="/admin/<%= admin_id %>/bills">facturas</a>
-    <a href="/admin/<%= admin_id %>/labs">laboratorios</a>
-    <a href="/admin/<%= admin_id %>/stores">tiendas</a>
-    <a href="/admin/<%= admin_id %>/deliveryPoints">puntos de recogida</a>
 
+        <%- include('./templates/nav_admin'); %>
+    </header>
+    <br>
+    <h1>Panel del administrador</h1>
+    <br>
+    <br>
+    <br>
+    <div style="margin: 0 30% 0 30%" class="card text-center text-white bg-light">
+        <ul class="list-group list-group-flush bg-dark">
+          <li class="list-group-item bg-light"><a href="/admin/<%= admin_id %>/update">actualizar datos</a></li>
+          <li class="list-group-item bg-light"><a href="/admin/<%= admin_id %>/create_admin">añadir administrador</a></li>
+          <li class="list-group-item bg-light"><a href="/admin/<%= admin_id %>/users">usuarios registrados</a></li>
+          <li class="list-group-item bg-light"><a href="/admin/<%= admin_id %>/bills">facturas</a></li>
+          <li class="list-group-item bg-light"><a href="/admin/<%= admin_id %>/labs">laboratorios</a></li>
+          <li class="list-group-item bg-light"><a href="/admin/<%= admin_id %>/stores">tiendas</a></li>
+          <li class="list-group-item bg-light"><a href="/admin/<%= admin_id %>/deliveryPoints">puntos de recogida</a></li>
+          <li class="list-group-item bg-light"><a href="/admin/<%= admin_id %>/services">reparaciones</a></li>
+          <li class="list-group-item bg-light"><a href="/admin/<%= admin_id %>/sales">ventas</a></li>
+          <li class="list-group-item bg-light"><a href="/admin/<%= admin_id %>/shop">comprar para un usuario</a></li>
+        </ul>
+      </div>
+      <br>
+    <br>
 
     <footer>
         <%- include('./templates/footer'); %>

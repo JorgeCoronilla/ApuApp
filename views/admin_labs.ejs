@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <%- include('./templates/head', {title:'Home'} ); %>
 </head>
@@ -8,38 +9,57 @@
 <body class="container">
 
     <header>
-        <%- include('./templates/nav'); %>
+        <%- include('./templates/nav_admin'); %>
     </header>
 
-<div class="table-responsible">
-    <% if (result != '') { %>
-        <table class="table table-striped text-center">
-            <thead>
-                <tr class="table-dark">
-                    <th>Nombre</th>
-                    <th>Dirección</th>
-                    <th>Ciudad</th>
-                </tr>
-            </thead>
-            <tbody>
-            <% result.forEach((row, index) => { %>
-                <tr class="align-middle">
-                    <td><%= row.labName  %></td>
-                    <td><%= row.address  %></td>
-                    <td><%= row.city  %></td>
-                    <td>
-                        <a href="/admin/<%= admin_id %>/labs/<%= row.labName %> " class="text-success">Editar</a>
-                        <a href="/admin/<%= admin_id %>/labs/<%= row.labName %>/delete " class="text-success">Borrar</a>
-                    </td>
-                </tr>
-            <% }) %>
-            </tbody>
-        </table>
-    <% } else { %>
-        <h1 class="text-center text-secondary mt-5">No hay resultados</h1>
-        <% } %> 
-
-</div>
+    <div class="table-responsible">
+      <% if (result != '') { %>
+          <table class="table table-striped text-center">
+              <thead>
+                  <tr class="table-dark">
+                      <th>Nombre</th>
+                      <th>Dirección</th>
+                      <th>Ciudad</th>
+                      <th>Acción</th>
+                  </tr>
+              </thead>
+              <tbody>
+              <% result.forEach((row, index) => { %>
+                  <tr class="align-middle">
+                      <td><%= row.labName  %></td>
+                      <td><%= row.address  %></td>
+                      <td><%= row.city  %></td>
+                      <td>
+                          <a href="/admin/<%= admin_id %>/labs/<%= row.labName %> " class="text-success">Editar</a>
+                          <a href="/admin/<%= admin_id %>/labs/<%= row.labName %>/delete " class="text-success">Borrar</a>
+                      </td>
+                  </tr>
+              <% }) %>
+              </tbody>
+          </table>
+      <% } else { %>
+          <h1 class="text-center text-secondary mt-5">No hay resultados</h1>
+          <% } %> 
+  </div>
+  
+  <h1>Crear Laboratorio</h1>
+  <main>
+    <form action="/admin/<%=admin_id%>/labs" method="POST">
+          <div class="mb-3">
+            <label for="labName" class="form-label">Nombre del laboratorio</label>
+            <input type="text" class="form-control" id="labName" name="labName" >
+          </div>
+          <div class="mb-3">
+            <label for="address" class="form-label">Introduce la dirección</label>
+            <input type="text" class="form-control" id="address" name="address">
+          </div>
+          <div class="mb-3">
+            <label for="city" class="form-label">Ciudad</label>
+            <input type="text" class="form-control" id="city" name="city">
+          </div>
+          <button type="submit" class="btn btn-primary">Crear nuevo Laboratorio</button>
+        </form>
+  </main>
 
 <footer>
     <%- include('./templates/footer'); %>
@@ -48,3 +68,6 @@
 </body>
 
 </html>
+
+
+
