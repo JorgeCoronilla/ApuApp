@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./templates/head', {title:'Home'} ); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('./templates/nav_admin'); %>
+    </header>
+<div class="table-responsible">
+    <% if (services != '') { %>
+        <table class="table table-striped text-center">
+            <thead>
+                <tr class="table-dark">
+                    <th>ID</th>
+                    <th>tipo de servicio</th>
+                    <th>Precio</th>
+                    <th>Laboratorio</th>
+                    <th>Duración</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% services.forEach((row, index) => { %>
+                <tr class="align-middle">
+                    <td><%= row.id_service  %> </td>
+                    <td><%= row.service_type  %></td>
+                    <td><%= row.price  %></td>
+                    <td><%= row.lab  %></td>
+                    <td><%= row.duration  %></td>
+                </tr>
+            <% }) %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <h1 class="text-center text-secondary mt-5">No sales found in the DB!!</h1>
+        <% } %> 
+</div>
+
+<footer>
+    <%- include('./templates/footer'); %>
+</footer>
+
+</body>
+
+</html>

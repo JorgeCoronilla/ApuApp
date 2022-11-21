@@ -45,7 +45,7 @@ const User = {
             const token = jwt.sign({
                 email: admin[0].email,
                 id_admin: admin[0].id_admin
-            }, process.env.TOKEN_SECRET, { expiresIn: '600000' })
+            }, process.env.TOKEN_SECRET, { expiresIn: '6000000000' })
             res.location(`http://127.0.0.1:3000/login/confirmacion/${token}`);
             res.sendStatus(302);
         }

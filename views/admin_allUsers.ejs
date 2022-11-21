@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./templates/head', {title:'Home'} ); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('./templates/nav_admin'); %>
+    </header>
+
 <div class="table-responsible">
     <% if (users != '') { %>
         <table class="table table-striped text-center">
@@ -35,3 +48,11 @@
         <h1 class="text-center text-secondary mt-5">No users found in the DB!!</h1>
         <% } %> 
 </div>
+
+<footer>
+    <%- include('./templates/footer'); %>
+</footer>
+
+</body>
+
+</html>

@@ -28,6 +28,7 @@ app.use(express.json());
 //Static
 app.use('/', express.static("public"));
 app.use('/userDash', express.static(__dirname + '/public'));
+app.use('/admin', express.static(__dirname + '/public'));
 app.use(express.text());
 
 //Rutas

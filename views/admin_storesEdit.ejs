@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,20 +13,20 @@
     <header>
         <%- include('./templates/nav_admin'); %>
     </header>
-    <h1>Editar laboratorios</h1>
+    <h1>Editar tiendas</h1>
     <main>
-      <form action="/admin/<%= admin_id %>/labs/<%= lab.labName %>/update" method="POST">
+      <form action="/admin/<%= admin_id %>/stores/<%= store.storeName %>/update" method="POST">
             <div class="mb-3">
-              <label for="name" class="form-label">Introduce el nombre del laboratorio</label>
-              <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del laboratorio" value="<%= lab.labName %>">
+              <label for="storeName" class="form-label">Introduce el nombre de la tienda</label>
+              <input type="text" class="form-control" id="storeName" name="storeName" placeholder="Nombre del laboratorio" value="<%= store.storeName %>">
             </div>
             <div class="mb-3">
               <label for="address" class="form-label">Introduce la dirección</label>
-              <input type="text" class="form-control" id="address" name="address" placeholder="Dirección" value="<%= lab.address %>">
+              <input type="text" class="form-control" id="address" name="address" placeholder="Dirección" value="<%= store.address %>">
             </div>
             <div class="mb-3">
               <label for="city" class="form-label">Introduce la ciudad</label>
-              <input type="text" class="form-control" id="city" name="city" placeholder="Ciudad" value="<%= lab.city %>">
+              <input type="text" class="form-control" id="city" name="city" placeholder="Ciudad" value="<%= store.city %>">
             </div>
             <button type="submit" class="btn btn-primary">Confirmar cambios</button>
           </form>
