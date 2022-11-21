@@ -1,7 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
 
-<%= admin_id %>
-<%= lab.labName %>
-<%= lab.address %>
-<%= lab.city %>
-send to http://localhost:3000/admin/<%= admin_id %>/labs/<%= lab.labName %>/update
-POST labname, address, city
+<head>
+    <%- include('./templates/head', {title:'Home'} ); %>
+</head>
+
+<body class="container">
+
+    <header>
+
+        <%- include('./templates/nav_admin'); %>
+    </header>
+    <h1>Editar laboratorios</h1>
+    <main>
+      <form action="/admin/<%= admin_id %>/labs/<%= lab.labName %>/update" method="POST">
+            <div class="mb-3">
+              <label for="name" class="form-label">Introduce el nombre del laboratorio</label>
+              <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del laboratorio" value="<%= lab.labName %>">
+            </div>
+            <div class="mb-3">
+              <label for="address" class="form-label">Introduce la dirección</label>
+              <input type="text" class="form-control" id="address" name="address" placeholder="Dirección" value="<%= lab.address %>">
+            </div>
+            <div class="mb-3">
+              <label for="city" class="form-label">Introduce la ciudad</label>
+              <input type="text" class="form-control" id="city" name="city" placeholder="Ciudad" value="<%= lab.city %>">
+
+            </div>
+            <button type="submit" class="btn btn-primary">Confirmar cambios</button>
+          </form>
+    </main>
+
+    <footer>
+        <%- include('./templates/footer'); %>
+    </footer>
+
+</body>
+
+</html>

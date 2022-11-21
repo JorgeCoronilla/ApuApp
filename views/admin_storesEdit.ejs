@@ -1,0 +1,41 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./templates/head', {title:'Home'} ); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('./templates/nav_admin'); %>
+    </header>
+    <h1>Editar tiendas</h1>
+    <main>
+      <form action="/admin/<%= admin_id %>/stores/<%= store.storeName %>/update" method="POST">
+            <div class="mb-3">
+              <label for="storeName" class="form-label">Introduce el nombre de la tienda</label>
+              <input type="text" class="form-control" id="storeName" name="storeName" placeholder="Nombre del laboratorio" value="<%= store.storeName %>">
+            </div>
+            <div class="mb-3">
+              <label for="address" class="form-label">Introduce la dirección</label>
+              <input type="text" class="form-control" id="address" name="address" placeholder="Dirección" value="<%= store.address %>">
+            </div>
+            <div class="mb-3">
+              <label for="city" class="form-label">Introduce la ciudad</label>
+              <input type="text" class="form-control" id="city" name="city" placeholder="Ciudad" value="<%= store.city %>">
+            </div>
+            <button type="submit" class="btn btn-primary">Confirmar cambios</button>
+          </form>
+    </main>
+
+    <footer>
+        <%- include('./templates/footer'); %>
+    </footer>
+
+</body>
+
+</html>

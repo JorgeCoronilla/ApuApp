@@ -2,10 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const deliverySchema = new Schema({
-    user_id: {
-        type: String,
-        required: true
-    },
+   
     deliveryPoint: {
         type: String,
         required: true
@@ -20,4 +17,4 @@ const deliverySchema = new Schema({
     },
 })
 
-module.exports = mongoose.model('deliverySchema', deliverySchema);
+module.exports = mongoose.model('deliveryPoints', deliverySchema);

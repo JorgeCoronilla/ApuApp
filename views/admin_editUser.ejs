@@ -8,26 +8,34 @@
 <body class="container">
 
     <header>
-        <%- include('./templates/nav'); %>
+        <%- include('./templates/nav_admin'); %>
     </header>
     <h1>Editar Usuarios</h1>
     <main>
-      <form action="/admin" method="GET">
+      <form action="/admin/<%=admin_id%>/users/<%= user %>" method="POST">
             <div class="mb-3">
               <label for="user_name" class="form-label">Introduce el nombre</label>
-              <input type="text" class="form-control" id="user_name" name="user_name" >
+              <input type="text" class="form-control" id="user_name" name="user_name" required>
             </div>
             <div class="mb-3">
-              <label for=" surname1" class="form-label">Introduce el primer apellido</label>
-              <input type="text" class="form-control" id="surname1" name="surname1">
+              <label for=" surname_1" class="form-label">Introduce el primer apellido</label>
+              <input type="text" class="form-control" id="surname_1" name="surname_1" required>
             </div>
             <div class="mb-3">
-              <label for="surname2" class="form-label">Intoduce el segundo apellido</label>
-              <input type="text" class="form-control" id="surname2" name="surname2">
+              <label for="surname_2" class="form-label">Intoduce el segundo apellido</label>
+              <input type="text" class="form-control" id="surname_2" name="surname_2" required>
             </div>
             <div class="mb-3">
-              <label for="address" class="form-label">Introduce el correo electrónico</label>
-              <input type="email" class="form-control" id="address" name="address">
+              <label for="email" class="form-label">Introduce el correo electrónico</label>
+              <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+              <label for="address" class="form-label">Introduce la dirección</label>
+              <input type="text" class="form-control" id="address" name="address" required>
+            </div>
+            <div class="mb-3">
+              <label for="user_pass" class="form-label">Introduce el nuevo password</label>
+              <input type="password" class="form-control" id="user_pass" name="user_pass" required>
             </div>
             <button type="submit" class="btn btn-primary">Modificar datos</button>
           </form>

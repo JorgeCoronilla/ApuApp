@@ -30,6 +30,7 @@ app.use(express.json());
 //Static
 app.use('/', express.static("public"));
 app.use('/userDash', express.static(__dirname + '/public'));
+app.use('/admin', express.static(__dirname + '/public'));
 app.use(express.text());
 
 //Rutas
@@ -56,4 +57,3 @@ app.get('/', function(req, res) {
 app.listen(PORT, () => {
     console.log(`Server started at http://127.0.0.1:${PORT}`);
 });
-

@@ -1,4 +1,3 @@
-
 const invoice = {
 	client: {
 		user_name: 'Mario',
@@ -95,4 +94,3 @@ function generateInvoiceTable(doc, bills) {
 module.exports = {
 	createInvoice,
 };
-
