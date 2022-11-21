@@ -21,8 +21,8 @@ const Register = {
         try {
             const userId = await addUser(user_name, surname_1, surname_2, address, email, user_pass)
             if (userId) {
-                //res.render("registerConfirmed",{ user_name });
-                res.render("../views/map.ejs");
+                res.render("registerConfirmed", { user_name });
+                // res.render("login");
             }
         } catch (error) {
             if (user_name == "" || surname_1 == "" || surname_2 == "" || address == "" || email == "" || user_pass == "") {
