@@ -77,10 +77,13 @@
         const buyButton = document.getElementById('buyButton')
         buyButton.addEventListener('click', () => {
             let admin = JSON.parse(localStorage.getItem('admin'))
+            let client = JSON.parse(localStorage.getItem('client'))
             if (admin == true) {
                 window.location.assign(`/adminpay`)
-            } else {
+            } else if(client == true) {
                 window.location.assign(`/userpay`)
+            }else{
+                window.location.assign(`/login`)
             }
         })
     </script>

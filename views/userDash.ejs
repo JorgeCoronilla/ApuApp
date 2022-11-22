@@ -68,6 +68,8 @@
     <script type="module" src="./../js/userDashScript.js"></script>
     <script>
         window.addEventListener("DOMContentLoaded", () => {
+            var client = true
+            localStorage.setItem("client", client);  
             if (localStorage.admin) {
                 localStorage.setItem("admin", false);
             }

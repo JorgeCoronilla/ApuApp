@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./templates/head', {title:'Acceso'} ); %>
+</head>
+
+<body class="container border">
+
+    <header>
+        <%- include('./templates/nav'); %>
+    </header>
+    <div class="text-center mt-3">
+        <h1 class="font-weight-bold">Accede desde aquí</h1>
+    </div>
+    <form action='' method="POST">
+    <!-- Email input -->
+    <div class="form-outline">
+      <input type="email" id="email" class="form-control" name="email" />
+      <label class="form-label" for="form2Example1">Dirección de email</label>
+    </div>
+  
+    <!-- Password input -->
+    <div class="form-outline mb-4">
+      <input type="password" id="password" class="form-control" name="password" />
+      <label class="form-label" for="form2Example2">Password</label>
+    </div>
+  
+    <!-- 2 column grid layout for inline styling -->
+    <div class="row mb-4">
+      <div class="col">
+        <!-- Simple link -->
+        <a href="/login/recuperar">¿Olvidaste el password?</a>
+      </div>
+    </div>
+  
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-primary btn-block mb-4">Pagar</button>
+  
+    <!-- Register buttons -->
+    <div class="text-center">
+      <p>¿No estás registrado? <a href="/register">Regístrate</a></p>
+    </div>
+  </form>
