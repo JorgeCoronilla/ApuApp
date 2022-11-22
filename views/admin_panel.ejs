@@ -37,6 +37,14 @@
         <%- include('./templates/footer'); %>
     </footer>
 
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            if (!localStorage.admin) {
+                localStorage.setItem("admin", true);
+            }
+        })
+    </script>
+
 </body>
 
 </html>

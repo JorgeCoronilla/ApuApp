@@ -7,15 +7,13 @@ const getCart = async (req, res) => {
         const connection = await getConnection()
         const cartIDS = req.params
         const cart = cartIDS.items_ids.split(',')
-        console.log(cart)
-        
+
         for (const element of cart) {
             let product = await connection.query("SELECT * FROM products WHERE id_item=?", element)
             console.log(product)
             cartProducts.push(product[0])
         }
-
-        console.log('este es el carrito', cartProducts)
+        
         res.render('cart', { cartProducts })
     } catch (error) {
         res.status(500)
