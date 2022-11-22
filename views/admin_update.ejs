@@ -13,30 +13,47 @@
     </header>
     <h1>Editar administrador</h1>
     <main>
-      <form action="admin/<%= admin_id %>/update" method="post">
+      <form action="/admin/<%= admin_id %>/up" method="post">
 
             <div class="mb-3">
               <label for="admin_name" class="form-label">Introduce el nombre</label>
               <input type="text" class="form-control" id="admin_name" name="admin_name" placeholder="Nombre" value="<%= admin_name %>" >
             </div>
             <div class="mb-3">
-              <label for=" surname1" class="form-label">Introduce el primer apellido</label>
-              <input type="text" class="form-control" id="surname1" name="surname1" placeholder="Primer apellido" value="<%= surname1 %>">
+              <label for=" surname_1" class="form-label">Introduce el primer apellido</label>
+              <input type="text" class="form-control" id="surname_1" name="surname_1" placeholder="Primer apellido" value="<%= surname_1 %>">
             </div>
             <div class="mb-3">
-              <label for="surname2" class="form-label">Intoduce el segundo apellido</label>
-              <input type="text" class="form-control" id="surname2" name="surname2" placeholder="Segundo apellido" value="<%= surname2 %>">
+              <label for="surname_2" class="form-label">Intoduce el segundo apellido</label>
+              <input type="text" class="form-control" id="surname_2" name="surname_2" placeholder="Segundo apellido" value="<%= surname_2 %>">
             </div>
             <div class="mb-3">
               <label for="email" class="form-label">Introduce el correo electrónico</label>
               <input type="email" class="form-control" id="email" name="email" placeholder="Correo electrónico" value="<%= email %>">
             </div>
+            <div class="mb-3">
+              <label for="admin_pass" class="form-label">Introduce la contraseña/label>
+              <input type="password" class="form-control" id="admin_pass" name="admin_pass" placeholder="Correo electrónico" value="<%= admin_pass %>">
+            </div>
             <button type="submit" class="btn btn-primary">Modificar datos</button>
           </form>
     </main>
     <br>
+    <% if (message!=""){ %>
+      <br>
+      <h2><%= message %></h2>
+      <br>
+      <% } %>
     <br>
     <br>
+    <div style="margin: 0 30% 0 30%; width:300px;" class="card text-center text-white bg-light">
+      <ul class="list-group list-group-flush bg-dark">
+        <li class="list-group-item bg-light"><a href="/admin/<%= admin_id %>">Volver al menú inicial</a></li>
+      </ul>
+    </div>
+    <br>
+    <br>
+
     <footer>
         <%- include('./templates/footer'); %>
     </footer>

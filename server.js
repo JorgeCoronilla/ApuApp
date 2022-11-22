@@ -53,7 +53,8 @@ app.get('/', function(req, res) {
     res.render('../views/index');
 });
 
-app.get('/adminpay/', async (req, res) => {
+//PaymentPage for admin
+app.get('/adminpay', async (req, res) => {
     try {
         res.render("admin_pay")
     }
@@ -61,7 +62,7 @@ app.get('/adminpay/', async (req, res) => {
         res.status(500)
         res.send(error.message)
     }
-});
+})
 
 //Start listening
 app.listen(PORT, () => {

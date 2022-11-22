@@ -42,8 +42,8 @@ const adminController = {
              }
             const connection = await getConnection();
             let result = await connection.query('select * from app_admins where id_admin = ?;', userInfo.id_admin)
-            const admin_name = result[0].admin_name, surname1 = result[0].surname_1, surname2 = result[0].surname_2, email = result[0].email;
-            res.render("admin_update", { admin_id, admin_name, surname1, surname2, email })
+            const admin_name = result[0].admin_name, surname_1 = result[0].surname_1, surname_2 = result[0].surname_2, email = result[0].email, admin_pass =result[0].admin_pass;
+            res.render("admin_update", { admin_id, admin_name, surname_1, surname_2, email, admin_pass, message:"" })
         }
         catch (error) {
             res.status(500)
@@ -51,29 +51,25 @@ const adminController = {
         }
     },
     updateAdmin: async (req, res) => {
-        /*
+        
         try {
                      
             const { admin_id } = req.params;
             verify (admin_id, req)
-            
             const { admin_name, surname_1, surname_2, email, admin_pass } = req.body;
             userInfo = JSON.parse(Buffer.from(admin_id.split('.')[1], 'base64').toString());
             if (userInfo.id_admin == undefined) {
                 res.status(400).json({ message: "Bad request. That user doens't exist." })
             }
             const updates = { admin_name, surname_1, surname_2, email, admin_pass }
-            if (!admin_name || !surname_1 || !surname_2 || !email || !admin_pass) {
-                res.status(400).json({ message: "Son necesarios todos los campos" })
-            }
             const connection = await getConnection();
             let result = await connection.query('UPDATE app_admins SET ? WHERE id_admin = ? ', [updates, userInfo.id_admin])
-            res.status(200).json({ message: "Usuario actualizado" })
+            res.render("admin_update", { admin_id, admin_name, surname_1, surname_2, email, admin_pass, message: "Usuario actualizado" })
         }
         catch (error) {
             res.status(500)
             res.send(error.message)
-        }*/
+        }
     },
 
     allUsers: async (req, res) => {
@@ -676,7 +672,12 @@ const adminController = {
 
     payment: async (req, res) => {
         try {
-            res.render("admin_paymentGate")
+            const { admin_id, user } = req.params;
+            verify (admin_id, req)
+            const connection = await getConnection();
+            let result = await connection.query('select * from users where id_user = ?;', user)
+            const user_name = result[0].user_name, surname1 = result[0].surname_1, surname2 = result[0].surname_2, address = result[0].address, email = result[0].email;
+            res.render("admin_paymentGate", { user, admin_id,user_name, surname1, surname2, address, email })
         }
         catch (error) {
             res.status(500)

@@ -19,7 +19,7 @@
     <br>
     <div style="margin: 0 30% 0 30%" class="card text-center text-white bg-light">
         <ul class="list-group list-group-flush bg-dark">
-          <li class="list-group-item bg-light"><a id="pay" href="">Continuar a tienda</a></li>
+          <li class="list-group-item bg-light"><a id="pay" href="">Continuar con pago</a></li>
         </ul>
       </div>
       <br>
@@ -35,8 +35,10 @@
         window.addEventListener("DOMContentLoaded", () => {
         
                 var address = localStorage.adminT+"/pay";
-                console.log(address)
-            document.getElementById('pay').setAttribute("href", address)
+                var urlParams = address.split('/');
+                var admin_id = urlParams[2]
+                var user =  urlParams[4]
+            document.getElementById('pay').setAttribute("href", `/admin/${admin_id}/${user}/pay` )
         })
     </script>
 </body>
