@@ -2,7 +2,6 @@ const mysql = require('mysql');
 const jwt = require("jsonwebtoken");
 const getConnection = require('../ddbb/mysql');
 const nodemailer = require("nodemailer");
-const { application } = require('express');
 const User = {
     start: async (req, res) => {
         res.render("../views/login.ejs");
@@ -14,15 +13,13 @@ const User = {
         res.render("../views/confirmacion.ejs");
     },
     /**
-     * Este middleware coge el usuario, crea el token de acceso y redirecciona a los paneles de usuario
+     * Este middleware recoge el usuario, crea el token de acceso y redirecciona a los paneles de usuario
      * @param {*} req 
      * @param {*} res 
      * @returns redirección a panel de usuario
      */
     getUser: async (req, res) => {
         const { email, password } = req.body;
-        console.log(email)
-        // const { password } = req.body;
         let con = await getConnection();
         // validar correo 
         if (!email || !password) return res.status(400).json({ error: 'Por favor introduce tus credenciales correctamente' });
@@ -62,7 +59,6 @@ const User = {
      * Envía un email con el token al usuario para poder cambiar la contraseña
      * @param {*} req 
      * @param {*} res 
-     * @returns 
      */
     sendEmail: async (req, res) => {
         const { email } = req.body;
@@ -73,7 +69,7 @@ const User = {
         let query2 = mysql.format(selectQuery, ['app_admins', 'email', email]);
         let user = await con.query(query);
         let admin = await con.query(query2);
-        console.log(user)
+        // Establece el envío SMTP
         let transporter = nodemailer.createTransport({
             host: 'smtp.ethereal.email',
             port: 587,
@@ -84,11 +80,13 @@ const User = {
             }
         });
         if (!user[0] && !admin[0]) return res.status(400).json({ error: 'Usuario no encontrado' });
+        // Crea el token de usuario
         if (user[0]) {
             const token = jwt.sign({
                 email: user[0].email,
                 id_user: user[0].id_user
             }, process.env.TOKEN_SECRET, { expiresIn: '30000' })
+            // Crea el mensaje que se va a enviar
             let message = {
                 from: 'apu shop <sender@example.com>',
                 to: user[0].email,
@@ -102,17 +100,20 @@ const User = {
                     console.log('Hubo un error en el envío ' + err.message);
                     return process.exit(1);
                 }
-                // Imprime en el correo el mensaje
+                // Imprime en el backend la confirmación del envío
                 console.log('Message sent: %s', info.messageId);
-                // Preview only available when sending through an Ethereal account
+                // Te muestra el enlace para acceder a un cliente del correo que muestra el mensaje que recibiría el cliente
                 console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
             });
         }
         if (admin[0]) {
+            // Crea el token de admin
             const token = jwt.sign({
                 email: admin[0].email,
                 id_admin: admin[0].id_admin
             }, process.env.TOKEN_SECRET, { expiresIn: '30000' })
+            
+            // Crea el mensaje que se va a enviar
             let message = {
                 from: 'apu shop <sender@example.com>',
                 to: admin[0].email,
@@ -120,25 +121,25 @@ const User = {
                 text: '',
                 html: 'Hola, haz click en este link para cambiar tu contraseña<br>' + `<a href="http://localhost:3000/login/confirmacion/${token}" target="_blank" rel="external">http://localhost:3000/confirmacion/${token}</a>`
             };
+
             // Envia el correo con el enlace
             transporter.sendMail(message, (err, info) => {
                 if (err) {
                     console.log('Hubo un error en el envío ' + err.message);
                     return process.exit(1);
                 }
-                // Imprime en el correo el mensaje
+                // Imprime en el backend la confirmación del envío
                 console.log('Message sent: %s', info.messageId);
-                // Preview only available when sending through an Ethereal account
+                // Te muestra el enlace para acceder a un cliente del correo que muestra el mensaje que recibiría el cliente
                 console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
             });
         }
         res.render("../views/email_sent.ejs")
     },
     /**
-     * Hace update del password a través del login de confirmación
+     * Hace update del password a través del login de confirmación con token
      * @param {*} req 
      * @param {*} res 
-     * @returns 
      */
     updatePassword: async (req, res) => {
         const { password1 } = req.body;
@@ -147,9 +148,10 @@ const User = {
         let match = password1 == password2;
         if (!match) return res.status(400).json({ error: 'Las contraseñas no coinciden' });
         let con = await getConnection();
+        
+        // Recoge de la información del usuario del token, el email para buscarlo en la BD y actualizar el password
         let info = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
         let updateQuery = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
-        console.log(info);
         if (info.id_user) {
             let query = mysql.format(updateQuery, ["users", "user_pass", password1, "email", info.email]);
             await con.query(query);

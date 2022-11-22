@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%- include('./templates/head', {title:'Home'} ); %>
+</head>
+
+<body  class="container-fluid">
+    <header>
+        <%- include('./templates/nav'); %>
+    </header>
+    <div id="p_contenedor_general">
+        <div id="p_contenedor">
+            <h1>RedBros</h1>
+            <img src="https://e00-marca.uecdn.es/assets/multimedia/imagenes/2019/10/06/15703723600521.jpg" alt=""
+                srcset="" height="80px" width="160px">
+            <h2>Total a pagar</h2>
+            <p id="p_total"></p>
+            <h4>*Introduzca los datos de su tarjeta</h4>
+            <div id="p_tpv">
+                <p>Introduzca el número de tarjeta:</p>
+                <input type="text" name="" id="num_tarjeta" required>
+                <p>Introduzca el nombre del titular:</p>
+                <input type="text" id="nombre_tarjeta" required>
+                <p>Caducidad</p>
+                <div id="p_caducidad">
+                    <input type="number" placeholder="Mes" id="mes_tarjeta" required>
+                    <input type="number" placeholder="Año" id="ano_tarjeta" required>
+                </div>
+                <p>CVV</p>
+                <input type="number" name="cvv" id="cvv" required>
+            </div>
+            <button id="payButton">Pagar</button>
+        </div>
+    </div>
+
+    <footer>
+        <%- include('./templates/footer'); %>
+    </footer>
+
+    <script type="module" src="./../js/userPayScript.js"></script>
+</body>
+
+</html>
