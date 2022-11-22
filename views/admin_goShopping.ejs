@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./templates/head', {title:'Home'} ); %>
+</head>
+
+<body class="container">
+
+    <header>
+
+        <%- include('./templates/nav_admin'); %>
+    </header>
+    <br>
+    <h1 class="text-center">Compras para un usuario</h1>
+    <br>
+    <p>A continuación visitará la sección de la tienda. Al dirigirse a la tramitación del pedido los datos para realizar el pago y para completar la factura serán los del usuario seleccionado.</p>
+    <br>
+    <br>
+    <div style="margin: 0 30% 0 30%" class="card text-center text-white bg-light">
+        <ul class="list-group list-group-flush bg-dark">
+          <li class="list-group-item bg-light"><a href="/shop">Continuar a tienda</a></li>
+          <li class="list-group-item bg-light"><a href="/admin/<%= admin_id %>">Volver al menú inicial</a></li>
+        </ul>
+      </div>
+      <br>
+    <br>
+
+    <footer>
+        <%- include('./templates/footer'); %>
+    </footer>
+    <br>
+    <br>
+    <br>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+                localStorage.setItem("admin", true);
+                var admin_id= window.location.pathname
+                localStorage.setItem("adminT", admin_id);  
+        })
+    </script>
+</body>
+
+</html>

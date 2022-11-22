@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./templates/head', {title:'Home'} ); %>
+</head>
+
+<body class="container">
+
+    <header>
+
+        <%- include('./templates/nav_admin'); %>
+    </header>
+    <br>
+    <h1 class="text-center">Compras para un usuario</h1>
+    <br>
+    <p>A continuación será dirigido a la pasarela de pago en nombre del usuario seleccionado.</p>
+    <br>
+    <br>
+    <div style="margin: 0 30% 0 30%" class="card text-center text-white bg-light">
+        <ul class="list-group list-group-flush bg-dark">
+          <li class="list-group-item bg-light"><a id="pay" href="">Continuar con pago</a></li>
+        </ul>
+      </div>
+      <br>
+    <br>
+
+    <footer>
+        <%- include('./templates/footer'); %>
+    </footer>
+    <br>
+    <br>
+    <br>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+        
+                var address = localStorage.adminT+"/pay";
+                var urlParams = address.split('/');
+                var admin_id = urlParams[2]
+                var user =  urlParams[4]
+            document.getElementById('pay').setAttribute("href", `/admin/${admin_id}/${user}/pay` )
+        })
+    </script>
+</body>

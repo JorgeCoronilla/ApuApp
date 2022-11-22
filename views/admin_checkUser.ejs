@@ -33,7 +33,6 @@
             <tbody>
             <% bills.forEach((row, index) => { %>
                 <tr class="align-middle">
-                    <td><%= index  %> </td>
                     <td><%= row.id_bill  %> </td>
                     <td><%= row.total  %></td>
                     <td><%= row.nif  %></td>
@@ -54,7 +53,9 @@
 <footer>
     <%- include('./templates/footer'); %>
 </footer>
-
+<br>
+<br>
+<br>
 </body>
 
 </html>

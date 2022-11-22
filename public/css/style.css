@@ -121,12 +121,12 @@ main#cart {
     width: 80%;
 }
 
-
 /* ---------------------------------------------------- Estilos Generales ----------------------------------------------------- */
 a.navbar-brand, h1 {
     font-family: 'Homer Simpson Revised', sans-serif;
     font-size: 40px;
 }
+
 h2, h3, h4 {
     font-family: 'Homer Simpson Revised', sans-serif;
 }

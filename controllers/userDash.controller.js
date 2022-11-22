@@ -11,6 +11,7 @@ function verify (id_user, req){
     const verified = jwt.verify(id_user, process.env.TOKEN_SECRET)
     req.user = verified;
 }
+
 /**
  * @param  {} req
  * @param  {} res

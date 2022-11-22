@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./templates/head', {title:'Home'} ); %>
+</head>
+
+<body class="container">
+
+    <header>
+
+        <%- include('./templates/nav_admin'); %>
+    </header>
+
+    <h3><span>Pago seguro</span></h3>
+    <br>
+    <br>
+    <h3>Pago para:</h3>
+    <h2><%= user_name %></h2>
+    <h2><%= surname1%> <%=surname2%></h2>
+    <h4><%= address %></h4>
+    <h4><%= email %></h4>
+    <form action="/successful/" method="POST">
+        <div>
+        <p>Introduzca el número de tarjeta:</p>
+        <input type="text" name="" id="num_tarjeta" maxlength = "16"  required>
+        <p>Introduzca el nombre del titular:</p>
+        <input type="text" id="nombre_tarjeta"  maxlength = "21" required>
+        </div>
+        <div style="display:flex; flex-direction:row;">
+            <div>
+                <p>Caducidad (mm/aaaa)</p>
+                <input type="number" placeholder="Mes" id="mes_tarjeta" min="1" max="12" required>
+                <input type="number" placeholder="Año" id="ano_tarjeta"  min="2022" max="3000" required>
+            </div>
+            <div>
+                <p>CVV</p>
+                <input type="number" name="cvv" id="cvv" class="small" min="0" max="999" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Pagar</button>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        
+        <footer>
+            <%- include('./templates/footer'); %>
+        </footer>
+    </form>   
+</body>
+
+</html>

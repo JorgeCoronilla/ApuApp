@@ -12,7 +12,7 @@
         <%- include('./templates/nav_admin'); %>
     </header>
     <br>
-    <h1>Panel del administrador</h1>
+    <h1 class="text-center">Panel del administrador</h1>
     <br>
     <br>
     <br>
@@ -27,24 +27,17 @@
           <li class="list-group-item bg-light"><a href="/admin/<%= admin_id %>/deliveryPoints">puntos de recogida</a></li>
           <li class="list-group-item bg-light"><a href="/admin/<%= admin_id %>/services">reparaciones</a></li>
           <li class="list-group-item bg-light"><a href="/admin/<%= admin_id %>/sales">ventas</a></li>
-          <li class="list-group-item bg-light"><a href="/admin/<%= admin_id %>/shop">comprar para un usuario</a></li>
         </ul>
       </div>
       <br>
     <br>
 
+      <br>
+      <br>
+      <br>
     <footer>
         <%- include('./templates/footer'); %>
     </footer>
-
-    <script>
-        window.addEventListener("DOMContentLoaded", () => {
-            if (!localStorage.admin) {
-                localStorage.setItem("admin", true);
-            }
-        })
-    </script>
-
 </body>
 
 </html>

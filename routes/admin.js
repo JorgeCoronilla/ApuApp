@@ -3,13 +3,13 @@ const controller = require("../controllers/admin.controller");
 
 adminRouter.get('/:admin_id', controller.dashAdmin);
 adminRouter.get('/:admin_id/update', controller.showAdmin);
-adminRouter.post('/:admin_id/update', controller.updateAdmin);
+adminRouter.post('/:admin_id/up', controller.updateAdmin);
 
 adminRouter.get('/:admin_id/create_admin', controller.createAdmin)
 adminRouter.post('/:admin_id/create_admin', controller.insertAdmin);
 
 adminRouter.get('/:admin_id/users', controller.allUsers);
-adminRouter.post('/:admin_id/users', controller.insertUser);
+adminRouter.post('/:admin_id/users', controller.insertUser2);
 adminRouter.get('/:admin_id/check/:user', controller.checkUser);
 adminRouter.get('/:admin_id/users/:user', controller.editUser);
 adminRouter.post('/:admin_id/users/:user', controller.updateUser);
@@ -40,9 +40,10 @@ adminRouter.get('/:admin_id/deliveryPoints/', controller.checkdeliveryPoints);
 adminRouter.get('/:admin_id/services/', controller.allservices);
 adminRouter.get('/:admin_id/sales/', controller.allSales);
 
-//adminRouter.get('/:admin_id/compras/', controller.shopAdmin);
-//adminRouter.get('/:admin_id/shop/:user', controller.shopAdmin);
-//adminRouter.get('/:admin_id/cart/:user', controller.cartAdmin);
+
+adminRouter.get('/:admin_id/shop/:user', controller.shopAdmin);
+adminRouter.get('/adminpay/', controller.adminPay);
+adminRouter.get('/:admin_id/:user/pay', controller.payment);
 
 
 module.exports = adminRouter;
