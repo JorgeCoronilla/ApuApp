@@ -270,8 +270,9 @@ const adminController = {
             );
 
             //doc.pipe(fs.createWriteStream(`${__dirname}/${filename}`));
-            doc.pipe(fs.createWriteStream(`${__dirname}/${filename}`));
+            doc.pipe(fs.createWriteStream(`${__dirname.replace('controllers', 'invoices')}/${filename}`));
             doc.end();
+            res.send()
 
             //res.redirect(`/admin/${admin_id}/print/${id_bill}/${filename}.pdf`)
             //res.render("admin_print", { bill, admin_id })

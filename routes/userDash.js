@@ -1,8 +1,6 @@
 const router = require('express').Router();
 const userDashController = require('./../controllers/userDash.controller')
 
-router.get("/all", userDashController.getUsers)
-
 //Load User Dash
 router.get("/:id_user", userDashController.getUser)
 //Update User Data

@@ -119,7 +119,10 @@ main#cart {
     border-color: #D20A2C;
     border-radius: 20px;
     width: 80%;
+}
 
+
+/* ---------------------------------------------------- Estilos Generales ----------------------------------------------------- */
 a.navbar-brand, h1 {
     font-family: 'Homer Simpson Revised', sans-serif;
     font-size: 40px;
