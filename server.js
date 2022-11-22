@@ -9,6 +9,8 @@ const userDash = require ('./routes/userDash')
 const loginRouter = require("./routes/login");
 const shopRouter = require("./routes/shop");
 const cartRouter = require("./routes/cart");
+const userPay = require("./routes/user_pay");
+const adminPay = require("./routes/admin_pay");
 
 //const session = require('express-session');
 const app = express();
@@ -40,10 +42,8 @@ app.use("/userDash", userDash);
 app.use("/register", register);
 app.use("/shop", shopRouter);
 app.use("/cart", cartRouter);
-
-//Set XXXXX folder as static
-//app.use(express.static('XXXXXX'));
-
+app.use("/userpay", userPay);
+app.use("/adminpay", adminPay);
 
 //set temaplate engine
 app.set('view engine', 'ejs');
@@ -52,17 +52,6 @@ app.set('view engine', 'ejs');
 app.get('/', function(req, res) {
     res.render('../views/index');
 });
-
-//PaymentPage for admin
-app.get('/adminpay', async (req, res) => {
-    try {
-        res.render("admin_pay")
-    }
-    catch (error) {
-        res.status(500)
-        res.send(error.message)
-    }
-})
 
 //Start listening
 app.listen(PORT, () => {
