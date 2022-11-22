@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3000;
 //MongoDB connection
 require("./ddbb/mongo");
 
-//MYSQL conection
+//MYSQL conection   
 require("./ddbb/mysql");
 
 

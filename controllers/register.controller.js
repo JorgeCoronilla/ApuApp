@@ -3,7 +3,7 @@ var bcrypt = require("bcryptjs");
 const { json } = require("express");
 
 const Register = {
-
+    
     start: async (req, res) => {
         res.render("../views/userRegister.ejs", { message: "" });
     },
@@ -15,6 +15,7 @@ const Register = {
     },
 
     //INSERTAMOS USUARIOS
+   
     insertUser: async (req, res) => {
         //await getConnection()
         const { user_name, surname_1, surname_2, address, email, user_pass } = req.body
