@@ -68,18 +68,18 @@ const Register = {
 
 
 //CREAMOS UNA FUNCIÓN PARA ENCRIPTAR LA CONTRASEÑA.
-const encryptUserPass = async (textPlain) => {
-    const hash = await bcrypt.hash(textPlain, 10)
-    return hash
-}
+// const encryptUserPass = async (textPlain) => {
+//     const hash = await bcrypt.hash(textPlain, 10)
+//     return hash
+// }
 
 
 //CREAMOS FUNCION PARA AÑADIR USUARIO.
 const addUser = async (user_name, surname_1, surname_2, address, email, user_pass) => {
 
     const connection = await getConnection()
-    const passwordEncrypted = await encryptUserPass(user_pass)
-    const datesUser = { user_name, surname_1, surname_2, address, email, user_pass: passwordEncrypted }
+    // const passwordEncrypted = await encryptUserPass(user_pass)
+    const datesUser = { user_name, surname_1, surname_2, address, email, user_pass}
     //HACEMOS PROMESA "MANUAL".SI LO INSERTA SALE POR RESOLVE Y LO ENVÍA A "INSERTEUSER" ,Y SI FALLA SALE POR REJECT.
     return new Promise((resolve, reject) => {
         connection.query("INSERT INTO users SET ?", datesUser, (error, results) => {
