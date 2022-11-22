@@ -18,18 +18,18 @@ POST labname, address, city
     </header>
     <h1>Editar puntos de recogida</h1>
     <main>
-      <form action="/admin/<%= admin_id %>/deliveryPoints/<%= deliveryPoint1.deliveryPoint %>/update" method="POST">
+      <form action="/admin/<%= admin_id %>/deliveryPoints/<%= deliverypoint1.deliverypoint %>/update" method="POST">
             <div class="mb-3">
-              <label for="deliveryPoint" class="form-label">Introduce el nombre del punto de recogida</label>
-              <input type="text" class="form-control" id="deliveryPoint" name="deliveryPoint" placeholder="Nombre del punto de recogida" value="<%= deliveryPoint1.deliveryPoint %>">
+              <label for="deliverypoint" class="form-label">Introduce el nombre del punto de recogida</label>
+              <input type="text" class="form-control" id="deliverypoint" name="deliverypoint" placeholder="Nombre del punto de recogida" value="<%= deliverypoint1.deliverypoint %>">
             </div>
             <div class="mb-3">
               <label for="address" class="form-label">Introduce la dirección</label>
-              <input type="text" class="form-control" id="address" name="address" placeholder="Dirección" value="<%= deliveryPoint1.address %>">
+              <input type="text" class="form-control" id="address" name="address" placeholder="Dirección" value="<%= deliverypoint1.address %>">
             </div>
             <div class="mb-3">
               <label for="city" class="form-label">Introduce la ciudad</label>
-              <input type="text" class="form-control" id="city" name="city" placeholder="Ciudad" value="<%= deliveryPoint1.city %>">
+              <input type="text" class="form-control" id="city" name="city" placeholder="Ciudad" value="<%= deliverypoint1.city %>">
             </div>
             <button type="submit" class="btn btn-primary">Confirmar cambios</button>
           </form>

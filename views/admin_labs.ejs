@@ -26,12 +26,12 @@
               <tbody>
               <% result.forEach((row, index) => { %>
                   <tr class="align-middle">
-                      <td><%= row.labName  %></td>
+                      <td><%= row.labname  %></td>
                       <td><%= row.address  %></td>
                       <td><%= row.city  %></td>
                       <td>
-                          <a href="/admin/<%= admin_id %>/labs/<%= row.labName %> " class="text-success">Editar</a>
-                          <a href="/admin/<%= admin_id %>/labs/<%= row.labName %>/delete " class="text-success">Borrar</a>
+                          <a href="/admin/<%= admin_id %>/labs/<%= row.labname %> " class="text-success">Editar</a>
+                          <a href="/admin/<%= admin_id %>/labs/<%= row.labname %>/delete " class="text-success">Borrar</a>
                       </td>
                   </tr>
               <% }) %>
@@ -46,8 +46,8 @@
   <main>
     <form action="/admin/<%=admin_id%>/labs" method="POST">
           <div class="mb-3">
-            <label for="labName" class="form-label">Nombre del laboratorio</label>
-            <input type="text" class="form-control" id="labName" name="labName" >
+            <label for="labname" class="form-label">Nombre del laboratorio</label>
+            <input type="text" class="form-control" id="labname" name="labname" >
           </div>
           <div class="mb-3">
             <label for="address" class="form-label">Introduce la dirección</label>

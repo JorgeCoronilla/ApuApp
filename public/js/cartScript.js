@@ -1,8 +1,9 @@
 const buyButton = document.getElementById('buyButton')
 buyButton.addEventListener('click', ()=>{
-    if(!localStorage.admin){
-        window.location.assign(`/userpay`)
-    }else{
+    let admin = localStorage.getItem('admin')
+    if(admin == true){
         window.location.assign(`/adminpay`)
+    }else{
+        window.location.assign(`/userpay`)
     }
 })

@@ -21,7 +21,8 @@
                     </figure>
                     <article class="productInfo">
                         <h3 class="productBrand">
-                            <%=element.brand%> <%=element.model%>
+                            <%=element.brand%>
+                                <%=element.model%>
                         </h3>
                         <p class="productDescription">
                             <%=element.description%>
@@ -45,22 +46,24 @@
                     <p><strong>Subtotal</strong></p>
                 </div>
                 <div>
-                    <p style="font-size: 12px; color: gray;"> 
-                        <% let total = 0%>
-                        <% cartProducts.forEach(element=> { %>
-                        <% total+=element.price%>
-                        <% }) %>
-
-                        <%= total %>€
-                    </p>
-                    <p><strong><%= total %>€</strong></p>
                     <p style="font-size: 12px; color: gray;">
-                        <% let IVA = total - total/1.21 %>
-                        <%=IVA.toFixed(2) %>€ IVA incluido
+                        <% let total=0%>
+                            <% cartProducts.forEach(element=> { %>
+                                <% total+=element.price%>
+                                    <% }) %>
+
+                                        <%= total %>€
+                    </p>
+                    <p><strong>
+                            <%= total %>€
+                        </strong></p>
+                    <p style="font-size: 12px; color: gray;">
+                        <% let IVA=total - total/1.21 %>
+                            <%=IVA.toFixed(2) %>€ IVA incluido
                     </p>
 
                 </div>
-                
+
             </div>
             <button id="buyButton">Comprar</button>
         </section>
@@ -70,7 +73,17 @@
         <%- include('./templates/footer'); %>
     </footer>
 
-    <script type="module" src="./../js/cartScript.js"></script>
+    <script>
+        const buyButton = document.getElementById('buyButton')
+        buyButton.addEventListener('click', () => {
+            let admin = JSON.parse(localStorage.getItem('admin'))
+            if (admin == true) {
+                window.location.assign(`/adminpay`)
+            } else {
+                window.location.assign(`/userpay`)
+            }
+        })
+    </script>
 
 </body>
 

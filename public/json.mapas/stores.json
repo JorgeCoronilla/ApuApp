@@ -26,6 +26,19 @@
         "latitud":"0.3799839497237545",
         "longitud":"-0.011248019022",
         "deliveryPoint":"Apu Tadas"
+       },
+       {
+        "ciudad":"sevilla",
+        "provincia":"sevilla",
+        "latitud":"0.3738620512",
+        "longitud":"-0.05972847435174765",
+        "deliveryPoint":"Apu Esto"
+       },
+       {
+        "ciudad":"zaragoza",
+        "provincia":"zaragoza",
+        "latitud":"0.4165538910170202",
+        "longitud":"-0.008805104444833163",
+        "deliveryPoint":"Apu Lido"
        }
 ]
-

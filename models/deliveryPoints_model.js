@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const deliverySchema = new Schema({
    
-    deliveryPoint: {
+    deliverypoint: {
         type: String,
         required: true
     },
@@ -17,4 +17,4 @@ const deliverySchema = new Schema({
     },
 })
 
-module.exports = mongoose.model('deliveryPoints', deliverySchema);
+module.exports = mongoose.model('deliveries', deliverySchema);

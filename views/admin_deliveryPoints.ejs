@@ -25,12 +25,12 @@
               <tbody>
               <% result.forEach((row, index) => { %>
                   <tr class="align-middle">
-                      <td><%= row.deliveryPoint  %></td>
+                      <td><%= row.deliverypoint  %></td>
                       <td><%= row.address  %></td>
                       <td><%= row.city  %></td>
                       <td>
-                          <a href="/admin/<%= admin_id %>/labs/<%= index %> " class="text-success">Editar</a>
-                          <a href="/admin/<%= admin_id %>/labs/<%= index %>/delete " class="text-success">Borrar</a>
+                          <a href="/admin/<%= admin_id %>/deliveryPoint/<%= index %> " class="text-success">Editar</a>
+                          <a href="/admin/<%= admin_id %>/deliveryPoint/<%= index %>/delete " class="text-success">Borrar</a>
                       </td>
                   </tr>
               <% }) %>

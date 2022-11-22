@@ -25,7 +25,23 @@
         "ciudad": "alicante",
         "provincia": "alicante",
         "latitud": "0.3844930543912056",
-        "longitud": "-0.468843132730",
+        "longitud": "-0.00468843132730",
         "deliveryPoint":"Carrefour GRAN VIA"
+    },
+    {
+        "ciudad": "huelva",
+        "provincia": "huelva",
+        "latitud": "0.37255940663212975",
+        "longitud": "-0.06941639246033605",
+        "deliveryPoint":"EL CORTE INGLÉS COSTA LUZ"
+    },
+    {
+        "ciudad": "granada",
+        "provincia": "granada",
+        "latitud": "0.3717641932",
+        "longitud": "-0.036000188",
+        "deliveryPoint":"EL CORTE INGLÉS ARABIAL"
     }
+    
+    
 ]

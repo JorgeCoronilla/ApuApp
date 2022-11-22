@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <%- include('./templates/head', {title:'Home'} ); %>
+  <%- include('./templates/head_admin', {title:'Home'} ); %>
 </head>
 
 <body class="container">
@@ -13,10 +13,10 @@
     </header>
     <h1>Editar laboratorios</h1>
     <main>
-      <form action="/admin/<%= admin_id %>/labs/<%= lab.labName %>/update" method="POST">
+      <form action="/admin/<%= admin_id %>/labs/<%= lab.labname %>/update" method="POST">
             <div class="mb-3">
               <label for="name" class="form-label">Introduce el nombre del laboratorio</label>
-              <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del laboratorio" value="<%= lab.labName %>">
+              <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del laboratorio" value="<%= lab.labname %>">
             </div>
             <div class="mb-3">
               <label for="address" class="form-label">Introduce la dirección</label>

@@ -30,8 +30,8 @@
                       <td><%= row.address  %></td>
                       <td><%= row.city  %></td>
                       <td>
-                          <a href="/admin/<%= admin_id %>/labs/<%= index %> " class="text-success">Editar</a>
-                          <a href="/admin/<%= admin_id %>/labs/<%= index %>/delete " class="text-success">Borrar</a>
+                          <a href="/admin/<%= admin_id %>/stores/<%= index %> " class="text-success">Editar</a>
+                          <a href="/admin/<%= admin_id %>/stores/<%= index %>/delete " class="text-success">Borrar</a>
                       </td>
                   </tr>
               <% }) %>
@@ -46,8 +46,8 @@
   <main>
     <form action="/admin/<%=admin_id%>/stores" method="POST">
           <div class="mb-3">
-            <label for="storeName" class="form-label">Nombre de la tienda</label>
-            <input type="text" class="form-control" id="storeName" name="storeName" >
+            <label for="storename" class="form-label">Nombre de la tienda</label>
+            <input type="text" class="form-control" id="storename" name="storename" >
           </div>
           <div class="mb-3">
             <label for="address" class="form-label">Introduce la dirección</label>

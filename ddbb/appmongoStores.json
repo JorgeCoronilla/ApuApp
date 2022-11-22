@@ -3,7 +3,7 @@
         "_id": {
             "$oid": "6375fb0bf88b1bb76218f659"
         },
-        "storeName": "Apu Nietazos",
+        "storename": "Apu Nietazos",
         "address": "Calle de Orense, 65",
         "city": "Madrid"
     },
@@ -11,7 +11,7 @@
         "_id": {
             "$oid": "6375fb0bf88b1bb76218f660"
         },
-        "storeName": "Apu NtaPala",
+        "storename": "Apu NtaPala",
         "address": "Calle de Enrique Larreta, 19",
         "city": "Madrid"
     },
@@ -19,7 +19,7 @@
         "_id": {
             "$oid": "6375fb0bf88b1bb76218f661"
         },
-        "storeName": "Apu Ntillado",
+        "storename": "Apu Ntillado",
         "address": "Calle de Salomó ben Adret, 82",
         "city": "Barcelona"
     },
@@ -27,7 +27,7 @@
         "_id": {
             "$oid": "6375fb0bf88b1bb76218f662"
         },
-        "storeName": "Apu Lular",
+        "storename": "Apu Lular",
         "address": "Plaça Joan Cornudella, 27",
         "city": "Barcelona"
     },
@@ -35,7 +35,7 @@
         "_id": {
             "$oid": "6375fb0bf88b1bb76218f663"
         },
-        "storeName": "Apu Rado",
+        "storename": "Apu Rado",
         "address": "Carrer de Cirilo Amorós, 5",
         "city": "Valencia"
     },
@@ -43,7 +43,7 @@
         "_id": {
             "$oid": "6375fb0bf88b1bb76218f6564"
         },
-        "storeName": "Apu Pitas",
+        "storename": "Apu Pitas",
         "address": "Plaza de Uncibay, 27",
         "city": "Málaga"
     },
@@ -51,7 +51,7 @@
         "_id": {
             "$oid": "6375fb0bf88b1bb76218f665"
         },
-        "storeName": "Apu Esto",
+        "storename": "Apu Esto",
         "address": "Calle Luis de Morales, 3",
         "city": "Sevilla"
     },
@@ -59,7 +59,7 @@
         "_id": {
             "$oid": "6375fb0bf88b1bb76218f666"
         },
-        "storeName": "Apu Esta",
+        "storename": "Apu Esta",
         "address": "Calle Casas Ibáñez, 30",
         "city": "Bilbao"
     },
@@ -67,7 +67,7 @@
         "_id": {
             "$oid": "6375fb0bf88b1bb76218f667"
         },
-        "storeName": "Apu Lido",
+        "storename": "Apu Lido",
         "address": "Calle Sta. Isabel, 15",
         "city": "Zaragoza"
     },
@@ -75,7 +75,7 @@
         "_id": {
             "$oid": "6375fb0bf88b1bb76218f668"
         },
-        "storeName": "Apu Tadas",
+        "storename": "Apu Tadas",
         "address": "Calle Navegante Juan Fernández, 76",
         "city": "Murcia"
     },
@@ -83,7 +83,7 @@
         "_id": {
             "$oid": "6375fb0bf88b1bb76218f669"
         },
-        "storeName": "Apu Achili",
+        "storename": "Apu Achili",
         "address": "Calle del General Vives, 98",
         "city": "Las Palmas de Gran Canaria"
     }

@@ -44,4 +44,19 @@
   </div>
 </nav>
 
-<script src="./../../js/navScript.js"></script>
+<script>
+  
+const goToCart = document.getElementById('goToCart')
+
+goToCart.addEventListener('click', ()=>{
+    let cart = JSON.parse(localStorage.getItem('cart'))
+    
+    if(!cart || cart.length == 0){
+      window.location.assign(`/shop`)
+    }else{
+      console.log('click')
+      window.location.assign(`/cart/${cart}`)
+    }
+});
+
+</script>

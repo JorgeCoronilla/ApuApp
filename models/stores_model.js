@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const storeSchema = new Schema({
     
-    labName: {
+    storename: {
         type: String,
         required: true
     },

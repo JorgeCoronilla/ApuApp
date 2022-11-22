@@ -2,7 +2,7 @@ const getConnection = require('../ddbb/mysql')
 const mongoose = require('mongoose');
 const labs = require('../models/labs_model');
 const stores = require('../models/stores_model');
-const deliveryPoints = require('../models/deliveryPoints_model');
+const deliveries = require('../models/deliveryPoints_model');
 const fs = require('fs');
 const PDFDocument = require('pdfkit');
 const pdfService = require('../invoices/invoice');
@@ -363,7 +363,7 @@ const adminController = {
         const db = mongoose.connection;
         db.on('error', (error) => console.log("error"));
         db.once('open', () => console.log("Conectado a la base de datos"));
-        deliveryPoints.find().exec(function (err, result) {
+        deliveries.find().exec(function (err, result) {
             if (err) throw err;
             console.log(result);
             res.render('admin_deliveryPoints', { result, admin_id })
@@ -378,24 +378,22 @@ const adminController = {
         const db = mongoose.connection;
         db.on('error', (error) => console.log("error"));
         db.once('open', () => console.log("Conectado a la base de datos"));
-        labs.find({ 'labName': labname }).exec(function (err, result) {
+        labs.find({ 'labname': labname }).exec(function (err, result) {
             if (err) throw err;
-            console.log(result[0].city);
             const lab = result[0]
             res.render('admin_labsEdit', { lab, admin_id })
         });
     },
 
     findStore: (req, res) => {
-        const { admin_id, storeName } = req.params;
+        const { admin_id, storename } = req.params;
         verify (admin_id, req)
         mongoose.connect(process.env.DB_URI_MONGO, { useNewUrlPArser: true, useUnifiedTopology: true })
         const db = mongoose.connection;
         db.on('error', (error) => console.log("error"));
         db.once('open', () => console.log("Conectado a la base de datos"));
-        stores.find({ 'storeName': storeName }).exec(function (err, result) {
+        stores.find({ 'storename': storename }).exec(function (err, result) {
             if (err) throw err;
-            console.log(result[0].city);
             const store = result[0]
             res.render('admin_storesEdit', { store, admin_id })
 
@@ -404,17 +402,17 @@ const adminController = {
 
     findDeliveryPoint: (req, res) => {
         
-        const { admin_id, deliveryPoint } = req.params;
+        const { admin_id, deliverypoint } = req.params;
         verify (admin_id, req)
         mongoose.connect(process.env.DB_URI_MONGO, { useNewUrlPArser: true, useUnifiedTopology: true })
         const db = mongoose.connection;
         db.on('error', (error) => console.log("error"));
         db.once('open', () => console.log("Conectado a la base de datos"));
-        labs.find({ 'deliveryPoint': deliveryPoint }).exec(function (err, result) {
+        deliveries.find({ 'deliverypoint': deliverypoint }).exec(function (err, result) {
             if (err) throw err;
             console.log(result[0].city);
-            const deliveryPoint1 = result[0]
-            res.render('admin_deliveryEdit', { deliveryPoint1, admin_id })
+            const deliverypoint1 = result[0]
+            res.render('admin_deliveryEdit', { deliverypoint1, admin_id })
         });
     },
 
@@ -422,14 +420,14 @@ const adminController = {
        
         const { admin_id, labname } = req.params;
         verify (admin_id, req)
-        const { labName, address, city } = req.body;
+        const { name, address, city } = req.body;
         mongoose.connect(process.env.DB_URI_MONGO, { useNewUrlPArser: true, useUnifiedTopology: true })
         const db = mongoose.connection;
         db.on('error', (error) => console.log("error"));
         db.once('open', () => console.log("Conectado a la base de datos"));
-        labs.find({ 'labName': labName }).exec(function (err, lab) {
+        labs.find({ 'labname': labname }).exec(function (err, lab) {
             if (err) throw err;
-            lab.labName = name;
+            lab.labname = name;
             lab.address = address;
             lab.city = city
             lab.save(function (err) {
@@ -442,16 +440,16 @@ const adminController = {
 
     updateStores: (req, res) => {
        
-        const { admin_id, storeName } = req.params;
+        const { admin_id, storename } = req.params;
         verify (admin_id, req)
         const { name, address, city } = req.body;
         mongoose.connect(process.env.DB_URI_MONGO, { useNewUrlPArser: true, useUnifiedTopology: true })
         const db = mongoose.connection;
         db.on('error', (error) => console.log("error"));
         db.once('open', () => console.log("Conectado a la base de datos"));
-        stores.find({ 'storeName': storeName }).exec(function (err, store) {
+        stores.find({ 'storename': storename }).exec(function (err, store) {
             if (err) throw err;
-            store.storeName = name;
+            store.storename = name;
             store.address = address;
             store.city = city
             store.save(function (err) {
@@ -465,19 +463,19 @@ const adminController = {
 
     updateliveryPoints: (req, res) => {
        
-        const { admin_id, deliveryPoint } = req.params;
+        const { admin_id, deliverypoint } = req.params;
         verify (admin_id, req)
         const { name, address, city } = req.body;
         mongoose.connect(process.env.DB_URI_MONGO, { useNewUrlPArser: true, useUnifiedTopology: true })
         const db = mongoose.connection;
         db.on('error', (error) => console.log("error"));
         db.once('open', () => console.log("Conectado a la base de datos"));
-        deliveryPoints.find({ 'deliveryPoint': deliveryPoint }).exec(function (err, deliveryPoint1) {
+        deliveries.find({ 'deliverypoint': deliverypoint }).exec(function (err, deliverypoint1) {
             if (err) throw err;
-            deliveryPoint1.deliveryPoint = name;
-            deliveryPoint1.address = address;
-            deliveryPoint1.city = city
-            deliveryPoint1.save(function (err) {
+            deliverypoint1.deliverypoint = name;
+            deliverypoint1.address = address;
+            deliverypoint1.city = city
+            deliverypoint1.save(function (err) {
                 if (err) throw err;
                 console.log("Actualización correcta");
                 res.render('admin_deliveryPoints', { message: "Actualización correcta", admin_id })
@@ -495,7 +493,7 @@ const adminController = {
         db.on('error', (error) => console.log("error"));
         db.once('open', () => console.log("Conectado a la base de datos"));
 
-        labs.findOneAndDelete({ 'labName': labname }, (err, res) => {
+        labs.findOneAndDelete({ 'labname': labname }, (err, res) => {
             if (err) throw err;
             console.log("Borrado correcto");
 
@@ -524,14 +522,14 @@ const adminController = {
 
     deleteDeliveryPoint: (req, res) => {
         
-        const { admin_id, deliveryPoint } = req.params;
+        const { admin_id, deliverypoint } = req.params;
         verify (admin_id, req)
         mongoose.connect(process.env.DB_URI_MONGO, { useNewUrlPArser: true, useUnifiedTopology: true })
         const db = mongoose.connection;
         db.on('error', (error) => console.log("error"));
         db.once('open', () => console.log("Conectado a la base de datos"));
 
-        labs.findOneAndDelete({ 'deliveryPoint': deliveryPoint }, (err, res) => {
+        deliveries.findOneAndDelete({ 'deliverypoint': deliverypoint }, (err, res) => {
             if (err) throw err;
             console.log("Borrado correcto");
 
@@ -548,7 +546,7 @@ const adminController = {
         db.on('error', (error) => console.log("error"));
         db.once('open', () => console.log("Conectado a la base de datos"));
         const newLab = new labs ({ 
-            labName: req.body.labName,
+            labname: req.body.labname,
             address: req.body.address,
             city: req.body.city,
         });
@@ -571,8 +569,8 @@ const adminController = {
         const db = mongoose.connection;
         db.on('error', (error) => console.log("error"));
         db.once('open', () => console.log("Conectado a la base de datos"));
-        const newDP = new deliveryPoints ({ 
-            deliveryPoint: req.body.deliveryPoint,
+        const newDP = new deliveries ({ 
+            deliverypoint: req.body.deliverypoint,
             address: req.body.address,
             city: req.body.city,
         });
@@ -596,7 +594,7 @@ const adminController = {
         db.on('error', (error) => console.log("error"));
         db.once('open', () => console.log("Conectado a la base de datos"));
         const newStore = new stores ({ 
-            storeName: req.body.storeName,
+            storename: req.body.storename,
             address: req.body.address,
             city: req.body.city,
         });
