@@ -21,14 +21,27 @@
     <section style="display: flex;justify-content: center;flex-direction: row;align-items: center;">
 
         <div class="searchMap">
-            <h3>Busca por ciudad</h3>
-            <input type="text" id="store">
+            <select name="lenguajes" id="store">
+                <option value="barcelona">Barcelona</option>
+                <option value="madrid">Madrid</option>
+                <option value="murcia">Murcia</option>
+                <option value="sevilla">Sevilla</option>
+                <option value="valencia">Valencia</option>
+                <option value="zaragoza">Zaragoza</option>
+            </select>
 
             <button onclick="searchStore();" style="margin-bottom: 5%;margin-top: 5%;">Buscar storeApu</button>
         </div>
         <div class="searchMap">
-            <h3>Busca por ciudad</h3>
-            <input type="text" id="deliveryPoint">
+            <select name="lenguajes" id="point">
+                <option value="alicante">Alicante</option>
+                <option value="barcelona">Barcelona</option>
+                <option value="granada">Granada</option>
+                <option value="huelva">Huelva</option>
+                <option value="jaen">Jaen</option>
+                <option value="pamplona">Pamplona</option>
+                
+            </select>
             <button onclick="searchDelivery();" style="margin-bottom: 5%;margin-top: 5%;">Busca deliveryApu</button>
         </div>
         <div id="map" style="height:50Vh;width: 60%;border: 1px solid black;"></div>
@@ -63,41 +76,58 @@
     }).addTo(map);
 
 
+
+
     function searchStore() {
-        let city = document.getElementById("store").value.toLowerCase();
-        fetch("./../json.mapas/stores.json")
-            .then((res) => res.json())
-            .then((res) => {
-                let coordenatesCity = res.filter((cities) => cities.ciudad == city);
-                //* Para gestionar un gran cambio del json.
-                let cleanLat = coordenatesCity[0].latitud * 100;
-                let cleanLon = coordenatesCity[0].longitud * 100;
-                const plazaMayorCoordinates = [cleanLat, cleanLon];
-                //* Añadir marcador de la ciudad solicitada en el div.
-                L.marker(plazaMayorCoordinates).bindPopup(`${city} : lat:${cleanLat} long: ${cleanLon}`).addTo(map);
-            });
-            let stores = "madrid"
-            if(city !=stores){
-                alert("Lo sentimos,no tenemos servicio en esa ciudad")
-            }
+        let store1 = "madrid";
+        let store2 = "barcelona";
+        let store3 = "murcia";
+        let store4 = "valencia";
+        let store5 = "sevilla";
+        let store6 = "zaragoza";
+        let city = document.getElementById("store").value;
+        if (city == store2 || city == store1 || city == store3 || city == store4 || city == store5 || city == store6) {
+            fetch("./../json.mapas/stores.json")
+                .then((res) => res.json())
+                .then((res) => {
+                    let coordenatesCity = res.filter((cities) => cities.ciudad == city);
+                    //* Para gestionar un gran cambio del json.
+                    let cleanLat = coordenatesCity[0].latitud * 100;
+                    let cleanLon = coordenatesCity[0].longitud * 100;
+                    const plazaMayorCoordinates = [cleanLat, cleanLon];
+                    //* Añadir marcador de la ciudad solicitada en el div.
+                    L.marker(plazaMayorCoordinates).bindPopup(`${city} : lat:${cleanLat} long: ${cleanLon}`).addTo(map);
+                });
+
+        
+            
+        }
+
     }
 
     function searchDelivery() {
-        let city = document.getElementById("deliveryPoint").value.toLowerCase();
-        fetch("./../json.mapas/delivery.json")
-            .then((res) => res.json())
-            .then((res) => {
-                let coordenatesCity = res.filter((cities) => cities.ciudad == city);
-                //* Para gestionar un gran cambio del json.
-                let cleanLat = coordenatesCity[0].latitud * 100;
-                let cleanLon = coordenatesCity[0].longitud * 100;
-                const plazaMayorCoordinates = [cleanLat, cleanLon];
-                //* Añadir marcador de la ciudad solicitada en el div.
-                L.marker(plazaMayorCoordinates).bindPopup(`${city} : lat:${cleanLat} long: ${cleanLon}`).addTo(map); style;
-            });
-        
+        let store5 = "alicante";
+        let store6 = "barcelona";
+        let store7 = "jaen";
+        let store8 = "pamplona";
+        let store9 = "huelva";
+        let store10 = "granada";
+        let city2 = document.getElementById("point").value;
+        if (city2 == store5 || city2 == store6 || city2 == store7 || city2 == store8 || city2 == store9 || city2 == store10) {
+            fetch("./../json.mapas/delivery.json")
+                .then((res) => res.json())
+                .then((res) => {
+                    let coordenatesCity = res.filter((cities) => cities.ciudad == city2);
+                    //* Para gestionar un gran cambio del json.
+                    let cleanLat = coordenatesCity[0].latitud * 100;
+                    let cleanLon = coordenatesCity[0].longitud * 100;
+                    const plazaMayorCoordinates = [cleanLat, cleanLon];
+                    //* Añadir marcador de la ciudad solicitada en el div.
+                    L.marker(plazaMayorCoordinates).bindPopup(`${city2} : lat:${cleanLat} long: ${cleanLon}`).addTo(map);
+                });
+
+        }
     }
 
 </script>
-
 </html>

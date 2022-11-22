@@ -11,21 +11,11 @@ function verify (id_user, req){
     const verified = jwt.verify(id_user, process.env.TOKEN_SECRET)
     req.user = verified;
 }
-
-//Consulta de datos en mySQL
-const getUsers = async (req, res) => {
-    try {
-        const connection = await getConnection()
-        const query = "SELECT * FROM users"
-        const result = await connection.query(query)
-        console.log(result)
-        res.send(result)
-    } catch (error) {
-        res.status(500)
-        res.send(error.message)
-    }
-}
-
+/**
+ * @param  {} req
+ * @param  {} res
+ * @param  {} id_user
+ */
 const getUser = async (req, res) => {
     try {
         const connection = await getConnection()
@@ -43,7 +33,11 @@ const getUser = async (req, res) => {
         res.send(error.message)
     }
 }
-
+/**
+ * Funcion para actualizar los datos del usuario en la base de datos
+ * @param  {} req
+ * @param  {} res
+ */
 const updateUser = async (req, res) => {
     try {
         const { id_user } = req.params
@@ -65,6 +59,11 @@ const updateUser = async (req, res) => {
     }
 }
 
+/**
+ * Funcion para actualizar la contraseña del usuario en la base de datos
+ * @param  {} req
+ * @param  {} res
+ */
 const updatePass = async (req, res) => {
     try {
         const { id_user } = req.params
@@ -87,6 +86,11 @@ const updatePass = async (req, res) => {
     }
 }
 
+/**
+ * Funcion para renderizar el formulario de unsubscription
+ * @param  {} req
+ * @param  {} res
+ */
 const unsubscribeForm = async (req, res) => {
     try {
         const connection = await getConnection()
@@ -105,12 +109,18 @@ const unsubscribeForm = async (req, res) => {
     }
 }
 
+/**
+ * Funcion para eliminar los datos del usuario en la base de datos
+ * @param  {} req
+ * @param  {} res
+ */
 const deleteUser = async (req, res) => {
     try {
         const { id_user } = req.params
         const connection = await getConnection()
-        const result = await connection.query("DELETE FROM users WHERE id_user=?", id_user)
-        res.json(result)
+        await connection.query("DELETE FROM users WHERE id_user=?", id_user)
+        res.location('/index')
+        res.sendStatus(302);
     } catch (error) {
         res.status(500)
         res.send(error.message)
@@ -118,7 +128,6 @@ const deleteUser = async (req, res) => {
 }
 
 module.exports = {
-    getUsers,
     getUser,
     updateUser,
     updatePass,
