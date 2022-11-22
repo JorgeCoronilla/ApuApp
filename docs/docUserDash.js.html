@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: docUserDash.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: docUserDash.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const getConnection = require('./../ddbb/mysql')
+var bcrypt = require("bcryptjs")
+const jwt = require('jsonwebtoken')
+
+const encryptUserPass = async (textPlain) => {
+    const hash = await bcrypt.hash(textPlain,10)
+    return hash
+}
+
+function verify (id_user, req){
+    const verified = jwt.verify(id_user, process.env.TOKEN_SECRET)
+    req.user = verified;
+}
+/**
+ * @fileoverview Controlador de funciones de Usuario
+ *
+ * @author  Henalú Paes de Barros
+*/
+
+/**
+ * @param  {} req
+ * @param  {} res
+ * @param  {} id_user
+ */
+const getUser = async (req, res) => {
+    try {
+        const connection = await getConnection()
+        const { id_user } = req.params
+        verify (id_user, req)
+        userInfo = JSON.parse(Buffer.from(id_user.split('.')[1], 'base64').toString());
+         if (userInfo.id_user == undefined) {
+             res.status(400).json({ message: "Bad request. That user doens't exist." })
+         }
+        let decoded_id_user = userInfo.id_user
+        const user = await connection.query("SELECT * FROM users WHERE id_user=?", decoded_id_user)
+        res.render('userDash', {user, decoded_id_user, id_user})
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+}
+/**
+ * Funcion para actualizar los datos del usuario en la base de datos
+ * @param  {} req
+ * @param  {} res
+ */
+const updateUser = async (req, res) => {
+    try {
+        const { id_user } = req.params
+        req.body = JSON.parse(JSON.stringify(req.body));
+        console.log('Este es el req.body: ', req.body)
+        const { user_name, surname_1, surname_2, address, email } = req.body
+
+        if (user_name == undefined || surname_1 == undefined || surname_2 == undefined || address == undefined || email == undefined) {
+            res.status(400).json({ message: "Bad request. Please fill all fields" })
+        }
+        const updateUserData = { user_name, surname_1, surname_2, address, email }
+
+        const connection = await getConnection()
+        const result = await connection.query("UPDATE users SET ? WHERE id_user=?", [updateUserData, id_user])
+        res.json(result)
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+}
+
+/**
+ * Funcion para actualizar la contraseña del usuario en la base de datos
+ * @param  {} req
+ * @param  {} res
+ */
+const updatePass = async (req, res) => {
+    try {
+        const { id_user } = req.params
+        req.body = JSON.parse(JSON.stringify(req.body));
+        console.log('Este es el req.body: ', req.body)
+        const { user_pass } = req.body
+        const passwordEncrypted = await encryptUserPass(user_pass)
+
+        if (user_pass == undefined) {
+            res.status(400).json({ message: "Bad request. Please fill all fields" })
+        }
+        const updateUserPass = { user_pass:passwordEncrypted }
+
+        const connection = await getConnection()
+        const result = await connection.query("UPDATE users SET ? WHERE id_user=?", [updateUserPass, id_user])
+        res.json(result)
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+}
+
+/**
+ * Funcion para renderizar el formulario de unsubscription
+ * @param  {} req
+ * @param  {} res
+ */
+const unsubscribeForm = async (req, res) => {
+    try {
+        const connection = await getConnection()
+        const { id_user } = req.params
+        verify (id_user, req)
+        userInfo = JSON.parse(Buffer.from(id_user.split('.')[1], 'base64').toString());
+         if (userInfo.id_user == undefined) {
+             res.status(400).json({ message: "Bad request. That user doens't exist." })
+         }
+        let decoded_id_user = userInfo.id_user
+        const user = await connection.query("SELECT * FROM users WHERE id_user=?", decoded_id_user)
+        res.render('unsubscribe', {user, decoded_id_user,id_user})
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+}
+
+/**
+ * Funcion para eliminar los datos del usuario en la base de datos
+ * @param  {} req
+ * @param  {} res
+ */
+const deleteUser = async (req, res) => {
+    try {
+        const { id_user } = req.params
+        const connection = await getConnection()
+        await connection.query("DELETE FROM users WHERE id_user=?", id_user)
+        res.location('/index')
+        res.sendStatus(302);
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+}
+
+module.exports = {
+    getUser,
+    updateUser,
+    updatePass,
+    unsubscribeForm,
+    deleteUser
+} </code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Register">Register</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#encryptUserPass">encryptUserPass</a></li><li><a href="global.html#getUser">getUser</a></li><li><a href="global.html#unsubscribeForm">unsubscribeForm</a></li><li><a href="global.html#updatePass">updatePass</a></li><li><a href="global.html#updateUser">updateUser</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Nov 22 2022 11:02:42 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

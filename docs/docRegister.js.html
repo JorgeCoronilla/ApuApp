@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: docRegister.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: docRegister.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const getConnection = require("../ddbb/mysql")
+var bcrypt = require("bcryptjs");
+const { json } = require("express");
+
+/**
+* @fileoverview Controlador de funciones de Registro de usuario
+*
+* @author  Sergio Ovejero
+*/
+
+/**
+*CREAMOS UNA CONSTANTE QUE ENGLOBA TODO LO QUE TIENE QUE VER CON EL PROCESOD DEL REGISTRO DE USUARIO
+*@param String
+*@return {string}
+*/
+const Register = {
+
+    start: async (req, res) => {
+        res.render("../views/userRegister.ejs", { message: "" });
+    },
+
+    //VOLVEMOS A LA PANTALLA DE INICIO UNA VEZ REGISTRADO
+    index: async (req, res) => {
+        res.render("../views/login.ejs");
+
+    },
+
+    //INSERTAMOS USUARIOS
+    /**
+     * Esta función le da la respuesta al usuario de si todo el proceso ha sido correcto o si tiene que introducir datos válidos.Esto lo hace tras confirmar en la base de datos MYSQL que el correo no esté almacenado.Si lo estuviera le diría al usuario que tiene que introducir uno válido.
+     * @param {object} req Recibe un objeto con los valores del usuario introducidos(incluyendo la contraseña encriptada).
+     * @param {boolean} res Responde con un true o false una vez comprobado con la base de datos mediante el correo electronico.
+     */
+    insertUser: async (req, res) => {
+        //await getConnection()
+        const { user_name, surname_1, surname_2, address, email, user_pass } = req.body
+        try {
+            const userId = await addUser(user_name, surname_1, surname_2, address, email, user_pass)
+            if (userId) {
+                res.render("registerConfirmed", { user_name });
+                // res.render("login");
+            }
+        } catch (error) {
+            if (user_name == "" || surname_1 == "" || surname_2 == "" || address == "" || email == "" || user_pass == "") {
+                res.render("userRegister", { message: "Todos los campos son obligatorios" });
+
+            } else if (error == "ER_DUP_ENTRY") { //ES EL MENSAJE QUE NOS DA LA CONSOLA CUANDO EL REGISTRO DEL CORREO ESTÁ DUPLICADO EN LA BASE DE DATOS.
+                res.render("userRegister", { message: "El correo introducido ya existe.Por favor introduzca uno válido" });
+
+                // res.status(400).json({ message: "El correo electrónico introducido ya existe.Por favor introduzca uno válido" })
+            }
+        }
+    },
+
+
+    /**
+     * 
+     * @param {string} req recibe un parametro.
+     * @param {string} res nos envía a la pagina de mapas.
+     */
+    map: async (req, res) => {
+        res.render("map");
+
+    }
+
+
+
+
+    /*
+        //CONSULTAMOS TODOS LOS DATOS DE LA TABLA USUARIOS
+        findAll: async (req, res) => {
+            const connection = await getConnection()
+            connection.query('SELECT * FROM users', function (err, filas) {
+                if (err) {
+                    throw err;
+                } else {
+                    filas.forEach(fila => {
+                        console.log(fila)
+                    });
+                }
+            })
+    
+        }
+    */
+}
+
+
+
+//CREAMOS UNA FUNCIÓN PARA ENCRIPTAR LA CONTRASEÑA.
+/**
+ * Esta función encripta la contraseña que introduzca el usuario
+ * @param {string} textPlain recibe un string (number) que será el valor que encriptemos.
+ * @returns {string} devuelve el valor encriptado.          
+ */
+//CREAMOS UNA FUNCIÓN PARA ENCRIPTAR LA CONTRASEÑA.
+const encryptUserPass = async (textPlain) => {
+    const hash = await bcrypt.hash(textPlain, 10)
+    return hash
+}
+
+
+/**
+ * Esta función recibe los parámetros introducidos por el usuario y los inserta en la base de datos MYSQL.
+ * @param {string} user_name recibe el nombre del usuario
+ * @param {string} surname_1 recibe el primer apellido del usuario.
+ * @param {string} surname_2 recibe el segundo apellido del usuario.
+ * @param {string} address recibe la dirección del usuario.
+ * @param {string} email recibe el correo del usuario.
+ * @param {string} user_pass recibe la contraseña del usuario.
+ * @returns {object} devuelve un objeto con los datos del usuario.
+ */
+const addUser = async (user_name, surname_1, surname_2, address, email, user_pass) => {
+
+    const connection = await getConnection()
+    const passwordEncrypted = await encryptUserPass(user_pass)
+    const datesUser = { user_name, surname_1, surname_2, address, email, user_pass: passwordEncrypted }
+    //HACEMOS PROMESA "MANUAL".SI LO INSERTA SALE POR RESOLVE Y LO ENVÍA A "INSERTEUSER" ,Y SI FALLA SALE POR REJECT.
+    return new Promise((resolve, reject) => {
+        connection.query("INSERT INTO users SET ?", datesUser, (error, results) => {
+            if (error) {
+                return reject(error.code)
+            }
+            const response = JSON.parse(JSON.stringify(results))
+            resolve(response.insertId)
+        })
+    })
+
+}
+
+
+
+module.exports = Register
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Register">Register</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#encryptUserPass">encryptUserPass</a></li><li><a href="global.html#getUser">getUser</a></li><li><a href="global.html#unsubscribeForm">unsubscribeForm</a></li><li><a href="global.html#updatePass">updatePass</a></li><li><a href="global.html#updateUser">updateUser</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Nov 22 2022 11:02:42 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

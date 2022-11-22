@@ -1,24 +1,63 @@
-const getConnection = require('../ddbb/mysql')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: docAdmin.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: docAdmin.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const getConnection = require('../ddbb/mysql')
 const mongoose = require('mongoose');
 const labs = require('../models/labs_model');
 const stores = require('../models/stores_model');
-const deliveries = require('../models/deliveryPoints_model');
+const deliveryPoints = require('../models/deliveryPoints_model');
 const fs = require('fs');
 const PDFDocument = require('pdfkit');
 const pdfService = require('../invoices/invoice');
 const blobStream = require('blob-stream');
 const jwt = require('jsonwebtoken');
 
-function verify (admin_id, req){
+function verify(admin_id, req) {
     const verified = jwt.verify(admin_id, process.env.TOKEN_SECRET)
     req.user = verified;
 }
 
+/**
+ * @fileoverview Controlador de funciones de Administrador
+ *
+ * @author  Jorge Coronilla
+*/
+
 const adminController = {
+    /**
+     * Renderiza el panel de administrador
+     * @param {*} req 
+     * @param {*} res 
+     */
     dashAdmin: async (req, res) => {
         try {
             const { admin_id } = req.params;
-            verify (admin_id, req)
+            verify(admin_id, req)
             userInfo = JSON.parse(Buffer.from(admin_id.split('.')[1], 'base64').toString());
             if (userInfo.id_admin == undefined) {
                 res.status(400).json({ message: "Bad request. That user doens't exist." })
@@ -30,20 +69,24 @@ const adminController = {
             res.send(error.message)
         }
     },
-
+    /**
+     * Muestra los datos del administrador
+     * @param {*} req 
+     * @param {*} res 
+     */
     showAdmin: async (req, res) => {
 
         try {
             const { admin_id } = req.params;
-            verify (admin_id, req)
+            verify(admin_id, req)
             userInfo = JSON.parse(Buffer.from(admin_id.split('.')[1], 'base64').toString());
-             if (userInfo.id_admin == undefined) {
-                 res.status(400).json({ message: "Bad request. That user doens't exist." })
-             }
+            if (userInfo.id_admin == undefined) {
+                res.status(400).json({ message: "Bad request. That user doens't exist." })
+            }
             const connection = await getConnection();
             let result = await connection.query('select * from app_admins where id_admin = ?;', userInfo.id_admin)
-            const admin_name = result[0].admin_name, surname_1 = result[0].surname_1, surname_2 = result[0].surname_2, email = result[0].email, admin_pass =result[0].admin_pass;
-            res.render("admin_update", { admin_id, admin_name, surname_1, surname_2, email, admin_pass, message:"" })
+            const admin_name = result[0].admin_name, surname1 = result[0].surname_1, surname2 = result[0].surname_2, email = result[0].email;
+            res.render("admin_update", { admin_id, admin_name, surname1, surname2, email })
         }
         catch (error) {
             res.status(500)
@@ -51,20 +94,22 @@ const adminController = {
         }
     },
     updateAdmin: async (req, res) => {
-        
         try {
-                     
-            const { admin_id } = req.params;
-            verify (admin_id, req)
+
             const { admin_name, surname_1, surname_2, email, admin_pass } = req.body;
+            const { admin_id } = req.params;
+            verify(admin_id, req)
             userInfo = JSON.parse(Buffer.from(admin_id.split('.')[1], 'base64').toString());
             if (userInfo.id_admin == undefined) {
                 res.status(400).json({ message: "Bad request. That user doens't exist." })
             }
             const updates = { admin_name, surname_1, surname_2, email, admin_pass }
+            if (!admin_name || !surname_1 || !surname_2 || !email || !admin_pass) {
+                res.status(400).json({ message: "Son necesarios todos los campos" })
+            }
             const connection = await getConnection();
             let result = await connection.query('UPDATE app_admins SET ? WHERE id_admin = ? ', [updates, userInfo.id_admin])
-            res.render("admin_update", { admin_id, admin_name, surname_1, surname_2, email, admin_pass, message: "Usuario actualizado" })
+            res.status(200).json({ message: "Usuario actualizado" })
         }
         catch (error) {
             res.status(500)
@@ -75,9 +120,9 @@ const adminController = {
     allUsers: async (req, res) => {
 
         try {
-           
+
             const { admin_id } = req.params;
-            verify (admin_id, req)
+            verify(admin_id, req)
             const connection = await getConnection();
             let result = await connection.query("select * from users");
             const users = result
@@ -88,33 +133,41 @@ const adminController = {
             res.send(error.message)
         }
     },
-
+    /**
+     * Edición de usuario por parte del administrador
+     * @param {*} req 
+     * @param {*} res 
+     */
     editUser: async (req, res) => {
 
         try {
-            const { admin_id,user } = req.params;
-            verify (admin_id, req)
+            const { admin_id, user } = req.params;
+            verify(admin_id, req)
             if (user == undefined) {
                 res.status(400).json({ message: "Bad request. That user doens't exist." })
             }
             const connection = await getConnection();
             let result = await connection.query('select * from users where id_user = ?;', user)
             const user_name = result[0].user_name, surname1 = result[0].surname_1, surname2 = result[0].surname_2, address = result[0].address, email = result[0].email;
-            res.render("admin_editUser", { user, admin_id,user_name, surname1, surname2, address, email })
+            res.render("admin_editUser", { user, admin_id, user_name, surname1, surname2, address, email })
         }
         catch (error) {
             res.status(500)
             res.send(error.message)
         }
     },
-
+    /**
+     * modifica el ususario en el BD
+     * @param {*} req 
+     * @param {*} res 
+     */
     updateUser: async (req, res) => {
 
         try {
-           
+
             const { user_name, surname_1, surname_2, address, email, user_pass } = req.body;
             const { admin_id, user } = req.params;
-            verify (admin_id, req)
+            verify(admin_id, req)
             const updates = { user_name, surname_1, surname_2, address, email, user_pass }
             const connection = await getConnection();
             let result = await connection.query('UPDATE users SET ? WHERE id_user = ? ', [updates, user])
@@ -129,8 +182,8 @@ const adminController = {
     createAdmin: async (req, res) => {
         try {
             const { admin_id } = req.params;
-            verify (admin_id, req)
-            res.render("admin_createAd", {admin_id, message: ""})
+            verify(admin_id, req)
+            res.render("admin_createAd", { admin_id, message: "" })
         }
         catch (error) {
             res.status(500)
@@ -141,14 +194,11 @@ const adminController = {
     insertAdmin: async (req, res) => {
         try {
             const { admin_id } = req.params;
-            verify (admin_id, req)
             const { admin_name, surname_1, surname_2, email, admin_pass } = req.body;
             const newAdmin = { admin_name, surname_1, surname_2, email, admin_pass }
-            console.log(newAdmin)
             const connection = await getConnection();
-            //let result = await connection.query('INSERT INTO app_admins (admin_name, surname_1, surname_2, email, admin_pass) VALUES (?) ', newAdmin)
-            let result = await connection.query('INSERT INTO app_admins SET ?', newAdmin)
-            res.render("admin_createAd", {admin_id, message: "Administrador creado"})
+            let result = await connection.query('INSERT INTO app_admins (admin_name, surname_1, surname_2, email, admin_pass) VALUES (?) ', newAdmin)
+            res.render("admin_createAd", { admin_id, message: "Admministrador creado" })
         }
         catch (error) {
             res.status(500)
@@ -160,7 +210,7 @@ const adminController = {
 
         try {
             const { user, admin_id } = req.params;
-            verify (admin_id, req)
+            verify(admin_id, req)
 
             if (user == undefined) {
                 res.status(400).json({ message: "Bad request. That user doens't exist." })
@@ -178,30 +228,33 @@ const adminController = {
             res.send(error.message)
         }
     },
-    insertUser2:async (req, res) => {
+
+    insertUser: async (req, res) => {
+        //await getConnection()
+        const { user_name, surname_1, surname_2, address, email, user_pass } = req.body
         try {
-            const { admin_id } = req.params;
-            verify (admin_id, req)
-            const { user_name, surname_1, surname_2, address, email, user_pass } = req.body
-            const datesUser = { user_name, surname_1, surname_2, address, email, user_pass }
-            const connection = await getConnection();
-            //let result = await connection.query('INSERT INTO app_admins (admin_name, surname_1, surname_2, email, admin_pass) VALUES (?) ', newAdmin)
-            let result = await connection.query("INSERT INTO users SET ?", datesUser)
-            res.redirect(`/admin/${admin_id}`);
-               
-        }
-        catch (error) {
-            res.status(500)
-            res.send(error.message)
+            const userId = await addUser(user_name, surname_1, surname_2, address, email, user_pass)
+            if (userId) {
+                res.render("registerConfirmed", { user_name });
+                //res.render("../views/userRegister.ejs");
+            }
+        } catch (error) {
+            if (error == "ER_DUP_ENTRY") { //ES EL MENSAJE QUE NOS DA LA CONSOLA CUANDO EL REGISTRO DEL CORREO ESTÁ DUPLICADO EN LA BASE DE DATOS.
+                res.render("userRegister", { message: "El correo introducido ya existe.Por favor introduzca uno válido" });
+
+                // res.status(400).json({ message: "El correo electrónico introducido ya existe.Por favor introduzca uno válido" })
+            }
         }
     },
 
+
     allBills: async (req, res) => {
 
+
         try {
-            
+
             const { admin_id } = req.params;
-            verify (admin_id, req)
+            verify(admin_id, req)
             if (admin_id == undefined) {
                 res.status(400).json({ message: "Bad request. That user doens't exist." })
             }
@@ -215,12 +268,17 @@ const adminController = {
             res.send(error.message)
         }
     },
-
+    /**
+     * imprime la factura en PDF
+     * @param {*} req 
+     * @param {*} res 
+     */
     printBill: async (req, res) => {
+
 
         try {
             const { id_bill, admin_id } = req.params;
-            verify (admin_id, req)
+            verify(admin_id, req)
             if (id_bill == undefined) {
                 res.status(400).json({ message: "Bad request. That bill doens't exist." })
             }
@@ -229,6 +287,7 @@ const adminController = {
             const bill = result[0];
             var item = bill.items.split('#');
             let fecha = bill.bill_date.toLocaleDateString()
+
 
             const doc = new PDFDocument();
             var filename = `factura${Date.now()}.pdf`
@@ -251,7 +310,8 @@ const adminController = {
             let i,
                 invoiceTableTop = 330;
 
-            for (i = 0; i < item.length; i++) {
+
+            for (i = 0; i &lt; item.length; i++) {
                 const row = item[i];
                 const position = invoiceTableTop + (i + 1) * 50;
                 doc.fontSize(15)
@@ -269,21 +329,28 @@ const adminController = {
                 { align: 'center', width: 500 },
             );
 
+
             //doc.pipe(fs.createWriteStream(`${__dirname}/${filename}`));
-            doc.pipe(fs.createWriteStream(`${__dirname}/${filename}`));
+            doc.pipe(fs.createWriteStream(`${__dirname.replace('controllers', 'invoices')}/${filename}`));
             doc.end();
+            res.send()
+
 
             //res.redirect(`/admin/${admin_id}/print/${id_bill}/${filename}.pdf`)
             //res.render("admin_print", { bill, admin_id })
             //const file = `${filename}`;
 
+
             //res.download(filename, {root: `${__dirname}`}); // Set disposition and send it.
             //var stream = fs.createReadStream(`${__dirname}/`);
 
+
             //filename = encodeURIComponent(filename);
+
 
             //res.setHeader('Content-disposition', 'inline; filename="' + filename + '"');
             //res.setHeader('Content-type', 'application/pdf');
+
 
             //stream.pipe(res);
             //fs.readFile(__dirname + filename, function (err, data) {
@@ -291,18 +358,24 @@ const adminController = {
             //    res.send(data);
             //});
 
+
         }
         catch (error) {
             res.status(500)
             res.send(error.message)
         }
     },
-
+    /**
+     * Borra un administrador
+     * @param {*} req 
+     * @param {*} res 
+     */
     deleteUser: async (req, res) => {
+
 
         try {
             const { admin_id, user } = req.params;
-            verify (admin_id, req)
+            verify(admin_id, req)
             res.render("admin_delete", { admin_id, user })
         }
         catch (error) {
@@ -310,16 +383,21 @@ const adminController = {
             res.send(error.message)
         }
     },
-
+    /**
+     * Borra un usuario
+     * @param {*} req 
+     * @param {*} res 
+     */
     confirmDeleteUser: async (req, res) => {
+
 
         try {
             const { answer } = req.body;
             const { admin_id, user } = req.params;
-            verify (admin_id, req)
+            verify(admin_id, req)
             const connection = await getConnection();
-            let result = await connection.query("DELETE FROM users WHERE id_user=?", user)       
-            console.log("Usuario eliminado") 
+            let result = await connection.query("DELETE FROM users WHERE id_user=?", user)
+            console.log("Usuario eliminado")
             res.redirect(`/admin/${admin_id}/`)
         }
         catch (error) {
@@ -327,10 +405,15 @@ const adminController = {
             res.send(error.message)
         }
     },
+    /**
+     * Recoge los datos de los laboratorios
+     * @param {*} req 
+     * @param {*} res 
+     */
     checkLabs: (req, res) => {
-        
+
         const { admin_id } = req.params;
-        verify (admin_id, req)
+        verify(admin_id, req)
         mongoose.connect(process.env.DB_URI_MONGO, { useNewUrlPArser: true, useUnifiedTopology: true })
         const db = mongoose.connection;
         db.on('error', (error) => console.log("error"));
@@ -340,11 +423,15 @@ const adminController = {
             res.render('admin_labs', { result, admin_id })
         });
     },
-
+    /**
+     * Recoge los datos de todas las tiendas
+     * @param {*} req 
+     * @param {*} res 
+     */
     checkStores: (req, res) => {
-        
+
         const { admin_id } = req.params;
-        verify (admin_id, req)
+        verify(admin_id, req)
         mongoose.connect(process.env.DB_URI_MONGO, { useNewUrlPArser: true, useUnifiedTopology: true })
         const db = mongoose.connection;
         db.on('error', (error) => console.log("error"));
@@ -354,80 +441,106 @@ const adminController = {
             res.render('admin_stores', { result, admin_id })
         });
     },
-
+    /**
+     * Recoge los datos de todos los puntos de entrega
+     * @param {*} req 
+     * @param {*} res 
+     */
     checkdeliveryPoints: (req, res) => {
-        
+
         const { admin_id } = req.params;
-        verify (admin_id, req)
+        verify(admin_id, req)
         mongoose.connect(process.env.DB_URI_MONGO, { useNewUrlPArser: true, useUnifiedTopology: true })
         const db = mongoose.connection;
         db.on('error', (error) => console.log("error"));
         db.once('open', () => console.log("Conectado a la base de datos"));
-        deliveries.find().exec(function (err, result) {
+        deliveryPoints.find().exec(function (err, result) {
             if (err) throw err;
             console.log(result);
             res.render('admin_deliveryPoints', { result, admin_id })
         });
     },
-
+    /**
+     * Busca un tienda en concreto
+     * @param {*} req 
+     * @param {*} res 
+     */
     findLab: (req, res) => {
-        
+
         const { admin_id, labname } = req.params;
-        verify (admin_id, req)
+        verify(admin_id, req)
         mongoose.connect(process.env.DB_URI_MONGO, { useNewUrlPArser: true, useUnifiedTopology: true })
         const db = mongoose.connection;
         db.on('error', (error) => console.log("error"));
         db.once('open', () => console.log("Conectado a la base de datos"));
-        labs.find({ 'labname': labname }).exec(function (err, result) {
+        labs.find({ 'labName': labname }).exec(function (err, result) {
             if (err) throw err;
+            console.log(result[0].city);
             const lab = result[0]
             res.render('admin_labsEdit', { lab, admin_id })
         });
     },
 
+    /**
+     * función que se conecta a la base de datos de mongo y busca las tiendas almacenadas.
+     * @param {string} req 
+     * @param {string} res 
+     */
     findStore: (req, res) => {
-        const { admin_id, storename } = req.params;
-        verify (admin_id, req)
+        const { admin_id, storeName } = req.params;
+        verify(admin_id, req)
         mongoose.connect(process.env.DB_URI_MONGO, { useNewUrlPArser: true, useUnifiedTopology: true })
         const db = mongoose.connection;
         db.on('error', (error) => console.log("error"));
         db.once('open', () => console.log("Conectado a la base de datos"));
-        stores.find({ 'storename': storename }).exec(function (err, result) {
+        stores.find({ 'storeName': storeName }).exec(function (err, result) {
             if (err) throw err;
+            console.log(result[0].city);
             const store = result[0]
             res.render('admin_storesEdit', { store, admin_id })
 
         });
     },
 
+    /**
+     * función que se conecta a la base de datos de mongo y busca los puntos de entrega almacenados en nuestra base de datos
+     * @param {string} req 
+     * @param {string} res 
+     */
     findDeliveryPoint: (req, res) => {
-        
-        const { admin_id, deliverypoint } = req.params;
-        verify (admin_id, req)
+
+        const { admin_id, deliveryPoint } = req.params;
+        verify(admin_id, req)
         mongoose.connect(process.env.DB_URI_MONGO, { useNewUrlPArser: true, useUnifiedTopology: true })
         const db = mongoose.connection;
         db.on('error', (error) => console.log("error"));
         db.once('open', () => console.log("Conectado a la base de datos"));
-        deliveries.find({ 'deliverypoint': deliverypoint }).exec(function (err, result) {
+        labs.find({ 'deliveryPoint': deliveryPoint }).exec(function (err, result) {
             if (err) throw err;
             console.log(result[0].city);
-            const deliverypoint1 = result[0]
-            res.render('admin_deliveryEdit', { deliverypoint1, admin_id })
+            const deliveryPoint1 = result[0]
+            res.render('admin_deliveryEdit', { deliveryPoint1, admin_id })
         });
     },
 
+
+    /**
+     * función que se conecta a la base de datos de mongo,busca los laboratorios almacenados previamente ,los edita y  los guarda con los nuevos valores.
+     * @param {string} req 
+     * @param {string} res 
+     */
     updateLabs: (req, res) => {
-       
+
         const { admin_id, labname } = req.params;
-        verify (admin_id, req)
-        const { name, address, city } = req.body;
+        verify(admin_id, req)
+        const { labName, address, city } = req.body;
         mongoose.connect(process.env.DB_URI_MONGO, { useNewUrlPArser: true, useUnifiedTopology: true })
         const db = mongoose.connection;
         db.on('error', (error) => console.log("error"));
         db.once('open', () => console.log("Conectado a la base de datos"));
-        labs.find({ 'labname': labname }).exec(function (err, lab) {
+        labs.find({ 'labName': labName }).exec(function (err, lab) {
             if (err) throw err;
-            lab.labname = name;
+            lab.labName = name;
             lab.address = address;
             lab.city = city
             lab.save(function (err) {
@@ -438,18 +551,24 @@ const adminController = {
         });
     },
 
+
+    /**
+     * función que se conecta a la base de datos de mongo,busca las tiendas almacenadas previamente ,los edita y  los guarda con los nuevos valores.
+     * @param {string} req 
+     * @param {string} res 
+     */
     updateStores: (req, res) => {
-       
-        const { admin_id, storename } = req.params;
-        verify (admin_id, req)
+
+        const { admin_id, storeName } = req.params;
+        verify(admin_id, req)
         const { name, address, city } = req.body;
         mongoose.connect(process.env.DB_URI_MONGO, { useNewUrlPArser: true, useUnifiedTopology: true })
         const db = mongoose.connection;
         db.on('error', (error) => console.log("error"));
         db.once('open', () => console.log("Conectado a la base de datos"));
-        stores.find({ 'storename': storename }).exec(function (err, store) {
+        stores.find({ 'storeName': storeName }).exec(function (err, store) {
             if (err) throw err;
-            store.storename = name;
+            store.storeName = name;
             store.address = address;
             store.city = city
             store.save(function (err) {
@@ -461,21 +580,26 @@ const adminController = {
         });
     },
 
+    /**
+     * función que se conecta a la base de datos de mongo,busca los puntos de entrega almacenados previamente ,los edita y  los guarda con los nuevos valores.
+     * @param {string} req 
+     * @param {string} res 
+     */
     updateliveryPoints: (req, res) => {
-       
-        const { admin_id, deliverypoint } = req.params;
-        verify (admin_id, req)
+
+        const { admin_id, deliveryPoint } = req.params;
+        verify(admin_id, req)
         const { name, address, city } = req.body;
         mongoose.connect(process.env.DB_URI_MONGO, { useNewUrlPArser: true, useUnifiedTopology: true })
         const db = mongoose.connection;
         db.on('error', (error) => console.log("error"));
         db.once('open', () => console.log("Conectado a la base de datos"));
-        deliveries.find({ 'deliverypoint': deliverypoint }).exec(function (err, deliverypoint1) {
+        deliveryPoints.find({ 'deliveryPoint': deliveryPoint }).exec(function (err, deliveryPoint1) {
             if (err) throw err;
-            deliverypoint1.deliverypoint = name;
-            deliverypoint1.address = address;
-            deliverypoint1.city = city
-            deliverypoint1.save(function (err) {
+            deliveryPoint1.deliveryPoint = name;
+            deliveryPoint1.address = address;
+            deliveryPoint1.city = city
+            deliveryPoint1.save(function (err) {
                 if (err) throw err;
                 console.log("Actualización correcta");
                 res.render('admin_deliveryPoints', { message: "Actualización correcta", admin_id })
@@ -484,16 +608,21 @@ const adminController = {
         });
     },
 
+    /**
+     * función que se conecta a la base de datos de mongo,busca los laboratorios almacenados previamente y nos elimina el seleccionado.
+     * @param {string} req 
+     * @param {string} res 
+     */
     deleteLab: (req, res) => {
-        
+
         const { admin_id, labname } = req.params;
-        verify (admin_id, req)
+        verify(admin_id, req)
         mongoose.connect(process.env.DB_URI_MONGO, { useNewUrlPArser: true, useUnifiedTopology: true })
         const db = mongoose.connection;
         db.on('error', (error) => console.log("error"));
         db.once('open', () => console.log("Conectado a la base de datos"));
 
-        labs.findOneAndDelete({ 'labname': labname }, (err, res) => {
+        labs.findOneAndDelete({ 'labName': labname }, (err, res) => {
             if (err) throw err;
             console.log("Borrado correcto");
 
@@ -502,10 +631,15 @@ const adminController = {
         res.end();
     },
 
+    /**
+     * función que se conecta a la base de datos de mongo,busca las tiendas almacenadas previamente y nos elimina la seleccionada.
+     * @param {string} req 
+     * @param {string} res 
+     */
     deleteStore: (req, res) => {
-        
+
         const { admin_id, storename } = req.params;
-        verify (admin_id, req)
+        verify(admin_id, req)
         mongoose.connect(process.env.DB_URI_MONGO, { useNewUrlPArser: true, useUnifiedTopology: true })
         const db = mongoose.connection;
         db.on('error', (error) => console.log("error"));
@@ -520,16 +654,21 @@ const adminController = {
         res.end();
     },
 
+    /**
+     * función que se conecta a la base de datos de mongo,busca los puntos de entrega almacenados previamente y nos elimina el seleccionado.
+     * @param {string} req 
+     * @param {string} res 
+     */
     deleteDeliveryPoint: (req, res) => {
-        
-        const { admin_id, deliverypoint } = req.params;
-        verify (admin_id, req)
+
+        const { admin_id, deliveryPoint } = req.params;
+        verify(admin_id, req)
         mongoose.connect(process.env.DB_URI_MONGO, { useNewUrlPArser: true, useUnifiedTopology: true })
         const db = mongoose.connection;
         db.on('error', (error) => console.log("error"));
         db.once('open', () => console.log("Conectado a la base de datos"));
 
-        deliveries.findOneAndDelete({ 'deliverypoint': deliverypoint }, (err, res) => {
+        labs.findOneAndDelete({ 'deliveryPoint': deliveryPoint }, (err, res) => {
             if (err) throw err;
             console.log("Borrado correcto");
 
@@ -538,23 +677,28 @@ const adminController = {
         res.end();
     },
 
-    insertLabs:  (req, res) => {
+    /**
+     * función que se conecta a la base de datos de mongo,introducimos 3 valores por nombre,dirección y ciudad y añade el laboratorio nuevo a la base de datos.
+     * @param {string} req 
+     * @param {string} res 
+     */
+    insertLabs: (req, res) => {
         const { admin_id } = req.params;
-        verify (admin_id, req)
+        verify(admin_id, req)
         mongoose.connect(process.env.DB_URI_MONGO, { useNewUrlPArser: true, useUnifiedTopology: true })
         const db = mongoose.connection;
         db.on('error', (error) => console.log("error"));
         db.once('open', () => console.log("Conectado a la base de datos"));
-        const newLab = new labs ({ 
-            labname: req.body.labname,
+        const newLab = new labs({
+            labName: req.body.labName,
             address: req.body.address,
             city: req.body.city,
         });
         newLab.save((err) => {
-          
-            if(err) {
-                res.json({message: err.message, type: 'danger'})
-            } else{
+
+            if (err) {
+                res.json({ message: err.message, type: 'danger' })
+            } else {
                 console.log("Laboratorio añadido")
                 res.redirect(`/admin/${admin_id}/labs`)
                 res.end();
@@ -562,47 +706,56 @@ const adminController = {
         })
     },
 
-    insertDeliveryPoint:  (req, res) => {
+    /**
+     * función que se conecta a la base de datos de mongo,introducimos 3 valores por nombre,dirección y ciudad y añade el punto de entrega nuevo a la base de datos.
+     * @param {string} req 
+     * @param {string} res 
+     */
+    insertDeliveryPoint: (req, res) => {
         const { admin_id } = req.params;
-        verify (admin_id, req)
+        verify(admin_id, req)
         mongoose.connect(process.env.DB_URI_MONGO, { useNewUrlPArser: true, useUnifiedTopology: true })
         const db = mongoose.connection;
         db.on('error', (error) => console.log("error"));
         db.once('open', () => console.log("Conectado a la base de datos"));
-        const newDP = new deliveries ({ 
-            deliverypoint: req.body.deliverypoint,
+        const newDP = new deliveryPoints({
+            deliveryPoint: req.body.deliveryPoint,
             address: req.body.address,
             city: req.body.city,
         });
         newDP.save((err) => {
-            if(err) {
-                res.json({message: err.message, type: 'danger'})
-            } else{
+            if (err) {
+                res.json({ message: err.message, type: 'danger' })
+            } else {
                 console.log("Punto de recogida añadido")
                 res.redirect(`/admin/${admin_id}/deliveryPoints`)
                 res.end();
             }
         })
     },
-
-    insertStores:  (req, res) => {
+    /**
+     * función que se conecta a la base de datos de mongo,introducimos 3 valores por nombre,dirección y ciudad, y añade la nueva tienda a la base de datos.
+     * @param {string} req 
+     * @param {string} res 
+     */
+    insertStores: (req, res) => {
         console.log("ENTRA")
         const { admin_id } = req.params;
-        verify (admin_id, req)
+        verify(admin_id, req)
         mongoose.connect(process.env.DB_URI_MONGO, { useNewUrlPArser: true, useUnifiedTopology: true })
         const db = mongoose.connection;
         db.on('error', (error) => console.log("error"));
         db.once('open', () => console.log("Conectado a la base de datos"));
-        const newStore = new stores ({ 
-            storename: req.body.storename,
+        const newStore = new stores({
+            storeName: req.body.storeName,
             address: req.body.address,
             city: req.body.city,
         });
         newStore.save((err) => {
-          
-            if(err) {
-                res.json({message: err.message, type: 'danger'})
-            } else{
+
+            if (err) {
+                res.json({ message: err.message, type: 'danger' })
+            } else {
                 console.log("Laboratorio añadido")
                 res.redirect(`/admin/${admin_id}/stores`)
                 res.end();
@@ -610,12 +763,17 @@ const adminController = {
         })
     },
 
+    /**
+     * función que se conecta a la base de datos de MYSQL y muestra todas las ventas registradas.
+     * @param {string} req 
+     * @param {string} res 
+     */
     allSales: async (req, res) => {
 
         try {
-           
+
             const { admin_id } = req.params;
-            verify (admin_id, req)
+            verify(admin_id, req)
             const connection = await getConnection();
             let result = await connection.query("select * from sales");
             const sales = result
@@ -627,12 +785,18 @@ const adminController = {
         }
     },
 
+
+    /**
+     * función que se conecta a la base de datos de MYSQL y muestra todos los servicios registradas.
+     * @param {string} req 
+     * @param {string} res 
+     */
     allservices: async (req, res) => {
 
         try {
-           
+
             const { admin_id } = req.params;
-            verify (admin_id, req)
+            verify(admin_id, req)
             const connection = await getConnection();
             let result = await connection.query("select * from services");
             const services = result
@@ -645,10 +809,15 @@ const adminController = {
         }
     },
 
+    /**
+     * función que nos dirige a "compras para usuario" con los valores recogidos.
+     * @param {string} req 
+     * @param {string} res 
+     */
     shopAdmin: async (req, res) => {
         try {
             const { admin_id, user } = req.params;
-            verify (admin_id, req)
+            verify(admin_id, req)
             const admin_id2 = JSON.parse(Buffer.from(admin_id.split('.')[1], 'base64').toString());
             res.render("admin_goShopping", { admin_id, user, admin_id2 })
         }
@@ -658,6 +827,11 @@ const adminController = {
         }
     },
 
+    /**
+     * función que nos dirige a la pasarela de pago mediante el perfil de administrador
+     * @param {string} req 
+     * @param {string} res 
+     */
     adminPay: async (req, res) => {
         try {
             res.render("admin_pay")
@@ -668,14 +842,19 @@ const adminController = {
         }
     },
 
+    /**
+     * función que se conecta a la base de datos MYSQL,pide valores del usuario y gestiona compra mediante el perfil del admin en nombre del usuario.
+     * @param {string} req 
+     * @param {string} res 
+     */
     payment: async (req, res) => {
         try {
             const { admin_id, user } = req.params;
-            verify (admin_id, req)
+            verify(admin_id, req)
             const connection = await getConnection();
             let result = await connection.query('select * from users where id_user = ?;', user)
             const user_name = result[0].user_name, surname1 = result[0].surname_1, surname2 = result[0].surname_2, address = result[0].address, email = result[0].email;
-            res.render("admin_paymentGate", { user, admin_id,user_name, surname1, surname2, address, email })
+            res.render("admin_paymentGate", { user, admin_id, user_name, surname1, surname2, address, email })
         }
         catch (error) {
             res.status(500)
@@ -684,4 +863,26 @@ const adminController = {
     },
 }
 
-module.exports = adminController;
+module.exports = adminController;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Register">Register</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#encryptUserPass">encryptUserPass</a></li><li><a href="global.html#getUser">getUser</a></li><li><a href="global.html#unsubscribeForm">unsubscribeForm</a></li><li><a href="global.html#updatePass">updatePass</a></li><li><a href="global.html#updateUser">updateUser</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Nov 22 2022 11:02:42 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
